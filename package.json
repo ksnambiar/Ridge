@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "mdbreact": "^4.10.0",
     "react": "^16.7.0",
     "react-bootstrap": "^1.0.0-beta.5",
     "react-bulma-components": "^2.3.0",

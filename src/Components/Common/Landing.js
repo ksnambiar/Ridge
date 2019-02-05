@@ -4,7 +4,7 @@ import landing from "./landing.jpg";
 export default class Landing extends Component {
   render() {
     return (
-      <div id="bgim">
+      <div className="bg-gray">
         <div className="landing">
           <div className="dark-overlay landing-inner text-light">
             <div className="container">
