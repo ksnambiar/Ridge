@@ -1,28 +1,54 @@
 import React, { Component } from 'react'
-export default class Login extends Component {
+import {loginUser} from '../../actions/authAction';
+import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
+import PropTypes from 'prop-types'
+class Login extends Component {
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+        email:'',
+        password:'',
+        errors:{}
+    }
+    this.onChange=this.onChange.bind(this);
+    this.onSubmit=this.onSubmit.bind(this);
+  }
+  onSubmit(e){
+    e.preventDefault();
+    const user={
+      email:this.state.email,
+      password:this.state.password
+    }
+    this.props.loginUser(user,this.props.history);
+  }
+  onChange(e){
+    this.setState({[e.target.name]:e.target.value})
+  }
   render() {
     return (
-      <div class="br2 ba dark-gray b--black-10 mv4 w-40 shadow-5 center">
-      <main class="pa4 black-80">
-  <form class="measure center">
-    <fieldset id="sign_up" class="ba b--transparent ph0 mh0">
-      <legend class="f4 fw6 ph0 mh0">Sign In</legend>
-      <div class="mt3">
-        <label class="db fw6 lh-copy f6" htmlfor="email-address">Email</label>
-        <input class="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="email" name="email-address"  id="email-address"/>
+      <div className="br2 ba dark-gray b--black-10 mv4 w-40 shadow-5 center">
+      <main className="pa4 black-80">
+  <form className="measure center" onSubmit={this.onSubmit}>
+    <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
+      <legend className="f4 fw6 ph0 mh0">Sign In</legend>
+      <div className="mt3">
+        <label className="db fw6 lh-copy f6" htmlFor="email">Email</label>
+        <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="email" name="email"  id="email-address" value={this.state.email} onChange={this.onChange}/>
       </div>
-      <div class="mv3">
-        <label class="db fw6 lh-copy f6" for="password">Password</label>
-        <input class="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="password" name="password"  id="password"/>
+      <div className="mv3">
+        <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
+        <input className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="password" name="password"  id="password" value={this.state.password} onChange={this.onChange}/>
       </div>
-      <label class="pa0 ma0 lh-copy f6 pointer"><input type="checkbox"/> Remember me</label>
+      <label className="pa0 ma0 lh-copy f6 pointer"><input type="checkbox"/> Remember me</label>
     </fieldset>
-    <div class="">
-      <input class="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit" value="Sign in"/>
+    <div className="">
+      <input className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit" value="Sign in"/>
     </div>
-    <div class="lh-copy mt3">
-      <a href="#0" class="f6 link dim black db">Sign up</a>
-      <a href="#0" class="f6 link dim black db">Forgot your password?</a>
+    <div className="lh-copy mt3">
+      <a href="#0" className="f6 link dim black db">Sign up</a>
+      <a href="#0" className="f6 link dim black db">Forgot your password?</a>
     </div>
   </form>
 </main>
@@ -30,3 +56,13 @@ export default class Login extends Component {
     )
   }
 }
+Login.propTypes={
+  loginUser:PropTypes.func.isRequired,
+  auth:PropTypes.object.isRequired
+}
+
+const mapStateToProps=(state)=>({
+  auth:state.auth,
+  errors:state.errors
+})
+export default connect(mapStateToProps,{loginUser})(withRouter(Login));
