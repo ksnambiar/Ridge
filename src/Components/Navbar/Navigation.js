@@ -1,11 +1,37 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
-export default class Navigation extends Component {
-  state = {
-    isAuthenticated: "false"
-  };
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {logoutUser} from '../../actions/authAction';
+import {clearCurrentProfile} from '../../actions/profileAction';
+class Navigation extends Component {
+ onLogoutClick(e){
+   e.preventDefault();
+   this.props.clearCurrentProfile();
+   this.props.logoutUser();
+   window.location.href='/'
+ }
   render() {
+    const {isAuthenticated,user} = this.props.auth;
+    const authLinks = (
+      <Nav>
+          
+      <Link to='/register' className="f4 fw6 db silver link dim hover-silver">Register</Link>
+     
+      <Link to='/login' className="f4 fw6 db silver link dim hover-silver ml2">sign in</Link>
+     
+     </Nav>
+    )
+    const userLinks = (
+      <Nav>
+          
+      <Link to='/profile' className="f4 fw6 db silver link dim hover-silver">Profile</Link>
+     
+      <a href="#" onClick={this.onLogoutClick.bind(this)} className="f4 fw6 db silver link dim hover-silver ml2">Logout</a>
+     
+    </Nav>
+    )
     return (
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Navbar.Brand><Link to='/' className="f4 fw6 db white link dim hover-white">Ridge</Link></Navbar.Brand>
@@ -27,15 +53,18 @@ export default class Navigation extends Component {
             // </NavDropdown>
     }
           </Nav>
-          <Nav>
-          
-            <Link to='/register' className="f4 fw6 db silver link dim hover-silver">Register</Link>
-           
-            <Link to='/login' className="f4 fw6 db silver link dim hover-silver ml2">sign in</Link>
-           
-          </Nav>
+          {isAuthenticated?userLinks:authLinks}
         </Navbar.Collapse>
       </Navbar>
     );
   }
 }
+Navigation.propTypes={
+  logoutUser:PropTypes.func.isRequired,
+  auth:PropTypes.object.isRequired
+}
+const mapStateToProps=(state)=>({
+  auth:state.auth
+})
+
+export default connect(mapStateToProps,{logoutUser,clearCurrentProfile})(Navigation);

@@ -20,6 +20,7 @@ class Register extends Component {
     this.onSubmit=this.onSubmit.bind(this);
   }
   
+  
   onChange(e){
     console.log(e);
     this.setState({[e.target.name]:e.target.value})
@@ -27,6 +28,11 @@ class Register extends Component {
   componentWillReceiveProps(nextProps){
     if(nextProps.errors){
       this.setState({errors:nextProps.errors});
+    }
+  }
+  componentDidMount(){
+    if(this.props.auth.isAuthenticated){
+      window.location='/dashboard';
     }
   }
   onSubmit(e){
@@ -82,6 +88,7 @@ class Register extends Component {
 Register.propTypes={
   registerUser:PropTypes.func.isRequired,
   auth:PropTypes.object.isRequired,
+  errors:PropTypes.object.isRequired
 }
 const mapStateToProps= (state)=>({
   auth:state.auth,

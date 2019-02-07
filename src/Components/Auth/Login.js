@@ -15,6 +15,11 @@ class Login extends Component {
     this.onChange=this.onChange.bind(this);
     this.onSubmit=this.onSubmit.bind(this);
   }
+  componentDidMount(){
+    if(this.props.auth.isAuthenticated){
+      this.props.history.push('/dashboard');
+    }
+  }
   onSubmit(e){
     e.preventDefault();
     const user={
@@ -23,12 +28,17 @@ class Login extends Component {
     }
     this.props.loginUser(user,this.props.history);
   }
+  componentWillReceiveProps(nextProps){
+    if(nextProps.errors){
+      this.setState({errors:nextProps.errors});
+    }
+  }
   onChange(e){
     this.setState({[e.target.name]:e.target.value})
   }
   render() {
     return (
-      <div className="br2 ba dark-gray b--black-10 mv4 w-40 shadow-5 center">
+      <div className="br2 ba dark-gray b--black-10 mv4 w-40 shadow-5 center bg-light-blue">
       <main className="pa4 black-80">
   <form className="measure center" onSubmit={this.onSubmit}>
     <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
@@ -58,7 +68,8 @@ class Login extends Component {
 }
 Login.propTypes={
   loginUser:PropTypes.func.isRequired,
-  auth:PropTypes.object.isRequired
+  auth:PropTypes.object.isRequired,
+  errors:PropTypes.object.isRequired
 }
 
 const mapStateToProps=(state)=>({
