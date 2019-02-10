@@ -1,8 +1,18 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link,withRouter } from "react-router-dom";
+import {connect} from "react-redux";
+import PropTypes from "prop-types";
 import landing from "./landing.jpg";
-export default class Landing extends Component {
+class Landing extends Component {
+  componentDidMount(){
+    let {isAuthenticated} = this.props.auth;
+    if(isAuthenticated){
+     
+      this.props.history.push('/dashboard')
+    }
+  }
   render() {
+    let {isAuthenticated} = this.props.auth;
     return (
       <div className="bg-gray">
         <div className="landing">
@@ -16,12 +26,18 @@ export default class Landing extends Component {
                     A Complete Social Network who love to do something innovative
                   </p>
                   <hr />
-                  <Link to="/register" className="btn btn-lg btn-info mr-2">
+                  {isAuthenticated?
+                    <Link to='/dashboard' className="btn btn-lg btn-info mr-2">Enter</Link>
+                    :
+                    <div>
+                    <Link to="/register" className="btn btn-lg btn-info mr-2">
                     Sign Up
                   </Link>
                   <Link to="/login" className="btn btn-lg btn-light">
                     Login
                   </Link>
+                </div>
+                }
                 </div>
               </div>
             </div>
@@ -31,3 +47,11 @@ export default class Landing extends Component {
     );
   }
 }
+Landing.propTypes = {
+  auth:PropTypes.object.isRequired
+}
+
+const mapStateToProps= (state)=>({
+  auth:state.auth
+})
+export default connect(mapStateToProps)(withRouter(Landing));

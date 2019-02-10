@@ -10,7 +10,6 @@ class Navigation extends Component {
    e.preventDefault();
    this.props.clearCurrentProfile();
    this.props.logoutUser();
-   window.location.href='/'
  }
   render() {
     const {isAuthenticated,user} = this.props.auth;
@@ -25,10 +24,10 @@ class Navigation extends Component {
     )
     const userLinks = (
       <Nav>
-          
-      <Link to='/profile' className="f4 fw6 db silver link dim hover-silver">Profile</Link>
+      <Link to='/dashboard' className="f4 fw6 db silver link dim hover-silver">Dashboard</Link>    
+      <Link to='/profile' className="f4 fw6 db silver link dim hover-silver ml3">Profile</Link>
      
-      <a href="#" onClick={this.onLogoutClick.bind(this)} className="f4 fw6 db silver link dim hover-silver ml2">Logout</a>
+      <a href="#" onClick={this.onLogoutClick.bind(this)} className="f4 fw6 db silver link dim hover-silver ml3">Logout</a>
      
     </Nav>
     )
@@ -38,7 +37,7 @@ class Navigation extends Component {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
-          <Link to='/devs' className="f4 fw6 db silver link dim hover-silver">Developers</Link>
+          <Link to='/developers' className="f4 fw6 db silver link dim hover-silver">Developers</Link>
             {//<Nav.Link href="#pricing">Pricing</Nav.Link>
             // <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
             //   <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>

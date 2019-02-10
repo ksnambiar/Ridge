@@ -32,6 +32,9 @@ class Login extends Component {
     if(nextProps.errors){
       this.setState({errors:nextProps.errors});
     }
+    if(this.props.auth.isAuthenticated){
+      this.props.history.push('/dashboard')
+    }
   }
   onChange(e){
     this.setState({[e.target.name]:e.target.value})
