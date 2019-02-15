@@ -44,7 +44,17 @@ export const getProfileByHandle = (handle)=>dispatch=>{
         })
     })
 }
-
+//get Projects by college
+export const getProjectsByCollege = (college)=>dispatch =>{
+    dispatch(setProfileLoading);
+    let profiles = dataBase.ref('profiles/')
+    profiles.orderByChild('institution').equalTo(college).on("child_added",snapshot=>{
+        dispatch({
+            type:GET_PROFILES,
+            payload:snapshot.val()
+        })
+    })
+}
 
 //create a profile
 export const createProfile = (userData,history)=>dispatch=>{
@@ -186,18 +196,6 @@ export const clearCurrentProfile = ()=>{
 }
 
 
-
-//test purpose 
-
-
-
-//get profiles of existing developers
-export const getDevProfiles = ()=>dispatch=>{
-    let profiles=dataBase.ref('profiles');
-    profiles.once('value').then(snapshot=>{
-        dispatch({
-            type:GET_PROFILES,
-            payload:snapshot.val()
-        })
-    })
+//test
+export const getDevProfiles = () =>{
 }

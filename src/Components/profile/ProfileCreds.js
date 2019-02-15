@@ -3,9 +3,11 @@ import React, { Component } from 'react'
 class ProfileCreds extends Component {
   render() {
     const { experience, projects } = this.props;
+    let expItems;
+    if(experience){
     let expValues=Object.values(experience)
     let expKeys=Object.keys(experience);
-    const expItems = expValues.map((exp,i) => (
+    expItems = expValues.map((exp,i) => (
       <li key={expKeys[i]} className="list-group-item">
         <h4>{exp.company}</h4>
         <p>
@@ -35,12 +37,14 @@ class ProfileCreds extends Component {
         </p>
       </li>
     ));
-
+          }
+          let projItems;
     //projects
+    if(projects){
     let projectValues=Object.values(projects);
     let projectKeys=Object.keys(projects)
     
-    const projItems = projectValues.map((proj,i) => {
+    projItems = projectValues.map((proj,i) => {
         let dom=proj.domains.split(',');
     const doms = dom.map((skill, index) => (
         <div key={index} className="p-3">
@@ -79,12 +83,12 @@ class ProfileCreds extends Component {
           
         </li>
       )});
-
+            }
     return (
         <div className="row">
         <div className="col-md-6">
           <h3 className="text-center text-info">Experience</h3>
-          {expItems.length > 0 ? (
+          {experience ? (
             <ul className="list-group">{expItems}</ul>
           ) : (
             <p className="text-center">No Experience Listed</p>
@@ -93,7 +97,7 @@ class ProfileCreds extends Component {
 
         <div className="col-md-6">
           <h3 className="text-center text-info">Projects</h3>
-          {projItems.length > 0 ? (
+          {projects? (
             <ul className="list-group">{projItems}</ul>
           ) : (
             <p className="text-center">No Projects Listed</p>
