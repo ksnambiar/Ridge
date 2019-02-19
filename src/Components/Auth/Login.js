@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import {loginUser} from '../../actions/authAction';
 import {connect} from 'react-redux';
-import {withRouter} from 'react-router-dom';
+import {withRouter,Link} from 'react-router-dom';
+import {auth} from '../../firebase/Index'
 import PropTypes from 'prop-types'
 class Login extends Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class Login extends Component {
     this.onSubmit=this.onSubmit.bind(this);
   }
   componentDidMount(){
+    let user=auth.currentUser;
     if(this.props.auth.isAuthenticated){
       this.props.history.push('/dashboard');
     }
@@ -29,6 +31,7 @@ class Login extends Component {
     this.props.loginUser(user,this.props.history);
   }
   componentWillReceiveProps(nextProps){
+
     if(nextProps.errors){
       this.setState({errors:nextProps.errors});
     }
@@ -41,30 +44,30 @@ class Login extends Component {
   }
   render() {
     return (
-      <div className="br2 ba dark-gray b--black-10 mv4 w-40 shadow-5 center bg-light-blue">
+      <div>
+      <div className="br2 ba dark-gray b--black-10 mv4 shadow-5 center bg-light-green col-lg-5 col-md-7 col-sm-11">
       <main className="pa4 black-80">
   <form className="measure center" onSubmit={this.onSubmit}>
     <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
       <legend className="f4 fw6 ph0 mh0">Sign In</legend>
       <div className="mt3">
         <label className="db fw6 lh-copy f6" htmlFor="email">Email</label>
-        <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="email" name="email"  id="email-address" value={this.state.email} onChange={this.onChange}/>
+        <input className="form-control" type="email" name="email"  id="email-address" value={this.state.email} onChange={this.onChange}/>
       </div>
       <div className="mv3">
         <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
-        <input className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="password" name="password"  id="password" value={this.state.password} onChange={this.onChange}/>
+        <input className="form-control" type="password" name="password"  id="password" value={this.state.password} onChange={this.onChange}/>
       </div>
-      <label className="pa0 ma0 lh-copy f6 pointer"><input type="checkbox"/> Remember me</label>
     </fieldset>
     <div className="">
-      <input className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit" value="Sign in"/>
+      <input className="btn btn-info btn-block" type="submit" value="Sign in"/>
     </div>
     <div className="lh-copy mt3">
-      <a href="#0" className="f6 link dim black db">Sign up</a>
-      <a href="#0" className="f6 link dim black db">Forgot your password?</a>
+      <Link to="/register" className="f6 link dim black db">Sign up</Link>
     </div>
   </form>
 </main>
+      </div>
       </div>
     )
   }

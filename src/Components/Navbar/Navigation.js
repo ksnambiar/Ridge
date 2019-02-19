@@ -13,6 +13,7 @@ class Navigation extends Component {
  }
   render() {
     const {isAuthenticated,user} = this.props.auth;
+    const {profile} = this.props.profile;
     const authLinks = (
       <Nav>
           
@@ -25,7 +26,7 @@ class Navigation extends Component {
     const userLinks = (
       <Nav>
       <Link to='/dashboard' className="f4 fw6 db silver link dim hover-silver">Dashboard</Link>    
-      <Link to='/profile' className="f4 fw6 db silver link dim hover-silver ml3">Profile</Link>
+      <Link to={`/profile/${user.fullName}`} className="f4 fw6 db silver link dim hover-silver ml3">Profile</Link>
      
       <a href="#" onClick={this.onLogoutClick.bind(this)} className="f4 fw6 db silver link dim hover-silver ml3">Logout</a>
      
@@ -63,7 +64,8 @@ Navigation.propTypes={
   auth:PropTypes.object.isRequired
 }
 const mapStateToProps=(state)=>({
-  auth:state.auth
+  auth:state.auth,
+  profile:state.profile
 })
 
 export default connect(mapStateToProps,{logoutUser,clearCurrentProfile})(Navigation);

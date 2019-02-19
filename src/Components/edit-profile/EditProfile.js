@@ -25,7 +25,9 @@ class EditProfile extends Component {
          errors:{},
          fullName:'',
          contact:'',
-         email:''
+         email:'',
+         projects:null,
+         experience:null
       }
       this.onSubmit=this.onSubmit.bind(this)
       this.onChange=this.onChange.bind(this)
@@ -53,6 +55,8 @@ class EditProfile extends Component {
           profile.fullName=profile.fullName?profile.fullName:''
           profile.contact=profile.contact?profile.contact:''
           profile.email=profile.email?profile.email:''
+          profile.projects = profile.projects?profile.projects:null;
+          profile.experience = profile.experience?profile.experience:null;
           this.setState({
               year:profile.year,
               institution:profile.institution,
@@ -66,7 +70,9 @@ class EditProfile extends Component {
               instagram: profile.instagram,
               fullName:profile.fullName,
               contact:profile.contact,
-              email:profile.email
+              email:profile.email,
+              projects:profile.projects,
+              experience:profile.experience
 
           })
       }
@@ -89,13 +95,16 @@ class EditProfile extends Component {
         instagram: this.state.instagram,
         fullName:this.state.fullName,
         contact:this.state.contact,
-        email:this.state.email
+        email:this.state.email,
+        projects:this.state.projects,
+        experience:this.state.experience
+        
       }
       this.props.createProfile(data,this.props.history)
     }
   render() {
     return (
-      <div className="center">
+      <div className="center br2 ba dark-gray b--black-10">
       <div className="container">
       <div className="row">
           <div className="col-md-8 m-auto">
@@ -108,10 +117,11 @@ class EditProfile extends Component {
         
       </div>
       </div>
-      <div className="center panel shadow-5">
-      <form className="pa4 w-50 center" onSubmit={this.onSubmit}>
+      <div className="center panel shadow-5 col-lg-7 col-md-8 ">
+      <form className="pa4 w-80 center" onSubmit={this.onSubmit}>
       <div className="form-group">
       <input type="text" name="institution" className="form-control" placeholder="Institution" onChange={this.onChange} value={this.state.institution}/>
+      
       </div>
       <div className="form-group">
       <input type="text" name="location" className="form-control" placeholder="Location" onChange={this.onChange} value={this.state.location}/>

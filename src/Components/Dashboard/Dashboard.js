@@ -28,7 +28,7 @@ class Dashboard extends Component {
             <p className="lead text-muted">
             Welcome, <Link to={`/profile/${user.fullName}`}>{user.fullName}</Link>
             </p>
-            <ProfileActions/>
+            <ProfileActions institution={profile.institution}/>
             <Experience experience={profile.experience}/>
            <Projects projects={profile.projects}/>
         

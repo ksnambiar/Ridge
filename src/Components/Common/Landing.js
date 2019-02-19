@@ -14,7 +14,7 @@ class Landing extends Component {
   render() {
     let {isAuthenticated} = this.props.auth;
     return (
-      <div className="bg-gray">
+      <div>
         <div className="landing">
           <div className="dark-overlay landing-inner text-light">
             <div className="container">

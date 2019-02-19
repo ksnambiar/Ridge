@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Provider } from "react-redux";
 // import {userInfo} from './firebase/Dbs';
-import {dataBase} from './firebase/Index';
+import {dataBase,auth} from './firebase/Index';
 import store from "./Store";
 import { BrowserRouter as Router ,Route,Switch} from "react-router-dom";
 import Navigation from "./Components/Navbar/Navigation";
@@ -13,21 +13,28 @@ import Register from "./Components/Auth/Register"
 import Dashboard from './Components/Dashboard/Dashboard';
 import Developers from './Components/testing/Developers';
 import Profiles from './Components/profiles/Profiles';
+import Project from './Components/Project/Project';
 import Profile from './Components/profile/Profile';
 import CreateProfile from './Components/create-profile/CreateProfile';
 import EditProfile from './Components/edit-profile/EditProfile'
 import AddExperience from './Components/add-creds/AddExperience';
 import AddProjects from './Components/add-creds/AddProjects';
+import Projects from './Components/projects/Projects';
 import "./App.css";
-import { setCurrentUser,logoutUser } from "./actions/authAction";
+import { setCurrentUser,logoutUser,checkSession} from "./actions/authAction";
 
 if(localStorage.uid){
   let uuid=localStorage.getItem('uid');
-
-  let user=dataBase.ref('users/'+uuid);
-    user.once('value').then(snapshot=>{
-      store.dispatch(setCurrentUser(snapshot.val()))    
-    })
+  let te = localStorage.getItem('et');
+  let data = {
+    uid:uuid,
+    time:te
+  }
+  store.dispatch(checkSession(data))
+  // let user=dataBase.ref('users/'+uuid);
+  //   user.once('value').then(snapshot=>{
+  //     store.dispatch(setCurrentUser(snapshot.val()))    
+  //   })
 
 }
 
@@ -36,7 +43,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <Router>
-          <div className="App">
+          <div>
             <Navigation />
             <Route exact path='/' component={Landing}/>
             <div className="container">
@@ -59,6 +66,15 @@ class App extends Component {
             <Switch>
             <PrivateRoute exact path='/add-project' component={AddProjects} />
             </Switch>
+            <Switch>
+            <PrivateRoute exact path='/projects/:institution' component={Projects} />
+            </Switch>
+            <Route exact path='/projects/:institution/:name' component={Project} />
+            {
+            //   <Switch>
+            // <PrivateRoute exact path='/projects/:institution/:name' component={Project} />
+            // </Switch>
+            }
             </div>
             <Footer />
           </div>

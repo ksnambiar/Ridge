@@ -50,7 +50,8 @@ class CreateProfile extends Component {
         instagram: this.state.instagram,
         fullName:this.props.auth.user.fullName,
         contact:this.props.auth.user.contact,
-        email:this.props.auth.user.email
+        email:this.props.auth.user.email,
+        year:this.state.year
       }
       this.props.createProfile(data,this.props.history)
     }
