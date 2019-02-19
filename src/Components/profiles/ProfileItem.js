@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 
 class ProfileItem extends Component {
   render() {
-      const {profile} =this.props;
+      const {profile,uid} =this.props;
       let skil=profile.skills.split(',');
     return (
       <div className="card card-body bg-light mb-3">
@@ -20,7 +20,7 @@ class ProfileItem extends Component {
         <p>
         {profile.location}
         </p>
-       <Link to={`/profile/${profile.fullName}`} className="btn btn-info">
+       <Link to={"/profile/"+uid} className="btn btn-info">
         View Profile
        </Link>   
         </div>

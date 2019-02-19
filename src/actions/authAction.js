@@ -1,55 +1,56 @@
 import {GET_ERRORS,SET_CURRENT_USER} from './types';
-import {auth,dataBase} from '../firebase/Index';
+import axios from 'axios'
 
 //Register User
 export const registerUser = (userData,history)=>(dispatch)=>{
-    auth.createUserWithEmailAndPassword(userData.email,userData.password)
+    //axios implementation
+
+    axios.post("https://blooming-gorge-84662.herokuapp.com/api/auth/register",userData)
         .then(obj=>{
-            let uid =obj.user.uid 
-            dataBase.ref('users/'+uid).set({
-                fullName:userData.fullName,
-                email:userData.email,
-                password:userData.password,
-                usn:userData.usn,
-                contact:userData.contact
-            }).then(
-                dataBase.ref('profiles/'+uid).set({
-                    test:'test'
-                }).then( history.push('/login'))
-                .catch(err=>{
-                    console.log(err)
-                })
-               
-            ).catch(err=>{
-                console.log("error in commiting \n"+err);
-            })
+            console.log(obj)
+            history.push('/login')
         })
         .catch(err=>{
             dispatch({
-                type:GET_ERRORS,
-                payload:err
-            })
+                            type:GET_ERRORS,
+                            payload:err
+                    })
         })
+
 }
 //Login User
 export const loginUser = (userData,history)=>(dispatch)=>{
-    auth.signInWithEmailAndPassword(userData.email,userData.password)
+   //axios implementation
+   axios.post("https://blooming-gorge-84662.herokuapp.com/api/auth/login",userData) 
+   .then(dat=>{
+        let obj=dat.data;
+        let uid = obj.jwt.uid;
+        let et = obj.jwt.stsTokenManager.expirationTime
+        localStorage.setItem("uid",uid);
+        localStorage.setItem("et",et);
+        let user = obj.data;
+        dispatch(setCurrentUser(user))
+
+        history.push('/dashboard');
+    }).catch(err=>{
+        dispatch({
+                        type:GET_ERRORS,
+                        payload:err
+                })
+    })
+}
+
+export const checkSession=(data)=>dispatch=>{
+    axios.get("https://blooming-gorge-84662.herokuapp.com/api/auth/current")
         .then(obj=>{
             console.log(obj)
-            let uid = obj.user.uid;
-            localStorage.setItem('uid',uid);
-            let user=dataBase.ref('users/'+uid);
-            user.once('value').then(snapshot=>{
-                dispatch(setCurrentUser(snapshot.val()))    
-              })
-            
-            history.push('/dashboard')
-        })
-        .catch(err=>{
-            dispatch({
-                type:GET_ERRORS,
-                payload:err
-            })
+            let indat=obj.data;
+            console.log(indat)
+            if(Object.keys(indat.data)>0)
+            {   if(data.uid===indat.jwt.uid){
+                dispatch(setCurrentUser(indat.data))
+            }
+            }
         })
 }
 

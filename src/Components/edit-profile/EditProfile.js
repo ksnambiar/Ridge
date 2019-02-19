@@ -120,16 +120,8 @@ class EditProfile extends Component {
       <div className="center panel shadow-5 col-lg-7 col-md-8 ">
       <form className="pa4 w-80 center" onSubmit={this.onSubmit}>
       <div className="form-group">
-      <select class="form-control" name="institution" placeholder="college" onChange={this.onChange}>
-      <option value="Ramaiah Institute of Technology">Ramaiah Institute of Technology</option>
-      <option>P E S Institute of Technology</option>
-      <option>B M S Institute of Technology</option>
-      <option>R V College of Engineering</option>
-      <option>University Vishwesharaiah College of Engineering</option>
-    </select>
-      {
-      //  <input type="text" name="institution" className="form-control" placeholder="Institution" onChange={this.onChange} value={this.state.institution}/>
-      }
+      <input type="text" name="institution" className="form-control" placeholder="Institution" onChange={this.onChange} value={this.state.institution}/>
+      
       </div>
       <div className="form-group">
       <input type="text" name="location" className="form-control" placeholder="Location" onChange={this.onChange} value={this.state.location}/>

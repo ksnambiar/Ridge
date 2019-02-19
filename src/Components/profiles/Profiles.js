@@ -19,10 +19,14 @@ class Profiles extends Component {
         length=Object.keys(profiles).length;
           if(length>0){
             profileKey=Object.keys(profiles);
+            console.log(profileKey)
             profileVal=Object.values(profiles);
               profileItems=profileVal.map((profile,i)=>
 
-                (<ProfileItem key={profileKey[i]} profile={profile}/>)
+                (Object.keys(profile).length>1?
+                <ProfileItem key={i} uid={profileKey[i]} profile={profile}/>
+                :
+                null)
               )
           }else{
               profileItems=<h4>No Profiles Found</h4>

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {Link} from 'react-router-dom';
 class ProjectItem extends Component {
   render() {
-    const {project,institution} = this.props;
+    const {project} = this.props;
     let doma = project.domains.split(",");
     let domains=doma;
     return (
@@ -15,14 +15,16 @@ class ProjectItem extends Component {
       <div className="col-lg-6 col-md-4 col-8">
       <h3>{project.name}</h3>
       <p>
-      {institution};
+      {project.institution};
       </p>
       <p>
       Guided by {project.guide}
       </p>
-     <Link to={`/request`} className="btn btn-info">
-      Request
-     </Link>   
+      {
+    //  <Link to={`/projects/${project.institution}/${project.name}`} className="btn btn-info">
+    //   View Details
+    //  </Link>
+      }   
       </div>
       <div className="col-md-4 d-none d-md-block">
       <h4>Domains used</h4>

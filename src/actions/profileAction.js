@@ -1,46 +1,58 @@
 import {dataBase,auth} from '../firebase/Index';
 import {GET_PROFILE,PROFILE_LOADING,GET_ERRORS,CLEAR_CURRENT_PROFILE, GET_PROFILES, SET_CURRENT_USER} from './types';
-
+import axios from 'axios';
 //get profiles
 export const getProfiles = ()=>dispatch=>{
 dispatch(setProfileLoading());
-let profiles=dataBase.ref('profiles/');
-profiles.once('value').then(snapshot=>{
-    dispatch({type:GET_PROFILES,
-    payload:snapshot.val()
-    })
-}).catch(err=>{
-    dispatch({
-        type:GET_PROFILES,
-        payload:null
-    })
-})
+axios.get("https://blooming-gorge-84662.herokuapp.com/api/profile/allProfiles")
+    .then(obj=>{
+        let dat=obj.data
+        console.log(dat)
+        dispatch({
+            type:GET_PROFILES,
+            payload:dat.data
+        })
+    }).catch(err=>
+        dispatch({
+            type:GET_ERRORS,
+            payload:err
+        })
+    )
 }
 //get current profile
 export const getCurrentProfile = ()=>dispatch=>{
     dispatch(setProfileLoading)
-    let uuid = localStorage.getItem('uid');
-    let user=dataBase.ref('profiles/'+uuid)
-    user.once('value').then(snapshot=>{
-        dispatch({type:GET_PROFILE,
-        payload:snapshot.val()
+    axios.get("https://blooming-gorge-84662.herokuapp.com/api/profile/current")
+        .then(obj=>{
+            dispatch({type:GET_PROFILE,
+                    payload:obj.data.data
+                    })
+        }).catch(err=>{
+            dispatch({
+                type:GET_ERRORS,
+                payload:err
+            })
         })
-    }).catch(err=>{
-        dispatch({
-            type:GET_ERRORS,
-            payload:{}
-        })
-    })
 }
 
 //get profile by handle
 export const getProfileByHandle = (handle)=>dispatch=>{
     dispatch(setProfileLoading)
     let uuid = handle;
-    let user=dataBase.ref('profiles/')
-    user.orderByChild('fullName').equalTo(uuid).on("child_added",snapshot=>{
-        dispatch({type:GET_PROFILE,
-        payload:snapshot.val()
+    
+    axios.get("https://blooming-gorge-84662.herokuapp.com/api/profile/getProfile/"+uuid)
+    .then(obj=>{
+        console.log(obj)
+        let dat=obj.data.data;
+        dispatch({
+            type:GET_PROFILE,
+            payload:dat
+        })
+    })
+    .catch(err=>{
+        dispatch({
+            type:GET_ERRORS,
+            payload:err
         })
     })
 }
@@ -59,40 +71,42 @@ export const getProjectsByCollege = (college)=>dispatch =>{
 //create a profile
 export const createProfile = (userData,history)=>dispatch=>{
     let uuid= localStorage.getItem('uid');
-    let currProfile = dataBase.ref('profiles/'+uuid)
-    currProfile.set(userData)  
+    
+    axios.post("https://blooming-gorge-84662.herokuapp.com/api/profile/createProfile",userData)
         .then(obj=>{
-            history.push('/dashboard');
+            console.log("profile response")
+            console.log(obj)
+            history.push('/dashboard')
         })
-        .catch(err=>dispatch({
-            type:GET_ERRORS,
-            payload:err
-        }))
+        .catch(err=>{
+            dispatch({
+                type:GET_ERRORS,
+                payload:err
+            })
+        })
 }
 //Add Experience
 export const addExperience = (expData,history)=>dispatch=>{
-    let uid = localStorage.getItem('uid');
-    let newKey = dataBase.ref('profiles/'+uid+'/experience').push().key;
-    var updates = {};
-    updates['profiles/'+uid+'/experience/' + newKey] = expData;
-    dataBase.ref().update(updates)
-    .then(obj=>
-        {console.log(obj)
-        history.push('/dashboard')})
-    .catch(err=>dispatch({
-        type:GET_ERRORS,
-        payload:err
-    }))
+    axios.post("https://blooming-gorge-84662.herokuapp.com/api/profile/addExperience",expData)
+    .then(obj=>{
+        let handle=obj.data;
+        console.log(handle)
+        history.push('/dashboard');
+    })
+    .catch(err=>{
+        dispatch({
+            type:GET_ERRORS,
+            payload:err
+        })
+    })
 }
 //delete experience
 export const deleteExperience = (id,history)=>dispatch=>{
     console.log(id)
-    let uid = localStorage.getItem('uid');
-    let exp = dataBase.ref('profiles/'+uid+'/experience/'+id);
-    exp.remove()
+    axios.delete(`https://blooming-gorge-84662.herokuapp.com/api/profile/removeExperience/${id}`)
         .then(obj=>{
+            console.log(obj)
             dispatch(getCurrentProfile())
-
         })
         .catch(err=>{
             dispatch({
@@ -104,25 +118,13 @@ export const deleteExperience = (id,history)=>dispatch=>{
 
 //Add Project
 export const addProject = (projData,history)=>dispatch=>{
-    let uid = localStorage.getItem('uid');
-    let newKey = dataBase.ref('profiles/'+uid).child('projects').push().key;
-    var updates = {};
-    updates['profiles/'+uid+'/projects/' + newKey] = projData;
-    dataBase.ref().update(updates)
+     
+
+    axios.post("https://blooming-gorge-84662.herokuapp.com/api/project/addProject",projData)
         .then(obj=>{
-            projData.uid=uid;
-            dataBase.ref('projects/'+newKey).set(projData)
-                .then(obj=>{
-                    history.push("/dashboard");
-                })
-                .catch(err=>{
-                    dispatch({
-                        type:GET_ERRORS,
-                        payload:err
-                    })
-                })
-        })
-        .catch(err=>{
+            console.log(obj)
+            history.push('/dashboard');
+        }).catch(err=>{
             dispatch({
                 type:GET_ERRORS,
                 payload:err
@@ -132,18 +134,10 @@ export const addProject = (projData,history)=>dispatch=>{
 
 //delete projects
 export const deleteProject = (id)=>dispatch=>{
-    let uid = localStorage.getItem('uid');
-    let exp = dataBase.ref('profiles/'+uid+'/projects/'+id);
-    exp.remove()
+   
+    axios.delete(`https://blooming-gorge-84662.herokuapp.com/api/project/removeProject/${id}`)
         .then(obj=>{
-            dataBase.ref('projects/'+id).remove().then(obj=>
             dispatch(getCurrentProfile())
-            ).catch(err=>{
-                dispatch({
-                    type:GET_ERRORS,
-                    payload:err
-                })
-            })
         })
         .catch(err=>{
             dispatch({
@@ -151,33 +145,26 @@ export const deleteProject = (id)=>dispatch=>{
                 payload:err
             })
         })
-
 }
 
 //delete profile and account
 export const deleteAccount = ()=>dispatch=>{
     if(window.confirm("are you sure? this is permenant!!")){
-    let user = auth.currentUser;
-    let uid=localStorage.getItem('uid');
-    let profile = dataBase.ref('profiles/');
-    let userData=dataBase.ref('users');
-    profile.child(uid).remove().then(obj=>{
-        userData.child(uid).remove().then(res=>{
-            user.delete().then(() =>{
+   
+        axios.get("https://blooming-gorge-84662.herokuapp.com/api/profile/deleteAccount")
+            .then(obj=>{
+                console.log(obj.data.data)
                 dispatch({
                     type:SET_CURRENT_USER,
                     payload:{}
                 })
-              }).catch((error)=> {
+            })
+            .catch(err=>{
                 dispatch({
                     type:GET_ERRORS,
-                    payload:error
+                    payload:err
                 })
-              });
-        }).catch(err=>console.log(err))
-    }).catch(err=>console.log(err))
-
-    
+            })
 }
 }
 
