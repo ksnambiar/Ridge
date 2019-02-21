@@ -1,11 +1,11 @@
 import {GET_ERRORS,SET_CURRENT_USER} from './types';
 import axios from 'axios'
-
+import {local_host,heroku_url} from '../api/Api_ref'
 //Register User
 export const registerUser = (userData,history)=>(dispatch)=>{
     //axios implementation
 
-    axios.post("https://blooming-gorge-84662.herokuapp.com/api/auth/register",userData)
+    axios.post(local_host+"/api/auth/register",userData)
         .then(obj=>{
             console.log(obj)
             history.push('/login')
@@ -13,7 +13,7 @@ export const registerUser = (userData,history)=>(dispatch)=>{
         .catch(err=>{
             dispatch({
                             type:GET_ERRORS,
-                            payload:err
+                            payload:err.response.data
                     })
         })
 
@@ -21,7 +21,7 @@ export const registerUser = (userData,history)=>(dispatch)=>{
 //Login User
 export const loginUser = (userData,history)=>(dispatch)=>{
    //axios implementation
-   axios.post("https://blooming-gorge-84662.herokuapp.com/api/auth/login",userData) 
+   axios.post(local_host+"/api/auth/login",userData) 
    .then(dat=>{
         let obj=dat.data;
         let uid = obj.jwt.uid;
@@ -35,13 +35,13 @@ export const loginUser = (userData,history)=>(dispatch)=>{
     }).catch(err=>{
         dispatch({
                         type:GET_ERRORS,
-                        payload:err
+                        payload:err.response.data
                 })
     })
 }
 
 export const checkSession=(data)=>dispatch=>{
-    axios.get("https://blooming-gorge-84662.herokuapp.com/api/auth/current")
+    axios.get(local_host+"/api/auth/current")
         .then(obj=>{
             console.log(obj)
             let indat=obj.data;

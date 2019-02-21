@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {withRouter,Link} from 'react-router-dom';
 import {auth} from '../../firebase/Index'
 import PropTypes from 'prop-types'
+import classnames from 'classnames'
 class Login extends Component {
   constructor(props) {
     super(props)
@@ -33,7 +34,7 @@ class Login extends Component {
   componentWillReceiveProps(nextProps){
 
     if(nextProps.errors){
-      this.setState({errors:nextProps.errors});
+      this.setState({errors:nextProps.errors.error});
     }
     if(this.props.auth.isAuthenticated){
       this.props.history.push('/dashboard')
@@ -43,6 +44,7 @@ class Login extends Component {
     this.setState({[e.target.name]:e.target.value})
   }
   render() {
+    const {errors} = this.state
     return (
       <div>
       <div className="br2 ba dark-gray b--black-10 mv4 shadow-5 center bg-light-green col-lg-5 col-md-7 col-sm-11">
@@ -52,12 +54,18 @@ class Login extends Component {
       <legend className="f4 fw6 ph0 mh0">Sign In</legend>
       <div className="mt3">
         <label className="db fw6 lh-copy f6" htmlFor="email">Email</label>
-        <input className="form-control" type="email" name="email"  id="email-address" value={this.state.email} onChange={this.onChange}/>
-      </div>
+        <input className={classnames('form-control', {
+          'is-invalid': errors.email
+        })} type="email" name="email"  id="email-address" value={this.state.email} onChange={this.onChange}/>
+        {errors.email && <div className="invalid-feedback">{errors.email}</div>}
+        </div>
       <div className="mv3">
         <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
-        <input className="form-control" type="password" name="password"  id="password" value={this.state.password} onChange={this.onChange}/>
-      </div>
+        <input className={classnames('form-control', {
+          'is-invalid': errors.password
+        })} type="password" name="password"  id="password" value={this.state.password} onChange={this.onChange}/>
+        {errors.password && <div className="invalid-feedback">{errors.password}</div>}
+        </div>
     </fieldset>
     <div className="">
       <input className="btn btn-info btn-block" type="submit" value="Sign in"/>

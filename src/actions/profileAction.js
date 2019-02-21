@@ -1,10 +1,11 @@
 import {dataBase,auth} from '../firebase/Index';
 import {GET_PROFILE,PROFILE_LOADING,GET_ERRORS,CLEAR_CURRENT_PROFILE, GET_PROFILES, SET_CURRENT_USER} from './types';
 import axios from 'axios';
+import {local_host,heroku_url} from '../api/Api_ref';
 //get profiles
 export const getProfiles = ()=>dispatch=>{
 dispatch(setProfileLoading());
-axios.get("https://blooming-gorge-84662.herokuapp.com/api/profile/allProfiles")
+axios.get(local_host+"/api/profile/allProfiles")
     .then(obj=>{
         let dat=obj.data
         console.log(dat)
@@ -22,7 +23,7 @@ axios.get("https://blooming-gorge-84662.herokuapp.com/api/profile/allProfiles")
 //get current profile
 export const getCurrentProfile = ()=>dispatch=>{
     dispatch(setProfileLoading)
-    axios.get("https://blooming-gorge-84662.herokuapp.com/api/profile/current")
+    axios.get(local_host+"/api/profile/current")
         .then(obj=>{
             dispatch({type:GET_PROFILE,
                     payload:obj.data.data
@@ -40,7 +41,7 @@ export const getProfileByHandle = (handle)=>dispatch=>{
     dispatch(setProfileLoading)
     let uuid = handle;
     
-    axios.get("https://blooming-gorge-84662.herokuapp.com/api/profile/getProfile/"+uuid)
+    axios.get(local_host+"/api/profile/getProfile/"+uuid)
     .then(obj=>{
         console.log(obj)
         let dat=obj.data.data;
@@ -72,7 +73,7 @@ export const getProjectsByCollege = (college)=>dispatch =>{
 export const createProfile = (userData,history)=>dispatch=>{
     let uuid= localStorage.getItem('uid');
     
-    axios.post("https://blooming-gorge-84662.herokuapp.com/api/profile/createProfile",userData)
+    axios.post(local_host+"/api/profile/createProfile",userData)
         .then(obj=>{
             console.log("profile response")
             console.log(obj)
@@ -87,7 +88,7 @@ export const createProfile = (userData,history)=>dispatch=>{
 }
 //Add Experience
 export const addExperience = (expData,history)=>dispatch=>{
-    axios.post("https://blooming-gorge-84662.herokuapp.com/api/profile/addExperience",expData)
+    axios.post(local_host+"/api/profile/addExperience",expData)
     .then(obj=>{
         let handle=obj.data;
         console.log(handle)
@@ -103,7 +104,7 @@ export const addExperience = (expData,history)=>dispatch=>{
 //delete experience
 export const deleteExperience = (id,history)=>dispatch=>{
     console.log(id)
-    axios.delete(`https://blooming-gorge-84662.herokuapp.com/api/profile/removeExperience/${id}`)
+    axios.delete(local_host+`/api/profile/removeExperience/${id}`)
         .then(obj=>{
             console.log(obj)
             dispatch(getCurrentProfile())
@@ -120,7 +121,7 @@ export const deleteExperience = (id,history)=>dispatch=>{
 export const addProject = (projData,history)=>dispatch=>{
      
 
-    axios.post("https://blooming-gorge-84662.herokuapp.com/api/project/addProject",projData)
+    axios.post(local_host+"/api/project/addProject",projData)
         .then(obj=>{
             console.log(obj)
             history.push('/dashboard');
@@ -135,7 +136,7 @@ export const addProject = (projData,history)=>dispatch=>{
 //delete projects
 export const deleteProject = (id)=>dispatch=>{
    
-    axios.delete(`https://blooming-gorge-84662.herokuapp.com/api/project/removeProject/${id}`)
+    axios.delete(local_host+`/api/project/removeProject/${id}`)
         .then(obj=>{
             dispatch(getCurrentProfile())
         })
@@ -151,7 +152,7 @@ export const deleteProject = (id)=>dispatch=>{
 export const deleteAccount = ()=>dispatch=>{
     if(window.confirm("are you sure? this is permenant!!")){
    
-        axios.get("https://blooming-gorge-84662.herokuapp.com/api/profile/deleteAccount")
+        axios.get(local_host+"/api/profile/deleteAccount")
             .then(obj=>{
                 console.log(obj.data.data)
                 dispatch({
