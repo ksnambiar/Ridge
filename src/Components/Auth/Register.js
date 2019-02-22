@@ -27,7 +27,7 @@ class Register extends Component {
     this.setState({[e.target.name]:e.target.value})
   }
   componentWillReceiveProps(nextProps){
-    if(nextProps.errors){
+    if(nextProps.errors.error){
       this.setState({errors:nextProps.errors.error});
     }
   }

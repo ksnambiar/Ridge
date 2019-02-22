@@ -12,7 +12,10 @@ class Login extends Component {
     this.state = {
         email:'',
         password:'',
-        errors:{}
+        errors:{
+          email:"",
+          password:""
+        }
     }
     this.onChange=this.onChange.bind(this);
     this.onSubmit=this.onSubmit.bind(this);
@@ -33,10 +36,10 @@ class Login extends Component {
   }
   componentWillReceiveProps(nextProps){
 
-    if(nextProps.errors){
+    if(nextProps.errors.error){
       this.setState({errors:nextProps.errors.error});
     }
-    if(this.props.auth.isAuthenticated){
+    if(nextProps.auth.isAuthenticated){
       this.props.history.push('/dashboard')
     }
   }
@@ -57,14 +60,18 @@ class Login extends Component {
         <input className={classnames('form-control', {
           'is-invalid': errors.email
         })} type="email" name="email"  id="email-address" value={this.state.email} onChange={this.onChange}/>
+        
         {errors.email && <div className="invalid-feedback">{errors.email}</div>}
+        
         </div>
       <div className="mv3">
         <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
         <input className={classnames('form-control', {
           'is-invalid': errors.password
         })} type="password" name="password"  id="password" value={this.state.password} onChange={this.onChange}/>
+        
         {errors.password && <div className="invalid-feedback">{errors.password}</div>}
+        
         </div>
     </fieldset>
     <div className="">

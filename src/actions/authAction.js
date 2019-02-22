@@ -33,6 +33,7 @@ export const loginUser = (userData,history)=>(dispatch)=>{
 
         history.push('/dashboard');
     }).catch(err=>{
+        console.log(err)
         dispatch({
                         type:GET_ERRORS,
                         payload:err.response.data
@@ -46,11 +47,13 @@ export const checkSession=(data)=>dispatch=>{
             console.log(obj)
             let indat=obj.data;
             console.log(indat)
-            if(Object.keys(indat.data)>0)
+            if(Object.keys(indat.data).length>0)
             {   if(data.uid===indat.jwt.uid){
                 dispatch(setCurrentUser(indat.data))
             }
             }
+        }).catch(err=>{
+            console.log(err)
         })
 }
 
