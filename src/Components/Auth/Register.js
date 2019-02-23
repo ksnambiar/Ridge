@@ -53,7 +53,7 @@ class Register extends Component {
   render() {
     const {errors} = this.state
     return (
-      <div className="br2 ba dark-gray b--black-10 mv4 shadow-5 center col-lg-5 col-md-6">
+      <div className="br2 ba dark-gray b--black-10 mv4 shadow-5 center col-lg-5 col-md-6 bg-light-gray">
       <article className="pa4 black-80">
       <form onSubmit={this.onSubmit}>
         <fieldset id="sign_up" className="ba b--transparent ph0 mh0" >

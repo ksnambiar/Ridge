@@ -14,6 +14,7 @@ class Navigation extends Component {
   render() {
     const {isAuthenticated,user} = this.props.auth;
     const {profile} = this.props.profile;
+    let uid = localStorage.getItem('uid')
     const authLinks = (
       <Nav>
           
@@ -26,7 +27,7 @@ class Navigation extends Component {
     const userLinks = (
       <Nav>
       <Link to='/dashboard' className="f4 fw6 db silver link dim hover-silver">Dashboard</Link>    
-      <Link to={`/profile/${user.fullName}`} className="f4 fw6 db silver link dim hover-silver ml3">Profile</Link>
+      <Link to={`/profile/${uid}`} className="f4 fw6 db silver link dim hover-silver ml3">Profile</Link>
      
       <a href="#" onClick={this.onLogoutClick.bind(this)} className="f4 fw6 db silver link dim hover-silver ml3">Logout</a>
      
@@ -34,7 +35,7 @@ class Navigation extends Component {
     )
     return (
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Navbar.Brand><Link to='/' className="f4 fw6 db white link dim hover-white">Ridge</Link></Navbar.Brand>
+        <Navbar.Brand><Link to='/' className="f4 fw6 db white link dim hover-white">TecRidge</Link></Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">

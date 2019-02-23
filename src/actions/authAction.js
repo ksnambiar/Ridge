@@ -5,7 +5,7 @@ import {local_host,heroku_url} from '../api/Api_ref'
 export const registerUser = (userData,history)=>(dispatch)=>{
     //axios implementation
 
-    axios.post(local_host+"/api/auth/register",userData)
+    axios.post(heroku_url+"/api/auth/register",userData)
         .then(obj=>{
             console.log(obj)
             history.push('/login')
@@ -21,7 +21,7 @@ export const registerUser = (userData,history)=>(dispatch)=>{
 //Login User
 export const loginUser = (userData,history)=>(dispatch)=>{
    //axios implementation
-   axios.post(local_host+"/api/auth/login",userData) 
+   axios.post(heroku_url+"/api/auth/login",userData) 
    .then(dat=>{
         let obj=dat.data;
         let uid = obj.jwt.uid;
@@ -42,7 +42,7 @@ export const loginUser = (userData,history)=>(dispatch)=>{
 }
 
 export const checkSession=(data)=>dispatch=>{
-    axios.get(local_host+"/api/auth/current")
+    axios.get(heroku_url+"/api/auth/current")
         .then(obj=>{
             console.log(obj)
             let indat=obj.data;

@@ -45,7 +45,6 @@ class Profile extends Component {
      <div className="col-md-12">
         {profileContent
         }
-        hellos
         </div>
         </div></div>
       </div>

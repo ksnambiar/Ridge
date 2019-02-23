@@ -126,8 +126,8 @@ class EditProfile extends Component {
       </div>
       </div>
       <div className="row">
-      <div className="center panel col-lg-8 col-md-9 col-sm-12">
-      <form className="pa4 w-80 center" onSubmit={this.onSubmit}>
+      <div className="center panel col-lg-8 col-md-9 col-sm-12 ">
+      <form className="pa4 w-100 center" onSubmit={this.onSubmit}>
       <div className="form-group">
       <label htmlFor="institution">Name of your college *</label>
       <select name="institution" className="form-control" placeholder="Institution" onChange={this.onChange} value={this.state.institution} defaultValue={this.state.institution}>
