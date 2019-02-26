@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "classnames": "^2.2.6",
     "firebase": "^5.8.2",
     "mdbreact": "^4.10.0",
     "react": "^16.7.0",

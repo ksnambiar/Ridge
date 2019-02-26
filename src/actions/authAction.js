@@ -1,11 +1,11 @@
 import {GET_ERRORS,SET_CURRENT_USER} from './types';
 import axios from 'axios'
-
+import {local_host,heroku_url} from '../api/Api_ref'
 //Register User
 export const registerUser = (userData,history)=>(dispatch)=>{
     //axios implementation
 
-    axios.post("https://blooming-gorge-84662.herokuapp.com/api/auth/register",userData)
+    axios.post(heroku_url+"/api/auth/register",userData)
         .then(obj=>{
             console.log(obj)
             history.push('/login')
@@ -13,7 +13,7 @@ export const registerUser = (userData,history)=>(dispatch)=>{
         .catch(err=>{
             dispatch({
                             type:GET_ERRORS,
-                            payload:err
+                            payload:err.response.data
                     })
         })
 
@@ -21,7 +21,7 @@ export const registerUser = (userData,history)=>(dispatch)=>{
 //Login User
 export const loginUser = (userData,history)=>(dispatch)=>{
    //axios implementation
-   axios.post("https://blooming-gorge-84662.herokuapp.com/api/auth/login",userData) 
+   axios.post(heroku_url+"/api/auth/login",userData) 
    .then(dat=>{
         let obj=dat.data;
         let uid = obj.jwt.uid;
@@ -33,24 +33,27 @@ export const loginUser = (userData,history)=>(dispatch)=>{
 
         history.push('/dashboard');
     }).catch(err=>{
+        console.log(err)
         dispatch({
                         type:GET_ERRORS,
-                        payload:err
+                        payload:err.response.data
                 })
     })
 }
 
 export const checkSession=(data)=>dispatch=>{
-    axios.get("https://blooming-gorge-84662.herokuapp.com/api/auth/current")
+    axios.get(heroku_url+"/api/auth/current")
         .then(obj=>{
             console.log(obj)
             let indat=obj.data;
             console.log(indat)
-            if(Object.keys(indat.data)>0)
+            if(Object.keys(indat.data).length>0)
             {   if(data.uid===indat.jwt.uid){
                 dispatch(setCurrentUser(indat.data))
             }
             }
+        }).catch(err=>{
+            console.log(err)
         })
 }
 

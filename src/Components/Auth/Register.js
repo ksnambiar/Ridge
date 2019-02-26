@@ -3,6 +3,7 @@ import {registerUser} from '../../actions/authAction';
 import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
+import classnames from 'classnames'
 class Register extends Component {
 
   constructor(props) {
@@ -26,8 +27,8 @@ class Register extends Component {
     this.setState({[e.target.name]:e.target.value})
   }
   componentWillReceiveProps(nextProps){
-    if(nextProps.errors){
-      this.setState({errors:nextProps.errors});
+    if(nextProps.errors.error){
+      this.setState({errors:nextProps.errors.error});
     }
   }
   componentDidMount(){
@@ -50,31 +51,52 @@ class Register extends Component {
 
 
   render() {
+    const {errors} = this.state
     return (
-      <div className="br2 ba dark-gray b--black-10 mv4 shadow-5 center col-lg-5 col-md-6">
+      <div className="br2 ba dark-gray b--black-10 mv4 shadow-5 center col-lg-5 col-md-6 bg-light-gray">
       <article className="pa4 black-80">
       <form onSubmit={this.onSubmit}>
         <fieldset id="sign_up" className="ba b--transparent ph0 mh0" >
           <legend className="f4 fw6 ph0 mh0">Sign Up</legend>
           <div className="mt3">
             <label className="db fw4 lh-copy f6" htmlFor="full-name">Full Name</label>
-            <input className="form-control" type="text" name="fullName"  id="fname" onChange={this.onChange} value={this.state.fullName}/>
-          </div>
+            <input className={classnames('form-control', {
+              'is-invalid': errors.fullName
+            })} type="text" name="fullName"  id="fname" onChange={this.onChange} value={this.state.fullName} />
+            
+            {errors.fullName && <div className="invalid-feedback">{errors.fullName}</div>}
+
+            </div>
           <div className="mt3">
             <label className="db fw4 lh-copy f6" htmlFor="USN">USN</label>
-            <input className="form-control" type="text" name="usn"  id="usn" onChange={this.onChange} value={this.state.usn}/>
-          </div>
+            <input className={classnames('form-control', {
+              'is-invalid': errors.usn
+            })} type="text" name="usn"  id="usn" onChange={this.onChange} value={this.state.usn}/>
+            {errors.usn && <div className="invalid-feedback">{errors.usn}</div>}
+
+            </div>
           <div className="mt3">
             <label className="db fw4 lh-copy f6" htmlFor="email">Email address</label>
-            <input className="form-control" type="email" name="email"  id="email-address" onChange={this.onChange} value={this.state.email}/>
-          </div>
+            <input className={classnames('form-control', {
+              'is-invalid': errors.email
+            })} type="email" name="email"  id="email-address" onChange={this.onChange} value={this.state.email}/>
+            {errors.email && <div className="invalid-feedback">{errors.email}</div>}
+
+            </div>
           <div className="mt3">
             <label className="db fw4 lh-copy f6" htmlFor="contact">Contact no</label>
-            <input className="form-control" type="text" name="contact"  id="contact" onChange={this.onChange} value={this.state.contact}/>
-          </div>
+            <input className={classnames('form-control', {
+              'is-invalid': errors.contact
+            })} type="text" name="contact"  id="contact" onChange={this.onChange} value={this.state.contact}/>
+            {errors.contact && <div className="invalid-feedback">{errors.contact}</div>}
+
+            </div>
           <div className="mt3">
             <label className="db fw4 lh-copy f6" htmlFor="password">Password</label>
-            <input className="form-control" type="password" name="password"  id="password" onChange={this.onChange} value={this.state.password}/>
+            <input className={classnames('form-control', {
+              'is-invalid': errors.password
+            })} type="password" name="password"  id="password" onChange={this.onChange} value={this.state.password}/>
+            {errors.password && <div className="invalid-feedback">{errors.password}</div>}
 
           </div>
         </fieldset>

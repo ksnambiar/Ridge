@@ -49,7 +49,7 @@ class AddExperience extends Component {
     return (
       <div className="add-experience">
       <div className="container ">
-      <div className="ma5 pd5">
+      <div className="mv4 pd5">
       <div className="col-md-8 m-auto">
       <Link to="/dashboard" className="btn btn-light">
       Go Back 
@@ -59,7 +59,9 @@ class AddExperience extends Component {
       Add any internship that you have had in the past or current
       </p>
       <small className="d-block pb-3">* = required Fields</small>
-      <form onSubmit={this.onSubmit} className='left'>
+      <div className="row">
+      <div className="center panel col-lg-8 col-md-9 col-sm-12">
+      <form onSubmit={this.onSubmit} className='left w-90'>
       
       <div className="form-group">
         <label htmlFor="company">Name of the Company/Institution</label>
@@ -107,6 +109,8 @@ class AddExperience extends Component {
         </div>
 
       </form> 
+      </div>
+      </div>
       </div>
       </div>
       </div>  
