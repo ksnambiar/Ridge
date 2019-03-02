@@ -78,13 +78,17 @@ class CreateProfile extends Component {
       </div>
       </div>
       <div className="center panel col-lg-8 col-md-9 col-sm-12">
-      <form className="pa4 w-80 center" onSubmit={this.onSubmit}>
+      <form className="pa4 w-90 center" onSubmit={this.onSubmit}>
       <div className="form-group">
       <label htmlFor="institution">Name of your college *</label>
       <select name="institution" className="form-control" placeholder="Institution" onChange={this.onChange} value={this.state.institution} defaultValue={this.state.institution}>
       <option value="">----</option>
       <option value="Ramaiah Institute of Technology">Ramaiah Institute of Technology</option>
       <option value="Sahyadri College of Engineering">Sahyadri College of Engineering</option>
+      <option value="Ambedkar Institute of Technology">Ambedkar Institute of Technology</option>
+      <option value="Vivekananda College of Engineering">Vivekananda College of Engineering</option>
+      <option value="National Institute Of Engineering">National Institute Of Engineering(NIE)</option>
+
       </select>
       </div>
       <div className="form-group">
@@ -93,6 +97,8 @@ class CreateProfile extends Component {
       <option value="">----</option>
       <option value="Bangalore">Bangalore</option>
       <option value="Mangalore">Mangalore</option>
+      <option value="Puttur">Puttur</option>
+      <option value="Mysore">Mysore</option>
       </select>
       </div>
       <div className="form-group">
@@ -110,8 +116,8 @@ class CreateProfile extends Component {
       <input type="text" name="skills" className="form-control" placeholder="skills" onChange={this.onChange} value={this.state.skills}/>
       </div>
       <div className="form-group">
-      <label htmlFor="location">Your Github Username *</label>
-      <input type="text" name="githubusername" className="form-control" placeholder="github username" required onChange={this.onChange} value={this.state.githubusername}/>
+      <label htmlFor="location">Your Github Username</label>
+      <input type="text" name="githubusername" className="form-control" placeholder="github username" onChange={this.onChange} value={this.state.githubusername}/>
       </div>
       <div className="form-group">
       <label htmlFor="location">A Short intro about yourself:</label>

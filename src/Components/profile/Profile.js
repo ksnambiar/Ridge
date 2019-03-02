@@ -9,9 +9,14 @@ import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getProfileByHandle } from '../../actions/profileAction';
 class Profile extends Component {
-    componentDidMount(){
+    componentWillMount(){
         if(this.props.match.params.handle){
             this.props.getProfileByHandle(this.props.match.params.handle);            
+        }
+    }
+    componentWillReceiveProps(nextProps){
+        if(nextProps.profile.profile===null ){
+            this.props.history.push('/not-found')
         }
     }
   render() {

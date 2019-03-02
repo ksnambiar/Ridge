@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import {loginUser} from '../../actions/authAction';
 import {connect} from 'react-redux';
 import {withRouter,Link} from 'react-router-dom';
-import {auth} from '../../firebase/Index'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 class Login extends Component {
@@ -21,7 +20,6 @@ class Login extends Component {
     this.onSubmit=this.onSubmit.bind(this);
   }
   componentDidMount(){
-    let user=auth.currentUser;
     if(this.props.auth.isAuthenticated){
       this.props.history.push('/dashboard');
     }

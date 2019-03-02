@@ -9,21 +9,21 @@ class ProjectHeader extends Component {
     return (
       <div className="row">
         <div className="center col-md-10">
-          <div className="panel br2 bg-light-green jumbotron center ma3" style={{textAlign:"center",color:"white"}}>
-          <div className="pa3 tc">
-          <h3 className="br1 h3 w3 dib bg-light-gray">1</h3>
-          </div>
+          <div className="panel br2 bg-light-blue jumbotron center ma3" style={{textAlign:"center",color:"white"}}>
           <h3> {project.name}</h3>
-          <Button
-          type="info"
+          <h5>{project.description}</h5>
+          <button
+          type="button"
+          className="btn btn-primary"
           >
-          ###
-          </Button>
-          <Button
-          type="warning"
+          Get in contact
+          </button>
+          <button
+          type="button"
+          className='btn btn-warning'
           >
-          ###
-          </Button>
+          Request to join
+          </button>
          </div>
         </div>
       </div>

@@ -1,4 +1,3 @@
-import {dataBase,auth} from '../firebase/Index';
 import {GET_PROFILE,PROFILE_LOADING,GET_ERRORS,CLEAR_CURRENT_PROFILE, GET_PROFILES, SET_CURRENT_USER} from './types';
 import axios from 'axios';
 import {local_host,heroku_url} from '../api/Api_ref';
@@ -57,18 +56,6 @@ export const getProfileByHandle = (handle)=>dispatch=>{
         })
     })
 }
-//get Projects by college
-export const getProjectsByCollege = (college)=>dispatch =>{
-    dispatch(setProfileLoading);
-    let profiles = dataBase.ref('profiles/')
-    profiles.orderByChild('institution').equalTo(college).on("child_added",snapshot=>{
-        dispatch({
-            type:GET_PROFILES,
-            payload:snapshot.val()
-        })
-    })
-}
-
 //create a profile
 export const createProfile = (userData,history)=>dispatch=>{
     let uuid= localStorage.getItem('uid');

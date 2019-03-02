@@ -2,12 +2,10 @@ import React, { Component } from "react";
 import { Link,withRouter } from "react-router-dom";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
-import landing from "./landing.jpg";
 class Landing extends Component {
   componentDidMount(){
     let {isAuthenticated} = this.props.auth;
     if(isAuthenticated){
-     
       this.props.history.push('/dashboard')
     }
   }
@@ -31,10 +29,10 @@ class Landing extends Component {
                     :
                     <div>
                     <Link to="/register" className="btn btn-lg btn-info mr-2">
-                    Sign Up
+                    Register
                   </Link>
                   <Link to="/login" className="btn btn-lg btn-light">
-                    Login
+                    Sign in
                   </Link>
                 </div>
                 }
