@@ -25,3 +25,34 @@ export const addPost = (data)=>dispatch=>{
         })
 }
 
+//get posts
+export const getPosts = (college)=>dispatch=>{
+    dispatch(setPostLoading())
+    
+    axios.get(local_host+'/api/posts/'+college+'/allPosts')
+        .then(obj=>{
+            let data=obj.data.posts.post;
+            let datakeys = Object.keys(data);
+            let mapped = datakeys.map(obj=>{
+                let parse=data[obj]
+                parse.key=obj
+                return parse
+            })
+            dispatch({
+                type:GET_POSTS,
+                payload:mapped
+            })
+        }).catch(err=>{
+            dispatch({
+                type:GET_POSTS,
+                payload:null
+            })
+        })
+}
+
+//set post loading
+export const setPostLoading=()=>{
+    return{
+        type:POST_LOADING
+    }
+}
