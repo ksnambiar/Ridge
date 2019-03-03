@@ -25,9 +25,9 @@ class ProfileGithub extends Component {
           ).then(data=>{
                console.log(data);
             
-            
+              if(this.refs.myRef){
                 this.setState({ repos: data.data,isLoading:false });
-              
+              }
            })
            .catch(err=>console.log(err));
           }

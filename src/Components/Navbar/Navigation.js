@@ -16,7 +16,7 @@ class Navigation extends Component {
     const {profile} = this.props.profile;
     let uid = localStorage.getItem('uid')
     const authLinks = (
-      <Nav>
+      <Nav> 
           
       <Link to='/register' className="f4 fw6 db silver link dim hover-silver">Register</Link>
      
@@ -24,22 +24,28 @@ class Navigation extends Component {
      
      </Nav>
     )
-    const userLinks = (
+    const userLinks = (<div>
+      
       <Nav>
-      <Link to='/dashboard' className="f4 fw6 db silver link dim hover-silver">Dashboard</Link>    
+      <Link to='/feeds' className="f4 fw6 db silver link dim hover-silver">Post Feeds</Link>    
+      <Link to='/dashboard' className="f4 fw6 db silver link dim hover-silver ml3">Dashboard</Link>    
       <Link to={`/profile/${uid}`} className="f4 fw6 db silver link dim hover-silver ml3">Profile</Link>
      
       <a href="#" onClick={this.onLogoutClick.bind(this)} className="f4 fw6 db silver link dim hover-silver ml3">Logout</a>
      
     </Nav>
+    </div>
     )
     return (
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Navbar.Brand><Link to='/' className="f4 fw6 db white link dim hover-white">TecRidge</Link></Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
+        
           <Nav className="mr-auto">
-          <Link to='/developers' className="f4 fw6 db silver link dim hover-silver">Developers</Link>
+        <Link to='/developers' className="f4 fw6 db silver link dim hover-silver">Developers</Link>
+        </Nav>
+    
             {//<Nav.Link href="#pricing">Pricing</Nav.Link>
             // <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
             //   <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
@@ -53,7 +59,6 @@ class Navigation extends Component {
             //   </NavDropdown.Item>
             // </NavDropdown>
     }
-          </Nav>
           {isAuthenticated?userLinks:authLinks}
         </Navbar.Collapse>
       </Navbar>

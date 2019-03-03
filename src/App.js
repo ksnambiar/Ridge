@@ -20,6 +20,7 @@ import Team from './Components/Team/Team';
 import AddProjects from './Components/add-creds/AddProjects';
 import Projects from './Components/projects/Projects';
 import NotFound from './Components/Not-found/NotFound';
+import Posts from './Components/Posts/Posts';
 import "./App.css";
 import { setCurrentUser,logoutUser,checkSession} from "./actions/authAction";
 import Particles from 'react-particles-js';
@@ -63,6 +64,9 @@ class App extends Component {
             </Switch>
             <Switch>
             <PrivateRoute exact path='/add-project' component={AddProjects} />
+            </Switch>
+            <Switch>
+            <PrivateRoute exact path='/feeds' component={Posts} />
             </Switch>
             <Switch>
             <PrivateRoute exact path='/projects/:institution' component={Projects} />

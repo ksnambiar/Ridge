@@ -48,7 +48,7 @@ class Login extends Component {
     const {errors} = this.state
     return (
       <div>
-      <div className="br2 ba dark-gray b--black-10 mv4 shadow-5 center bg-light-green col-lg-5 col-md-7 col-sm-11">
+      <div className="br2 ba dark-gray b--black-10 mv4 shadow-5 center bg-light-gray col-lg-5 col-md-7 col-sm-11">
       <main className="pa4 black-80">
   <form className="measure center" onSubmit={this.onSubmit}>
     <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
