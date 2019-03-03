@@ -8,14 +8,29 @@ class SocPostForm extends Component {
       super(props)
     
       this.state = {
-         post:""
+         post:"",
+         errors:{}
       }
       this.onChange=this.onChange.bind(this)
       this.onSubmit=this.onSubmit.bind(this)
     }
+    componentWillReceiveProps(nextProps){
+        if(nextProps.errors){
+            this.setState({errors:nextProps.errors})
+        }
+    }
     onSubmit(e){
         e.preventDefault();
-        console.log(this.state.post);
+        const {addPost} = this.props;
+        const {user} = this.props.auth;
+        const {profile} = this.props.profile
+        let obj={
+            fullName:user.fullName,
+            data:this.state.post,
+            institution:profile.institution
+        }
+        addPost(obj)
+        this.setState({post:''})
     }
     onChange(e){
         this.setState({[e.target.name]:e.target.value})
@@ -42,15 +57,17 @@ class SocPostForm extends Component {
     )
   }
 }
-const propTypes = {
+ SocPostForm.propTypes = {
     auth:PropTypes.object.isRequired,
     errors:PropTypes.object.isRequired,
-    addPost:PropTypes.func.isRequired
+    addPost:PropTypes.func.isRequired,
+    profile:PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state)=>({
     auth:state.auth,
-    errors:state.errors
+    errors:state.errors,
+    profile:state.profile
 })
 
 export default connect(mapStateToProps,{addPost})(SocPostForm);
