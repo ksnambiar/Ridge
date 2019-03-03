@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {Card} from 'react-bootstrap';
+import Octicon,{getIconByName} from '@githubprimer/octicons-react';
+import {Button} from 'react-bootstrap';
 class PostItem extends Component {
     
   render() {
     const {post} = this.props
     return (
-      <div className="mv1 col-md-9 center">
+      <div className="mv3 col-md-9 center">
         <Card >
             <Card.Header>
             <img
@@ -24,7 +26,22 @@ class PostItem extends Component {
             {post.postData}
             </Card.Body>
             <Card.Footer>
-            footer
+            <Button variant="dark">
+            <div>
+            <Octicon icon={getIconByName("thumbsup")} style={{float:"left"}}/>
+            </div>
+            </Button>
+            <Button variant="dark"  className="mh2">
+            <div>
+            <Octicon icon={getIconByName("thumbsdown")} style={{float:"left"}}/>
+            </div>
+            </Button>
+            <Button variant="dark" className="mh2" style={{width:"120px",height:"40px"}}>
+            <div style={{float:"left"}}>
+            <Octicon icon={getIconByName("comment")}/>
+            </div>
+            <p>Comment</p>
+            </Button>
             </Card.Footer>
         </Card>
       </div>

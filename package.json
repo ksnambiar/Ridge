@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@githubprimer/octicons-react": "^8.5.0",
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
     "firebase": "^5.8.2",
