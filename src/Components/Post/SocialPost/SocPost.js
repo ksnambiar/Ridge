@@ -25,7 +25,7 @@ class SocPost extends Component {
               <PostShow post={post.post}/>
               <div>
             <CommentForm post_id={key}/>
-            <CommentFeed post_id={key} comments={post.post.comments}/>
+            <CommentFeed post_id={key} post={post.post}/>
              </div>
               </div>
           )
@@ -39,7 +39,6 @@ class SocPost extends Component {
             Go Back
           </Link>
           {postContent}
-          
           </div>
          </div>
          </div>
