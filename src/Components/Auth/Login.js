@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import {loginUser} from '../../actions/authAction';
 import {connect} from 'react-redux';
 import {withRouter,Link} from 'react-router-dom';
-import {auth} from '../../firebase/Index'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 class Login extends Component {
@@ -21,7 +20,6 @@ class Login extends Component {
     this.onSubmit=this.onSubmit.bind(this);
   }
   componentDidMount(){
-    let user=auth.currentUser;
     if(this.props.auth.isAuthenticated){
       this.props.history.push('/dashboard');
     }
@@ -50,7 +48,7 @@ class Login extends Component {
     const {errors} = this.state
     return (
       <div>
-      <div className="br2 ba dark-gray b--black-10 mv4 shadow-5 center bg-light-green col-lg-5 col-md-7 col-sm-11">
+      <div className="br2 ba dark-gray b--black-10 mv4 shadow-5 center bg-light-gray col-lg-5 col-md-7 col-sm-11">
       <main className="pa4 black-80">
   <form className="measure center" onSubmit={this.onSubmit}>
     <fieldset id="sign_up" className="ba b--transparent ph0 mh0">

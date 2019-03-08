@@ -59,7 +59,7 @@ class ProfileCreds extends Component {
         </div>
         ))
         return(
-        <li key={projectKeys[i]} className="list-group-item">
+        <li key={projectKeys[i]} className="list-group-item mv2">
           <h4>{proj.name}</h4>
           <p>
             {proj.description === '' ? null : (
@@ -71,14 +71,9 @@ class ProfileCreds extends Component {
           <p>
             <strong>Guide:</strong> {proj.guide?proj.guide:<p>no one yet</p>}
           </p>
+          
           <p>
-            <strong>Team:</strong> {team}
-          </p>
-          <p>
-            <strong>Domains Used:</strong> {doms}
-          </p>
-          <p>
-            <strong>Github Link:</strong> <a href={proj.githublink}>{proj.githublink}</a>
+            <a href={proj.githublink}>Github Link</a>
           </p>
           
         </li>
@@ -98,7 +93,7 @@ class ProfileCreds extends Component {
         <div className="col-md-6">
           <h3 className="text-center text-info">Projects</h3>
           {projects? (
-            <ul className="list-group">{projItems}</ul>
+            <ul className="list-group ">{projItems}</ul>
           ) : (
             <p className="text-center">No Projects Listed</p>
           )}

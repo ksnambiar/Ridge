@@ -27,7 +27,7 @@ class Project extends Component {
           <div className="ma3">
           <h3>Repo Owner</h3>
           </div>
-          <ProjectGithub />
+          <ProjectGithub projectlink={project}/>
           </div>
       }
     return (

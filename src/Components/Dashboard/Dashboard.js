@@ -16,6 +16,7 @@ class Dashboard extends Component {
         this.props.deleteAccount();
     }
   render() {
+      const uid = localStorage.getItem('uid');
       const {user} = this.props.auth;
       const {profile,loading} = this.props.profile;
       let dashboardContent;
@@ -26,7 +27,7 @@ class Dashboard extends Component {
         if(Object.keys(profile).length>1){
             dashboardContent=<div>
             <p className="lead text-muted">
-            Welcome, <Link to={`/profile/${user.fullName}`}>{user.fullName}</Link>
+            Welcome, <Link to={`/profile/${uid}`}>{user.fullName}</Link>
             </p>
             <ProfileActions institution={profile.institution}/>
             <Experience experience={profile.experience}/>

@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom';
+import Spinner from '../Common/Spinner'
+import axios from 'axios';
 class ProfileGithub extends Component {
     constructor(props) {
       super(props)
@@ -7,29 +9,35 @@ class ProfileGithub extends Component {
       this.state = {
          clientId:'5d8243ed93467bbc02c7',
          clientSecret: '1df9aad9b3bf785cb2ba29cbf9d34de3229ec651',
-         count: 4,
+         count: 5,
          sort:'created: asc',
-         repos: []
+         repos: [],
+         isLoading:false
       }
     }
     componentDidMount(){
         const {username} = this.props;
+        this.setState({isLoading:true})
         const {count, sort, clientId ,clientSecret} = this.state;
-        fetch(
+        if(username){
+        axios.get(
             `https://api.github.com/users/${username}/repos?per_page=${count}&sort=${sort}&client_id=${clientId}&client_secret=${clientSecret}`
-          ).then(obj=>obj.json())
-           .then(data=>{
+          ).then(data=>{
                console.log(data);
             
-            if (this.refs.myRef) {
-                this.setState({ repos: data });
+              if(this.refs.myRef){
+                this.setState({ repos: data.data,isLoading:false });
               }
            })
            .catch(err=>console.log(err));
+          }
     }   
+    componentWillUnmount(){
+      this.setState({repos:[]})
+    }
   render() {
-    const { repos } = this.state;
-
+    const { repos,isLoading } = this.state;
+    const {username} = this.props;
     const repoItems = repos.map(repo => (
       <div key={repo.id} className="card card-body mb-2">
         <div className="row">
@@ -56,11 +64,13 @@ class ProfileGithub extends Component {
       </div>
     ));
     return (
+      
         <div ref="myRef">
         <hr />
         <h3 className="mb-4">Latest Github Repos</h3>
-        {repoItems}
+        {isLoading?<Spinner/>:repoItems}
       </div>
+      
     )
   }
 }
