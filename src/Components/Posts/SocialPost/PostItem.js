@@ -49,11 +49,14 @@ class PostItem extends Component {
                   className="rounded-circle bg-light-blue"
                   src={`https://robohash.org/${post.ownerName}`}
                   alt="Profile Photo"
-                  style={{width:"40px",height:"40px",float:"left"}}
+                  style={{width:"50px",height:"50px",float:"left"}}
             />
             <h6>
             {post.ownerName}
             </h6>
+            <p>
+            {d.toDateString()} at {d.toTimeString().slice(0,8)}
+            </p>
             </Card.Header>
             <Card.Body>
             {post.postData}
@@ -72,15 +75,18 @@ class PostItem extends Component {
             <Badge variant="light" className="ml1">{post.dislikes?Object.keys(post.dislikes).length:0}</Badge>
             </div>
             </Button>
-            <Link to={`/post/${post.key}`}  className="mh2 btn btn-dark" style={{width:"120px",height:"40px"}}>
+            <Link to={`/post/${post.key}`}  className="mh2 btn btn-dark" >
             <div style={{float:"left"}}>
             <Octicon icon={getIconByName("comment")}/>
             </div>
-            <p>Comment</p>
+            
+            <Badge variant="light" className="ml1">{post.comments?Object.keys(post.comments).length:0}</Badge>
+
             </Link>
             {post.ownerUid===ud?
             <Button variant="danger" style={{justifyContent:"end"}} onClick={this.onClickDelete.bind(this,post.key)}>
             <Octicon icon={getIconByName("trashcan")}/>
+
             </Button>:null
           }
             </Card.Footer>
