@@ -14,7 +14,8 @@ class SocialPost extends Component {
       let  postfeed;
       if(posts===null || loading){
         postfeed = <Spinner />
-      }else{
+      }
+      else{
           postfeed=<PostFeed posts = {posts}/>
       }
     return (

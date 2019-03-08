@@ -21,6 +21,7 @@ import AddProjects from './Components/add-creds/AddProjects';
 import Projects from './Components/projects/Projects';
 import NotFound from './Components/Not-found/NotFound';
 import Posts from './Components/Posts/Posts';
+import SocPost from './Components/Post/SocialPost/SocPost';
 import "./App.css";
 import { setCurrentUser,logoutUser,checkSession} from "./actions/authAction";
 import Particles from 'react-particles-js';
@@ -71,7 +72,12 @@ class App extends Component {
             <Switch>
             <PrivateRoute exact path='/projects/:institution' component={Projects} />
             </Switch>
-            <Route exact path='/projects/:institution/:name' component={Project} />
+            <Switch>
+            <PrivateRoute exact path='/post/:id' component={SocPost} />
+            </Switch>
+            <Switch>
+            <PrivateRoute exact path='/projects/:institution/:name' component={Project} />
+            </Switch>
             {
             //   <Switch>
             // <PrivateRoute exact path='/projects/:institution/:name' component={Project} />
