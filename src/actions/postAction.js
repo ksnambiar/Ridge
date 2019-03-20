@@ -133,6 +133,9 @@ axios.post(local_host+"/api/posts/"+college+"/post/"+id+"/comment",comment)
         payload:err
     }))
 }
+//adding query
+
+
 //set post loading
 export const setPostLoading=()=>{
     return{

@@ -48,13 +48,13 @@ class Login extends Component {
     const {errors} = this.state
     return (
       <div>
-      <div className="br2 ba dark-gray b--black-10 mv4 shadow-5 center bg-light-gray col-lg-5 col-md-7 col-sm-11">
+      <div className="br2 ba b--black-10 mv4 shadow-5 center col-lg-5 col-md-7 col-sm-11">
       <main className="pa4 black-80">
   <form className="measure center" onSubmit={this.onSubmit}>
     <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
-      <legend className="f4 fw6 ph0 mh0">Sign In</legend>
+      <legend className="f4 fw6 ph0 mh0 form_col">Sign In</legend>
       <div className="mt3">
-        <label className="db fw6 lh-copy f6" htmlFor="email">Email</label>
+        <label className="db fw6 lh-copy f6 form_col" htmlFor="email">Email</label>
         <input className={classnames('form-control', {
           'is-invalid': errors.email
         })} type="email" name="email"  id="email-address" value={this.state.email} onChange={this.onChange}/>
@@ -63,7 +63,7 @@ class Login extends Component {
         
         </div>
       <div className="mv3">
-        <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
+        <label className="db fw6 lh-copy f6 form_col" htmlFor="password">Password</label>
         <input className={classnames('form-control', {
           'is-invalid': errors.password
         })} type="password" name="password"  id="password" value={this.state.password} onChange={this.onChange}/>
@@ -73,10 +73,11 @@ class Login extends Component {
         </div>
     </fieldset>
     <div className="">
-      <input className="btn btn-info btn-block" type="submit" value="Sign in"/>
+      <input className="btn btn_col dim btn-block" type="submit" value="Sign in"/>
     </div>
     <div className="lh-copy mt3">
-      <Link to="/register" className="f6 link dim black db">Sign up</Link>
+      <p className="form_col">Don't have an account?</p>
+      <Link to="/register" className="f6 link dim black db form_col"> Register </Link>
     </div>
   </form>
 </main>

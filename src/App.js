@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Provider } from "react-redux";
 import store from "./Store";
+import Particles from 'react-particles-js';
 import { BrowserRouter as Router ,Route,Switch} from "react-router-dom";
 import pconfig from './particlesjs-config.json'
 import Navigation from "./Components/Navbar/Navigation";
@@ -24,7 +25,6 @@ import Posts from './Components/Posts/Posts';
 import SocPost from './Components/Post/SocialPost/SocPost';
 import "./App.css";
 import { setCurrentUser,logoutUser,checkSession} from "./actions/authAction";
-import Particles from 'react-particles-js';
 if(localStorage.uid){
   let uuid=localStorage.getItem('uid');
   let te = localStorage.getItem('et');
@@ -38,13 +38,15 @@ if(localStorage.uid){
 
 class App extends Component {
   render() {
+    console.log(pconfig)
     return (
       <Provider store={store}>
         <Router>
-          <div className="styling">
+          <div>
             <Navigation />
             <Route exact path='/' component={Landing}/>
             <div className="container">
+            <Particles params={pconfig} className="particlefind"/>
             <Route exact path='/team' component={Team}/>
             <Route exact path='/register' component={Register}/>
             <Route exact path='/Login' component={Login}/>

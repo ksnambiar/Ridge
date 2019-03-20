@@ -43,7 +43,9 @@ class Navigation extends Component {
         <Navbar.Collapse id="responsive-navbar-nav">
         
           <Nav className="mr-auto">
-        <Link to='/developers' className="f4 fw6 db silver link dim hover-silver">Developers</Link>
+        {
+          // <Link to='/developers' className="f4 fw6 db silver link dim hover-silver">Developers</Link>
+        }
         </Nav>
     
             {//<Nav.Link href="#pricing">Pricing</Nav.Link>
