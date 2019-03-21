@@ -7,9 +7,9 @@ import pconfig from './particlesjs-config.json'
 import Navigation from "./Components/Navbar/Navigation";
 import Landing from "./Components/Common/Landing";
 import Footer from "./Components/Common/Footer";
-import Login from "./Components/Auth/Login";
+import LoginPar from "./Components/Auth/LoginPar";
 import PrivateRoute from "./Components/Common/PrivateRoute";
-import Register from "./Components/Auth/Register"
+import RegPar from "./Components/Auth/RegPar";
 import Dashboard from './Components/Dashboard/Dashboard';
 import Profiles from './Components/profiles/Profiles';
 import Project from './Components/Project/Project';
@@ -46,15 +46,17 @@ class App extends Component {
             <Navigation />
             <Route exact path='/' component={Landing}/>
             <div className="container">
-            <Particles params={pconfig} className="particlefind"/>
+            {
+            // <Particles params={pconfig} className="particlefind"/>
+            }
             <Route exact path='/team' component={Team}/>
-            <Route exact path='/register' component={Register}/>
-            <Route exact path='/Login' component={Login}/>
+            <Route exact path='/register' component={RegPar}/>
+            <Route exact path='/Login' component={LoginPar}/>
             <Route exact path='/developers' component={Profiles}/>
             <Route exact path='/profile/:handle' component={Profile}/>
             <Route exact path='/not-found' component={NotFound}/>
             <Switch>
-            <PrivateRoute exact path='/dashboard' component={Dashboard} />
+            <PrivateRoute exact path='/dev/dashboard' component={Dashboard} />
             </Switch>
             <Switch>
             <PrivateRoute exact path='/create-profile' component={CreateProfile} />

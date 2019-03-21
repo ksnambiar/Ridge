@@ -4,13 +4,13 @@ import {connect} from "react-redux";
 import PropTypes from "prop-types";
 class Landing extends Component {
   componentDidMount(){
-    let {isAuthenticated} = this.props.auth;
+    let {isAuthenticated,type} = this.props.auth;
     if(isAuthenticated){
-      this.props.history.push('/dashboard')
+      this.props.history.push(''+type+'/dashboard')
     }
   }
   render() {
-    let {isAuthenticated} = this.props.auth;
+    let {isAuthenticated,type} = this.props.auth;
     return (
       <div>
         <div>
@@ -25,7 +25,7 @@ class Landing extends Component {
                   </p>
                   <hr />
                   {isAuthenticated?
-                    <Link to='/dashboard' className="btn btn-lg btn-info mr-2">Enter</Link>
+                    <Link to={`/${type}/dashboard`} className="btn btn-lg btn-info mr-2">Enter</Link>
                     :
                     <div>
                     <Link to="/register" className="btn btn-lg btn-info mr-2">

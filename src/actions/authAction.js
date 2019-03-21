@@ -18,6 +18,20 @@ export const registerUser = (userData,history)=>(dispatch)=>{
         })
 
 }
+//register guides
+export const registerGuide = (userData,history)=>(dispatch)=>{
+    axios.post(local_host+"/api/guides/auth/register",userData)
+        .then(obj=>{
+            console.log(obj)
+            history.push('/login')
+        })
+        .catch(err=>{
+            dispatch({
+                            type:GET_ERRORS,
+                            payload:err.response.data
+                    })
+        })
+}
 //Login User
 export const loginUser = (userData,history)=>(dispatch)=>{
    //axios implementation
@@ -29,9 +43,10 @@ export const loginUser = (userData,history)=>(dispatch)=>{
         localStorage.setItem("uid",uid);
         localStorage.setItem("et",et);
         let user = obj.data;
+        user.type="dev"
         dispatch(setCurrentUser(user))
 
-        history.push('/dashboard');
+        history.push('/'+user.type+'/dashboard');
     }).catch(err=>{
         console.log(err)
         dispatch({
@@ -40,6 +55,29 @@ export const loginUser = (userData,history)=>(dispatch)=>{
                 })
     })
 }
+//login guide
+export const loginGuide = (userData,history)=>(dispatch)=>{
+    //axios implementation
+    axios.post(local_host+"/api/guides/auth/login",userData) 
+    .then(dat=>{
+         let obj=dat.data;
+         let uid = obj.jwt.uid;
+         let et = obj.jwt.stsTokenManager.expirationTime
+         localStorage.setItem("uid",uid);
+         localStorage.setItem("et",et);
+         let user = obj.data;
+         user.type= 'guide'
+         dispatch(setCurrentUser(user)) 
+ 
+         history.push('/'+user.type+'/dashboard');
+     }).catch(err=>{
+         console.log(err)
+         dispatch({
+                         type:GET_ERRORS,
+                         payload:err.response.data
+                 })
+     })
+ }
 
 export const checkSession=(data)=>dispatch=>{
     axios.get(local_host+"/api/devs/auth/current")

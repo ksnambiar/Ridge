@@ -10,6 +10,12 @@
   z-index:-1;
 
 }
+.like{
+  background-color: cornflowerblue
+}
+.dislike{
+  background-color: #b80c09;
+}
 .styling{
   background-color: #0f1016;
   background-size: cover

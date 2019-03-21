@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import {loginUser} from '../../actions/authAction';
+import {loginGuide} from '../../actions/authAction';
 import {connect} from 'react-redux';
 import {withRouter,Link} from 'react-router-dom';
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-class Login extends Component {
+class LoginGuide extends Component {
   constructor(props) {
     super(props)
   
@@ -30,7 +30,7 @@ class Login extends Component {
       email:this.state.email,
       password:this.state.password
     }
-    this.props.loginUser(user,this.props.history);
+    this.props.loginGuide(user,this.props.history);
   }
   componentWillReceiveProps(nextProps){
 
@@ -86,8 +86,8 @@ class Login extends Component {
     )
   }
 }
-Login.propTypes={
-  loginUser:PropTypes.func.isRequired,
+LoginGuide.propTypes={
+  loginGuide:PropTypes.func.isRequired,
   auth:PropTypes.object.isRequired,
   errors:PropTypes.object.isRequired
 }
@@ -96,4 +96,4 @@ const mapStateToProps=(state)=>({
   auth:state.auth,
   errors:state.errors
 })
-export default connect(mapStateToProps,{loginUser})(withRouter(Login));
+export default connect(mapStateToProps,{loginGuide})(withRouter(LoginGuide));
