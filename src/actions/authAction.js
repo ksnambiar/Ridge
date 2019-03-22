@@ -39,20 +39,27 @@ export const loginUser = (userData,history)=>(dispatch)=>{
    .then(dat=>{
         let obj=dat.data;
         let uid = obj.jwt.uid;
-        let et = obj.jwt.stsTokenManager.expirationTime
+        let jwt = obj.jwt.stsTokenManager.accessToken;
         localStorage.setItem("uid",uid);
-        localStorage.setItem("et",et);
+        localStorage.setItem("jwt",jwt);
         let user = obj.data;
-        user.type="dev"
+        user.utype="dev"
         dispatch(setCurrentUser(user))
 
-        history.push('/'+user.type+'/dashboard');
+        history.push('/'+user.utype+'/dashboard');
     }).catch(err=>{
         console.log(err)
+        if(err.response){
         dispatch({
                         type:GET_ERRORS,
                         payload:err.response.data
                 })
+            }else{
+                dispatch({
+                    type:GET_ERRORS,
+                    payload:err
+            })
+            }
     })
 }
 //login guide
@@ -62,33 +69,40 @@ export const loginGuide = (userData,history)=>(dispatch)=>{
     .then(dat=>{
          let obj=dat.data;
          let uid = obj.jwt.uid;
-         let et = obj.jwt.stsTokenManager.expirationTime
+         let jwt = obj.jwt.stsTokenManager.accessToken
          localStorage.setItem("uid",uid);
-         localStorage.setItem("et",et);
+         localStorage.setItem("jwt",jwt);
+         console.log(obj,user)
+
          let user = obj.data;
-         user.type= 'guide'
+         user.utype='guide'
          dispatch(setCurrentUser(user)) 
- 
-         history.push('/'+user.type+'/dashboard');
+         history.push(`/${user.utype}/dashboard`);
      }).catch(err=>{
          console.log(err)
-         dispatch({
-                         type:GET_ERRORS,
-                         payload:err.response.data
-                 })
+         if(err.response){
+            dispatch({
+                            type:GET_ERRORS,
+                            payload:err.response.data
+                    })
+                }else{
+                    dispatch({
+                        type:GET_ERRORS,
+                        payload:err
+                })
+                }
      })
  }
 
 export const checkSession=(data)=>dispatch=>{
-    axios.get(local_host+"/api/devs/auth/current")
+    axios.get(local_host+"/api/session/current/"+data.jwt)
         .then(obj=>{
             console.log(obj)
             let indat=obj.data;
             console.log(indat)
-            if(Object.keys(indat.data).length>0)
-            {   if(data.uid===indat.jwt.uid){
-                dispatch(setCurrentUser(indat.data))
-            }
+            if(Object.keys(indat).length>0)
+            {   
+                dispatch(setCurrentUser(indat))
             }
         }).catch(err=>{
             console.log(err)

@@ -15,7 +15,6 @@ state={
   render() {
     return (
       <div>
-      <Particles params={pconfig} className="particlefind"/>
         <div>
         <Nav justify variant="tabs" defaultActiveKey="devLogin">
   <Nav.Item>

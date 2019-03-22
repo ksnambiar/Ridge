@@ -21,7 +21,7 @@ class LoginGuide extends Component {
   }
   componentDidMount(){
     if(this.props.auth.isAuthenticated){
-      this.props.history.push('/'+this.props.auth.type+'/dashboard');
+      this.props.history.push(`/${this.props.auth.utype}/dashboard`);
     }
   }
   onSubmit(e){
@@ -38,7 +38,7 @@ class LoginGuide extends Component {
       this.setState({errors:nextProps.errors.error});
     }
     if(nextProps.auth.isAuthenticated){
-      this.props.history.push('/'+this.props.auth.type+'/dashboard')
+      this.props.history.push(`/${nextProps.auth.utype}/dashboard`)
     }
   }
   onChange(e){

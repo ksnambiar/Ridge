@@ -4,9 +4,9 @@ import {connect} from "react-redux";
 import PropTypes from "prop-types";
 class Landing extends Component {
   componentDidMount(){
-    let {isAuthenticated,type} = this.props.auth;
+    let {isAuthenticated,utype} = this.props.auth;
     if(isAuthenticated){
-      this.props.history.push(''+type+'/dashboard')
+      this.props.history.push('/'+utype+'/dashboard')
     }
   }
   render() {
@@ -18,8 +18,8 @@ class Landing extends Component {
             <div className="container">
               <div className="row">
                 <div className="col-md-12 text-center">
-                  <h1 className="display-3 mb-4">TecRidge</h1>
-                  <p className="lead">
+                  <h1 className="display-3 mb-4 form_col">TecRidge</h1>
+                  <p className="lead form_col">
                     {" "}
                     A Complete Social Network for Showing off your Innovative Projects
                   </p>

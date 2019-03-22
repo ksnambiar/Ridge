@@ -9,6 +9,7 @@ import Landing from "./Components/Common/Landing";
 import Footer from "./Components/Common/Footer";
 import LoginPar from "./Components/Auth/LoginPar";
 import PrivateRoute from "./Components/Common/PrivateRoute";
+import PrivateGuideRoute from "./Components/Common/PrivateGuideRoute";
 import RegPar from "./Components/Auth/RegPar";
 import Dashboard from './Components/Dashboard/Dashboard';
 import Profiles from './Components/profiles/Profiles';
@@ -23,14 +24,15 @@ import Projects from './Components/projects/Projects';
 import NotFound from './Components/Not-found/NotFound';
 import Posts from './Components/Posts/Posts';
 import SocPost from './Components/Post/SocialPost/SocPost';
+import GuideDashboard from './Components/Dashboard/GuideDashboard/GuideDashboard';
 import "./App.css";
 import { setCurrentUser,logoutUser,checkSession} from "./actions/authAction";
 if(localStorage.uid){
   let uuid=localStorage.getItem('uid');
-  let te = localStorage.getItem('et');
+  let jwt = localStorage.getItem('jwt');
   let data = {
     uid:uuid,
-    time:te
+    jwt:jwt
   }
   store.dispatch(checkSession(data))
 }
@@ -47,7 +49,7 @@ class App extends Component {
             <Route exact path='/' component={Landing}/>
             <div className="container">
             {
-            // <Particles params={pconfig} className="particlefind"/>
+            <Particles params={pconfig} className="particlefind"/>
             }
             <Route exact path='/team' component={Team}/>
             <Route exact path='/register' component={RegPar}/>
@@ -59,22 +61,22 @@ class App extends Component {
             <PrivateRoute exact path='/dev/dashboard' component={Dashboard} />
             </Switch>
             <Switch>
-            <PrivateRoute exact path='/create-profile' component={CreateProfile} />
+            <PrivateRoute exact path='/dev/create-profile' component={CreateProfile} />
             </Switch>
             <Switch>
-            <PrivateRoute exact path='/edit-profile' component={EditProfile} />
+            <PrivateRoute exact path='/dev/edit-profile' component={EditProfile} />
             </Switch>
             <Switch>
-            <PrivateRoute exact path='/add-experience' component={AddExperience} />
+            <PrivateRoute exact path='/dev/add-experience' component={AddExperience} />
             </Switch>
             <Switch>
-            <PrivateRoute exact path='/add-project' component={AddProjects} />
+            <PrivateRoute exact path='/dev/add-project' component={AddProjects} />
             </Switch>
             <Switch>
-            <PrivateRoute exact path='/feeds' component={Posts} />
+            <PrivateRoute exact path='/dev/feeds' component={Posts} />
             </Switch>
             <Switch>
-            <PrivateRoute exact path='/projects/:institution' component={Projects} />
+            <PrivateRoute exact path='/dev/projects/:institution' component={Projects} />
             </Switch>
             <Switch>
             <PrivateRoute exact path='/post/:id' component={SocPost} />
@@ -82,8 +84,14 @@ class App extends Component {
             <Switch>
             <PrivateRoute exact path='/projects/:institution/:name' component={Project} />
             </Switch>
-            {
-            //   <Switch>
+{
+  ///////guide routes//////////
+}
+        <Switch>
+        <PrivateRoute exact path='/guide/dashboard' component={GuideDashboard} />
+        </Switch>
+            { 
+            // <Switch>
             // <PrivateRoute exact path='/projects/:institution/:name' component={Project} />
             // </Switch>
             }

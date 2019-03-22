@@ -12,7 +12,7 @@ class Navigation extends Component {
    this.props.logoutUser();
  }
   render() {
-    const {isAuthenticated,user} = this.props.auth;
+    const {isAuthenticated,user,utype} = this.props.auth;
     const {profile} = this.props.profile;
     let uid = localStorage.getItem('uid')
     const authLinks = (
@@ -27,12 +27,21 @@ class Navigation extends Component {
     const userLinks = (<div>
       
       <Nav>
-      <Link to='/feeds' className="f4 fw6 db silver link dim hover-silver">Post Feeds</Link>    
-      <Link to='/dashboard' className="f4 fw6 db silver link dim hover-silver ml3">Dashboard</Link>    
-      <Link to={`/profile/${uid}`} className="f4 fw6 db silver link dim hover-silver ml3">Profile</Link>
-     
+      {
+      // <Link to='/feeds' className="f4 fw6 db silver link dim hover-silver">Post Feeds</Link>    
+      }
+      <Link to='/dev/dashboard' className="f4 fw6 db silver link dim hover-silver ml3">Dashboard</Link>         
       <a href="#" onClick={this.onLogoutClick.bind(this)} className="f4 fw6 db silver link dim hover-silver ml3">Logout</a>
-     
+    </Nav>
+    </div>
+    )
+    const guideLinks = (<div>
+      <Nav>
+      {
+      // <Link to='/feeds' className="f4 fw6 db silver link dim hover-silver">Post Feeds</Link>    
+      }
+      <Link to='/guide/dashboard' className="f4 fw6 db silver link dim hover-silver ml3">Dashboard</Link>         
+      <a href="#" onClick={this.onLogoutClick.bind(this)} className="f4 fw6 db silver link dim hover-silver ml3">Logout</a>
     </Nav>
     </div>
     )
@@ -61,7 +70,7 @@ class Navigation extends Component {
             //   </NavDropdown.Item>
             // </NavDropdown>
     }
-          {isAuthenticated?userLinks:authLinks}
+          {isAuthenticated?utype==="dev"?userLinks:guideLinks:authLinks}
         </Navbar.Collapse>
       </Navbar>
     );
