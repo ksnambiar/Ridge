@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import {Link,withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import {addProject} from '../../actions/profileAction';
+import {addProject,addGuideProject} from '../../actions/profileAction';
 class AddProject extends Component {
     constructor(props) {
       super(props)
@@ -17,20 +17,14 @@ class AddProject extends Component {
          errors:{}
       }
       this.onChange = this.onChange.bind(this);
-      this.onCheck=this.onCheck.bind(this);
       this.onSubmit=this.onSubmit.bind(this);
     }
     onChange(e){
         this.setState({[e.target.name]:e.target.value})
     }
-    onCheck(e){
-        this.setState({
-            disabled:!this.state.disabled,
-            current:!this.state.current
-        })
-    }
     onSubmit(e){
         e.preventDefault();
+        const {utype} = this.props.auth
         const projData={
          name:this.state.name,
          domains:this.state.domains,
@@ -39,16 +33,22 @@ class AddProject extends Component {
          description: this.state.description,
          guide:this.state.guide
         }
-        this.props.addProject(projData,this.props.history);
+        if(utype==="dev"){
+            this.props.addProject(projData,this.props.history);
+        }else{
+            this.props.addGuideProject(projData,this.props.history);
+
+        }
     }
     
   render() {
+      const {utype} = this.props.auth
     return (
       <div className="add-experience">
       <div className="container ">
       <div className="mv4 pd5">
       <div className="m-auto">
-      <Link to="/dashboard" className="btn btn-light">
+      <Link to={`/${utype}/dashboard`} className="btn btn-light">
       Go Back 
       </Link>
       <h1 className="display-4 text-center">New Project</h1>
@@ -101,10 +101,13 @@ class AddProject extends Component {
 AddProject.propTypes = {
     profile: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,
-    addProject:PropTypes.func.isRequired
+    addProject:PropTypes.func.isRequired,
+    addGuideProject:PropTypes.func.isRequired,
+    auth:PropTypes.object.isRequired
 }
 const mapStateToProps = (state)=>({
     profile:state.profile,
-    errors:state.errors
+    errors:state.errors,
+    auth:state.auth
 })
-export default connect(mapStateToProps,{addProject})(withRouter(AddProject));
+export default connect(mapStateToProps,{addProject,addGuideProject})(withRouter(AddProject));

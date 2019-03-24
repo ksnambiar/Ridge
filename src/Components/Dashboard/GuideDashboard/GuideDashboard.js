@@ -27,9 +27,9 @@ class GuideDashboard extends Component {
             
             <div>
             <p className="lead text-muted">
-            Welcome, <Link to={`/profile/${uid}`}>{user.user.fullName}</Link>
+            Welcome, <Link to={`/profile/${uid}`}>{user.fullName}</Link>
             </p>
-            <GuideProfileActions/>
+            <GuideProfileActions institution={guideProfile.institution}/>
             <div style={{marginBottom: '60px'}}>
             <button className="btn btn-danger" onClick={this.onClickDelete.bind(this)}>Delete Account</button>
             

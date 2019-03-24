@@ -98,7 +98,7 @@ export const checkSession=(data)=>dispatch=>{
     axios.get(local_host+"/api/session/current/"+data.jwt)
         .then(obj=>{
             console.log(obj)
-            let indat=obj.data;
+            let indat=obj.data.data;
             console.log(indat)
             if(Object.keys(indat).length>0)
             {   

@@ -45,14 +45,26 @@ class ProfileCreds extends Component {
     let projectKeys=Object.keys(projects)
     
     projItems = projectValues.map((proj,i) => {
-        let dom=proj.domains.split(',');
+      let dom
+      if((typeof proj.domains)==="string"){
+        dom=proj.domains.split(',');
+      }else{
+        dom=proj.domains
+      }
+        
     const doms = dom.map((skill, index) => (
         <div key={index} className="p-3">
           <i className="fa fa-check" /> {skill}
         </div>
         
         ))
-        let tem = proj.team.split(',');
+        let tem;
+        if((typeof proj.team)==="string"){
+          tem=proj.team.split(',');
+        }else{
+          tem=proj.team
+        }
+        
         const team=tem.map((t,index)=>(
             <div key={index} className="p-3">
           <i className="fa fa-check" /> {t}

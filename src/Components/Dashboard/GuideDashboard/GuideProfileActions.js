@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import {Link} from 'react-router-dom';
 export default class GuideProfileActions extends Component {
   render() {
+      const {institution} = this.props
     return (
       <div>
-        
     <div className="btn-group mb-4 " role="group">
     <Link to="/guide/edit-profile" className="btn btn-light">
     <i className="fab fa-user-circle text-info mr-1"/>Edit Profile

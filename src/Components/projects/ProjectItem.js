@@ -3,8 +3,13 @@ import {Link} from 'react-router-dom';
 class ProjectItem extends Component {
   render() {
     const {project} = this.props;
-    let doma = project.domains.split(",");
-    let domains=doma;
+    let domains;
+    if((typeof project.domains)==="string"){
+      domains=project.domains.split(",");
+    }else{
+      domains=project.domains
+    }
+    
     return (
       <div>
       <div className="card card-body bg-light mb-3">

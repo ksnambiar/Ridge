@@ -18,6 +18,7 @@ import Profile from './Components/profile/Profile';
 import CreateProfile from './Components/create-profile/CreateProfile';
 import EditProfile from './Components/edit-profile/EditProfile'
 import AddExperience from './Components/add-creds/AddExperience';
+import AddEducation from "./Components/add-creds/AddEducation";
 import Team from './Components/Team/Team';
 import AddProjects from './Components/add-creds/AddProjects';
 import Projects from './Components/projects/Projects';
@@ -89,6 +90,14 @@ class App extends Component {
 }
         <Switch>
         <PrivateRoute exact path='/guide/dashboard' component={GuideDashboard} />
+        </Switch>
+        <Switch>
+        <PrivateRoute exact path='/guide/add-education' component={AddEducation} />
+
+        </Switch>
+        <Switch>
+        <PrivateRoute exact path='/guide/add-project' component={AddProjects} />
+
         </Switch>
             { 
             // <Switch>
