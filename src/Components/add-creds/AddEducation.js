@@ -34,12 +34,13 @@ class AddEducation extends Component {
     }
     
   render() {
+      const {utype}=this.props.auth
     return (
       <div className="add-experience">
       <div className="container ">
       <div className="mv4 pd5">
       <div className="col-md-8 m-auto">
-      <Link to="/dashboard" className="btn btn-light">
+      <Link to={`/${utype}/dashboard`} className="btn btn-light">
       Go Back 
       </Link>
       <h1 className="display-4 text-center">Add Education</h1>
@@ -90,10 +91,12 @@ class AddEducation extends Component {
 AddEducation.propTypes = {
     profile: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,
-    addEducation:PropTypes.func.isRequired
+    addEducation:PropTypes.func.isRequired,
+    auth:PropTypes.object.isRequired
 }
 const mapStateToProps = (state)=>({
     profile:state.profile,
-    errors:state.errors
+    errors:state.errors,
+    auth:state.auth
 })
 export default connect(mapStateToProps,{addEducation})(withRouter(AddEducation));

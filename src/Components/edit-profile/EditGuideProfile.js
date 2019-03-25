@@ -1,20 +1,19 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {createProfile} from '../../actions/profileAction';
+import {createGuideProfile,getCurrentGuideProfile} from '../../actions/profileAction';
 import {withRouter} from 'react-router-dom'
-class CreateProfile extends Component {
+class EditGuideProfile extends Component {
     constructor(props) {
       super(props)
     
       this.state = {
          displaySocialInputs: false,
-         year:'',
          handle: '',
          institution: '',
          location:'',
          status:'',
-         skills:'',
+         aoi:'',
          githubusername: '',
          bio: '',
          twitter: '',
@@ -28,10 +27,49 @@ class CreateProfile extends Component {
       this.onChange=this.onChange.bind(this)
       this.onClick=this.onClick.bind(this)
     }
+    componentDidMount(){
+        this.props.getCurrentGuideProfile();
+    }
     componentWillReceiveProps(nextProps){
       if(nextProps.errors){
         this.setState({errors:nextProps.errors})
       }
+      if(this.props.profile.guideProfile){
+        const profile=this.props.profile.guideProfile;
+        profile.year=profile.year?profile.year:'';
+        profile.institution=profile.institution?profile.institution:''
+        profile.location=profile.location?profile.location:''
+        profile.skills=profile.skills?profile.skills:''
+        profile.githubusername=profile.githubusername?profile.githubusername:''
+        profile.bio=profile.bio?profile.bio:''
+        profile.twitter=profile.twitter?profile.twitter:''
+        profile.facebook=profile.facebook?profile.facebook:''
+        profile.linkedin=profile.linkedin?profile.linkedin:''
+        profile.instagram=profile.instagram?profile.instagram:''
+        profile.fullName=profile.fullName?profile.fullName:''
+        profile.contact=profile.contact?profile.contact:''
+        profile.email=profile.email?profile.email:''
+        profile.projects = profile.projects?profile.projects:null;
+        profile.experience = profile.experience?profile.experience:null;
+        this.setState({
+            institution:profile.institution,
+            location:profile.location,
+            aoi:profile.aoi,
+            githubusername:profile.githubusername,
+            bio: profile.bio,
+            twitter: profile.twitter,
+            facebook: profile.facebook,
+            linkedin: profile.linkedin,
+            instagram: profile.instagram,
+            fullName:profile.fullName,
+            contact:profile.contact,
+            email:profile.email,
+            handle:profile.handle,
+            projects:profile.projects,
+            experience:profile.experience,
+            education:profile.education
+        })
+    }
     }
     onChange(e){
       this.setState({[e.target.name]:e.target.value});
@@ -42,7 +80,7 @@ class CreateProfile extends Component {
       let data={
         institution:this.state.institution,
         location:this.state.location,
-        skills:this.state.skills,
+        aoi:this.state.aoi,
         githubusername: this.state.githubusername,
         bio:this.state.bio,
         twitter: this.state.twitter,
@@ -52,10 +90,12 @@ class CreateProfile extends Component {
         fullName:this.props.auth.user.fullName,
         contact:this.props.auth.user.contact,
         email:this.props.auth.user.email,
-        year:this.state.year,
-        handle:this.state.handle
+        handle:this.state.handle,
+        projects:this.state.projects,
+        experience:this.state.experience,
+        education:this.state.education
       }
-      this.props.createProfile(data,this.props.history)
+      this.props.createGuideProfile(data,this.props.history)
     }
     onClick(e){
       e.preventDefault();
@@ -85,7 +125,7 @@ class CreateProfile extends Component {
         <input type="text" name="handle" className="form-control" placeholder="Profile Handle" value={this.state.handle} onChange={this.onChange}/>
       </div>
       <div className="form-group">
-      <label htmlFor="institution">Name of your college *</label>
+      <label htmlFor="institution">Name of your College/Institution *</label>
       <select name="institution" className="form-control" placeholder="Institution" onChange={this.onChange} value={this.state.institution} defaultValue={this.state.institution}>
       <option value="">----</option>
       <option value="Ramaiah Institute of Technology">Ramaiah Institute of Technology</option>
@@ -93,12 +133,10 @@ class CreateProfile extends Component {
       <option value="Ambedkar Institute of Technology">Ambedkar Institute of Technology</option>
       <option value="Vivekananda College of Engineering">Vivekananda College of Engineering</option>
       <option value="National Institute Of Engineering">National Institute Of Engineering(NIE)</option>
-
       </select>
       </div>
-
       <div className="form-group">
-      <label htmlFor="location">Location of your college *</label>
+      <label htmlFor="location">Location of your College/Institution *</label>
       <select name="location" className="form-control" placeholder="Location" onChange={this.onChange} value={this.state.location} defaultValue={this.state.location}>
       <option value="">----</option>
       <option value="Bangalore">Bangalore</option>
@@ -108,18 +146,8 @@ class CreateProfile extends Component {
       </select>
       </div>
       <div className="form-group">
-      <label htmlFor="location">Which year of your professional course are you in? *</label>
-      <select name="year" className="form-control" placeholder="Year" onChange={this.onChange} value={this.state.year} defaultValue={this.state.year}>
-      <option value="">----</option>
-      <option value="1st">1st Year</option>
-      <option value="2nd">2nd Year</option>
-      <option value="3rd">3rd Year</option>
-      <option vlaue="4th">4th Year</option>
-      </select>
-      </div>
-      <div className="form-group">
-      <label htmlFor="skills">What all Skills do you have as a Developer?</label>
-      <input type="text" name="skills" className="form-control" placeholder="skills" onChange={this.onChange} value={this.state.skills}/>
+      <label htmlFor="aoi">What are your Area of interests? (enter interests separated with a ',')</label>
+      <input type="text" name="aoi" className="form-control" placeholder="Area of Interests" onChange={this.onChange} value={this.state.aoi}/>
       </div>
       <div className="form-group">
       <label htmlFor="location">Your Github Username</label>
@@ -157,11 +185,11 @@ class CreateProfile extends Component {
     )
   }
 }
-CreateProfile.propTypes = {
+EditGuideProfile.propTypes = {
     auth:PropTypes.object.isRequired,
     profile:PropTypes.object.isRequired,
     errors:PropTypes.object.isRequired,
-    createProfile:PropTypes.func.isRequired
+    createGuideProfile:PropTypes.func.isRequired
 }
 
 const mapStateToProps = state=>({
@@ -169,4 +197,4 @@ const mapStateToProps = state=>({
     profile: state.profile,
     errors: state.errors
 })
-export default connect(mapStateToProps,{createProfile})(withRouter(CreateProfile))
+export default connect(mapStateToProps,{createGuideProfile,getCurrentGuideProfile})(withRouter(EditGuideProfile))

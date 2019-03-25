@@ -270,6 +270,7 @@ export const createGuideProfile = (userData,history)=>dispatch=>{
             })
         })
 }
+
 export const addGuideProject = (projData,history)=>dispatch=>{
      const uuid = localStorage.getItem("uid")
     axios.post(local_host+"/api/guides/project/"+uuid+"/addProject",projData)
@@ -284,6 +285,22 @@ export const addGuideProject = (projData,history)=>dispatch=>{
         })
 }
 
+//Add Experience
+export const addGuideExperience = (expData,history)=>dispatch=>{
+    const uid = localStorage.getItem("uid");
+    axios.post(local_host+"/api/guides/profile/"+uid+"/addExperience",expData)
+    .then(obj=>{
+        let handle=obj.data;
+        console.log(handle)
+        history.push('/guide/dashboard');
+    })
+    .catch(err=>{
+        dispatch({
+            type:GET_ERRORS,
+            payload:err
+        })
+    })
+}
 export const addEducation = (userData,history)=>dispatch=>{
     let uuid=localStorage.getItem("uid")
     axios.post(local_host+"/api/guides/profile/"+uuid+"/addEducation",userData)

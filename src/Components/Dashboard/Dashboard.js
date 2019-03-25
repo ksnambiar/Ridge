@@ -27,7 +27,7 @@ class Dashboard extends Component {
         if(Object.keys(profile).length>1){
             dashboardContent=<div>
             <p className="lead text-muted">
-            Welcome, <Link to={`/profile/${uid}`}>{user.user.fullName}</Link>
+            Welcome, <Link to={`/profile/${uid}`}>{user.fullName}</Link>
             </p>
             <ProfileActions institution={profile.institution}/>
             <Experience experience={profile.experience}/>

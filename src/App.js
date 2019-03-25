@@ -16,9 +16,12 @@ import Profiles from './Components/profiles/Profiles';
 import Project from './Components/Project/Project';
 import Profile from './Components/profile/Profile';
 import CreateProfile from './Components/create-profile/CreateProfile';
-import EditProfile from './Components/edit-profile/EditProfile'
+import CreateGuideProfile from './Components/create-profile/CreateGuideProfile';
+import EditProfile from './Components/edit-profile/EditProfile';
+import EditGuideProfile from './Components/edit-profile/EditGuideProfile';
 import AddExperience from './Components/add-creds/AddExperience';
 import AddEducation from "./Components/add-creds/AddEducation";
+import AddGuideExperience from './Components/add-creds/AddGuideExperience';
 import Team from './Components/Team/Team';
 import AddProjects from './Components/add-creds/AddProjects';
 import Projects from './Components/projects/Projects';
@@ -92,13 +95,22 @@ class App extends Component {
         <PrivateRoute exact path='/guide/dashboard' component={GuideDashboard} />
         </Switch>
         <Switch>
+        <PrivateRoute exact path='/guide/create-profile' component={CreateGuideProfile} />
+        </Switch>
+        <Switch>
+        <PrivateRoute exact path='/guide/edit-profile' component={EditGuideProfile} />
+        </Switch>
+        <Switch>
         <PrivateRoute exact path='/guide/add-education' component={AddEducation} />
-
         </Switch>
         <Switch>
         <PrivateRoute exact path='/guide/add-project' component={AddProjects} />
-
         </Switch>
+        <Switch>
+        <PrivateRoute exact path='/guide/add-experience' component={AddGuideExperience} />
+        </Switch>
+        
+        
             { 
             // <Switch>
             // <PrivateRoute exact path='/projects/:institution/:name' component={Project} />
