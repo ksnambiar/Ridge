@@ -20,10 +20,28 @@ axios.get(local_host+"/api/devs/profile/allProfiles")
         })
     )
 }
+//get profile by college
+export const getprofilesbycollege = (college)=>dispatch=>{
+    axios.get(local_host+"/api/devs/profile/allProfiles/"+college)
+        .then(obj=>{
+            let dat=obj.data
+            console.log(dat)
+            dispatch({
+                type:GET_PROFILES,
+                payload:dat.data
+            })
+        }).catch(err=>
+            dispatch({
+                type:GET_ERRORS,
+                payload:err
+            })
+        )
+    }
 //get current profile
 export const getCurrentProfile = ()=>dispatch=>{
     dispatch(setProfileLoading)
-    axios.get(local_host+"/api/devs/profile/current")
+    let uid = localStorage.getItem("uid")
+    axios.get(local_host+"/api/devs/profile/"+uid+"/current")
         .then(obj=>{
             dispatch({type:GET_PROFILE,
                     payload:obj.data.data
@@ -158,7 +176,21 @@ export const deleteAccount = ()=>dispatch=>{
 }
 
 
-
+//send join request from admin to developer
+export const addDeveloperToTeam = (pid,did,name,college)=>dispatch=>{
+    const uid = localStorage.getItem("uid")
+    axios.get(`${local_host}/api/devs/request/${uid}/projects/${college}/${pid}/developer/${did}/${name}/request`)
+        .then(obj=>{
+            console.log(obj)
+            dispatch(getCurrentProfile())
+        }).catch(err=>{
+            console.log(err)
+            dispatch({
+                type:GET_ERRORS,
+                payload:err
+            })
+        })
+}
 
 
 

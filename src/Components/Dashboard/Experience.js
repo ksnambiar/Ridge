@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {deleteExperience} from '../../actions/profileAction';
+import Octicon,{getIconByName} from '@githubprimer/octicons-react';
 import Modal from 'react-responsive-modal';
 class Experience extends Component {
     state={
@@ -40,14 +41,14 @@ class Experience extends Component {
           <div key={keys[i]} className="panel ma2 pa2" style={{float:"left"}}>
           <div className="jumbotron bg-white ba shadow-5">
           <h5 className="mh3 mv1" style={{float:"left"}} >{val.company}</h5>
-          <button className="btn btn-info" onClick={this.onOpenModal.bind(this,val,keys[i])}>Details</button>
+          <button className="btn btn-info" onClick={this.onOpenModal.bind(this,val,keys[i])}><Octicon icon={getIconByName("info")}/></button>
             <Modal open={open} onClose={this.onCloseModal} center>
             <div className="panel">
             <h3>{this.state.selectedState.company}</h3>
             <h6>Domain of Work:</h6><p>{this.state.selectedState.domain}</p>
             <h6>Duration:</h6><p>{this.state.selectedState.from} - {this.state.selectedState.to=== ''?'Now':this.state.selectedState.to}</p>
             <h6>Description:</h6><p>{this.state.selectedState.description}</p>
-            <button className="btn btn-danger" onClick={this.onClickDelete.bind(this,this.state.selectedState.key)}>Delete</button>
+            <button className="btn btn-danger" onClick={this.onClickDelete.bind(this,this.state.selectedState.key)}><Octicon icon={getIconByName("trashcan")}/></button>
             </div>
         </Modal>
         </div>

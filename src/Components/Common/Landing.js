@@ -10,7 +10,7 @@ class Landing extends Component {
     }
   }
   render() {
-    let {isAuthenticated,type} = this.props.auth;
+    let {isAuthenticated,utype} = this.props.auth;
     return (
       <div>
         <div>
@@ -25,7 +25,7 @@ class Landing extends Component {
                   </p>
                   <hr />
                   {isAuthenticated?
-                    <Link to={`/${type}/dashboard`} className="btn btn-lg btn-info mr-2">Enter</Link>
+                    <Link to={`/${utype}/dashboard`} className="btn btn-lg btn-info mr-2">Enter</Link>
                     :
                     <div>
                     <Link to="/register" className="btn btn-lg btn-info mr-2">
