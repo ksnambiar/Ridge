@@ -69,7 +69,7 @@ class PostItem extends Component {
             </div>
             
             </Button>
-            <Button className="dislike"  className="mh2" onClick={this.onClickDisLike.bind(this,post.key)}>
+            <Button className="mh2 dislike" onClick={this.onClickDisLike.bind(this,post.key)}>
             <div>
             <Octicon icon={getIconByName("thumbsdown")} style={{float:"left"}}/>
             <Badge variant="light" className="ml1">{post.dislikes?Object.keys(post.dislikes).length:0}</Badge>

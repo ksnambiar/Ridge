@@ -10,10 +10,9 @@ class AddProject extends Component {
       this.state = {
          name:'',
          domains:'',
-         team:'',
          githublink:'',
          description: '',
-         guide:'',
+        //  guide:'',
          errors:{}
       }
       this.onChange = this.onChange.bind(this);
@@ -24,14 +23,14 @@ class AddProject extends Component {
     }
     onSubmit(e){
         e.preventDefault();
-        const {utype} = this.props.auth
+        const {utype,user} = this.props.auth
+        const uid = localStorage.getItem("uid")
         const projData={
          name:this.state.name,
          domains:this.state.domains,
-         team:this.state.team,
+         team:[{fullName:user.fullName,uid:uid}],
          githublink:this.state.githublink,
-         description: this.state.description,
-         guide:this.state.guide
+         description: this.state.description
         }
         if(utype==="dev"){
             this.props.addProject(projData,this.props.history);
@@ -69,17 +68,15 @@ class AddProject extends Component {
       <input type="text" name="domains" placeholder="Eg. NLP,DeepLearning,WebDevelopment etc" className="form-control" value={this.state.domains} onChange={this.onChange} />
       </div>
       <div className="form-group">
-      <label htmlFor="team">Team Members</label>
-      <input type="text" name="team" placeholder="Name of the team member separated with ," className="form-control" value={this.state.team} onChange={this.onChange} />
-      </div>
-      <div className="form-group">
       <label htmlFor="githublink">Github Link</label>
       <input type="url" name="githublink" placeholder="Github Link for the project" className="form-control" value={this.state.githublink} onChange={this.onChange} />
       </div>
-      <div className="form-group">
-      <label htmlFor="guide">Project Guide/Mentor</label>
-      <input type="text" name="guide" placeholder="Mentor" className="form-control" value={this.state.guide} onChange={this.onChange} />
-      </div>
+      {
+    //   <div className="form-group">
+    //   <label htmlFor="guide">Project Guide/Mentor</label>
+    //   <input type="text" name="guide" placeholder="Mentor" className="form-control" value={this.state.guide} onChange={this.onChange} />
+    //   </div>
+      }
       <div className="form-group">
       <label htmlFor="description">Description about your Project</label>
       <input type="text" name="description" placeholder="Tell us about your experience in it" className="form-control" value={this.state.description} onChange={this.onChange} />

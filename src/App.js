@@ -28,6 +28,7 @@ import Projects from './Components/projects/Projects';
 import NotFound from './Components/Not-found/NotFound';
 import Posts from './Components/Posts/Posts';
 import SocPost from './Components/Post/SocialPost/SocPost';
+import Notification from './Components/Notification/Notification'
 import GuideDashboard from './Components/Dashboard/GuideDashboard/GuideDashboard';
 import "./App.css";
 import { setCurrentUser,logoutUser,checkSession} from "./actions/authAction";
@@ -77,7 +78,7 @@ class App extends Component {
             <PrivateRoute exact path='/dev/add-project' component={AddProjects} />
             </Switch>
             <Switch>
-            <PrivateRoute exact path='/dev/feeds' component={Posts} />
+            <PrivateRoute exact path='/feeds' component={Posts} />
             </Switch>
             <Switch>
             <PrivateRoute exact path='/dev/projects/:institution' component={Projects} />
@@ -88,7 +89,10 @@ class App extends Component {
             <Switch>
             <PrivateRoute exact path='/projects/:institution/:name' component={Project} />
             </Switch>
-{
+            <Switch>
+            <PrivateRoute exact path='/dev/notifications' component={Notification} />
+            </Switch>
+            {
   ///////guide routes//////////
 }
         <Switch>

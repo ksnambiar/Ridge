@@ -14,7 +14,10 @@ class AddDeveloper extends Component {
     }
   render() {
       const {profiles,profile} = this.props;
-      let pending=Object.values(profile.projects[this.props.pid].join_requests).map(obj=>(obj.uid))
+      let pending=[]
+      if(profile.projects[this.props.pid].join_requests){
+      pending=Object.values(profile.projects[this.props.pid].join_requests).map(obj=>(obj.uid))
+      }
       let lists
       let uid = localStorage.getItem("uid")
       if(profiles){

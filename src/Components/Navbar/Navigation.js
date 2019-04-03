@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {logoutUser} from '../../actions/authAction';
 import {clearCurrentProfile} from '../../actions/profileAction';
+import Octicon, { getIconByName } from "@githubprimer/octicons-react";
 class Navigation extends Component {
  onLogoutClick(e){
    e.preventDefault();
@@ -18,29 +19,32 @@ class Navigation extends Component {
     const authLinks = (
       <Nav> 
           
-      <Link to='/register' className="f4 fw6 db silver link dim hover-silver">Register</Link>
+      <Link to='/register' className="f6 fw6 db silver link dim hover-silver">Register</Link>
      
-      <Link to='/login' className="f4 fw6 db silver link dim hover-silver ml2">sign in</Link>
+      <Link to='/login' className="f6 fw6 db silver link dim hover-silver ml2">sign in</Link>
      
      </Nav>
     )
     const userLinks = (<div>
       
       <Nav>
+      <Link to='/developers' className="f6 fw6 db silver link dim hover-silver">Developers</Link>
+
       {
-      // <Link to='/feeds' className="f4 fw6 db silver link dim hover-silver">Post Feeds</Link>    
+      <Link to='/feeds' className="f6 fw6 db silver link dim hover-silver ml3">Post Feeds</Link>    
       }
-      <Link to='/dev/dashboard' className="f4 fw6 db silver link dim hover-silver ml3">Dashboard</Link>         
-      <a href="#" onClick={this.onLogoutClick.bind(this)} className="f4 fw6 db silver link dim hover-silver ml3">Logout</a>
+      <Link to="/dev/notifications" className="f6 fw6 db silver link dim hover-silver ml3" title="Notifications"><Octicon icon={getIconByName("bell")}/></Link>
+      <Link to='/dev/dashboard' className="f6 fw6 db silver link dim hover-silver ml3">Dashboard</Link>         
+      <a href="#" onClick={this.onLogoutClick.bind(this)} className="f6 fw6 db silver link dim hover-silver ml3">Logout</a>
     </Nav>
     </div>
     )
     const guideLinks = (<div>
       <Nav>
       {
-      // <Link to='/feeds' className="f4 fw6 db silver link dim hover-silver">Post Feeds</Link>    
-      }
-      <Link to='/guide/dashboard' className="f4 fw6 db silver link dim hover-silver ml3">Dashboard</Link>         
+      <Link to='/feeds' className="f6 fw6 db silver link dim hover-silver">Post Feeds</Link>    
+      } 
+      <Link to='/guide/dashboard' className="f6 fw6 db silver link dim hover-silver ml3">Dashboard</Link>         
       <a href="#" onClick={this.onLogoutClick.bind(this)} className="f4 fw6 db silver link dim hover-silver ml3">Logout</a>
     </Nav>
     </div>

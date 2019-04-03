@@ -10,6 +10,7 @@ class Projects extends Component {
         open:false,
         addDev:false,
         addMentor:false,
+        pid:null,
         selectedState:{}
     }
     onClickDelete(id){
@@ -37,8 +38,8 @@ class Projects extends Component {
         } });
 
       };
-      openAddDev=()=>{
-        this.setState({addDev:true})
+      openAddDev=(pid)=>{
+        this.setState({addDev:true,pid:pid})
       }
       closeAddDev=()=>{
         this.setState({addDev:false})
@@ -60,7 +61,7 @@ class Projects extends Component {
         <div className="jumbotron bg-white ba shadow-5">
         <h5 className="mr2" >{val.name}</h5>
         <button className="btn btn-info white mr1" onClick={this.onOpenModal.bind(this,val,keys[i])} title="info about the project"><Octicon icon={getIconByName("info")}/></button>
-        <button className="btn mr1" title="add developer to team" onClick={this.openAddDev.bind(this)}><Octicon icon={getIconByName("person")}/> </button>
+        <button className="btn mr1" title="add developer to team" onClick={this.openAddDev.bind(this,keys[i])}><Octicon icon={getIconByName("person")}/> </button>
         <button className="btn" title="find a guide"><Octicon icon={getIconByName("mortar-board")}/> </button>
           <Modal open={open} onClose={this.onCloseModal} center>
           <div className="panel">
@@ -73,7 +74,10 @@ class Projects extends Component {
           <button className="btn btn-danger" onClick={this.onClickDelete.bind(this,this.state.selectedState.key)}><Octicon icon={getIconByName("trashcan")}/></button>
           </div>
       </Modal>
-      <AddDeveloper show={this.state.addDev} pid={keys[i]} onAddDev={this.onAddDev} profiles={this.props.profile.profiles} profile={this.props.profile.profile} onHide={this.closeAddDev.bind(this)}/>
+      {
+      this.state.pid?<AddDeveloper show={this.state.addDev} pid={this.state.pid} onAddDev={this.onAddDev} profiles={this.props.profile.profiles} profile={this.props.profile.profile} onHide={this.closeAddDev.bind(this)}/>
+     :null 
+    }
       </div>
         </div>
     ))
