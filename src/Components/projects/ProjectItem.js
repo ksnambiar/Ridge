@@ -26,9 +26,9 @@ class ProjectItem extends Component {
       Guided by {project.guide}
       </p>
       {
-    //  <Link to={`/projects/${project.institution}/${project.name}`} className="btn btn-info">
-    //   View Details
-    //  </Link>
+     <Link to={`/projects/${project.institution}/${project.name}`} className="btn btn-info">
+       View Details
+     </Link>
       }   
       </div>
       <div className="col-md-4 d-none d-md-block">

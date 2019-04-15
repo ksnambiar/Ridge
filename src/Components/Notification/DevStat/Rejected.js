@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import {Card,Button} from 'react-bootstrap'
-import Octicon,{getIconByName} from '@githubprimer/octicons-react';
-
 export default class Rejected extends Component {
     render() {
         const profile=this.props.profile;

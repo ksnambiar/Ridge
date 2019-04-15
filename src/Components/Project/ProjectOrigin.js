@@ -3,8 +3,8 @@ import React, { Component } from 'react'
 class ProjectOrigin extends Component {
   render() {
     const {project} = this.props
-    let team=project.team.split(',');
-    let domains = project.domains.split(',')
+    let team=project.team
+    let domains = project.domains
     return (
       <div className="row">
         <div className="col-md-10 center panel jumbotron bg-light-green">
@@ -15,7 +15,7 @@ class ProjectOrigin extends Component {
       {team.slice(0,4).map((tem,index)=>
          ( <li key={index} className="list-group-item">
           <i className="fa fa-check pr-1" />
-          {tem}
+          {tem.fullName}
           </li>)
      )}
      </ul>
