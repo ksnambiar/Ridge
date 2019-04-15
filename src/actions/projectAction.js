@@ -1,5 +1,6 @@
 import {GET_PROJECT,GET_PROJECTS,PROJECT_LOADING,GET_ERRORS} from './types';
 import axios from 'axios';
+import {getCurrentProfile} from './profileAction'
 import {local_host, heroku_url} from '../api/Api_ref'
 export const getProjectsByCollege=(college) =>dispatch=>{
     dispatch(setProjectLoading)
@@ -35,6 +36,18 @@ export const getProjectByName = (college,name)=>dispatch=>{
             })
         })
 }
+//function to respond to a project request
+export const devResponse = (college,pid,aid,rid,decision)=>dispatch=>{
+    let uid=localStorage.getItem("uid");
+    axios.get(heroku_url+`/api/devs/request/${uid}/projects/${college}/${pid}/developer/${aid}/request/${rid}/${decision}`)
+        .then(obj=>{
+            dispatch(getCurrentProfile())
+        })
+        .catch(err=>{
+            console.log("error",err)
+        })
+}
+
 
 export const setProjectLoading = ()=>{
     return {
