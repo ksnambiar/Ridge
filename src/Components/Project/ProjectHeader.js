@@ -1,29 +1,46 @@
 import React, { Component } from 'react'
-import { Button } from 'react-bootstrap';
-
+import { Button,Badge } from 'react-bootstrap';
+import Octicon,{getIconByName} from '@githubprimer/octicons-react';
 class ProjectHeader extends Component {
-  compoe
   render() {
       const {project} = this.props;
       console.log(project)
+      
+      let domains
+      if(typeof project.domains ==="string"){
+        domains=project.domains.split(",")
+      }else{
+        domains=project.domains
+      }
+      let vars=["info","light","dark","primary","danger","success","secondary"];
+      let rdom=domains.map((obj,i)=>{
+        return <Badge className="center mh1" key={i} variant={vars[i%vars.length]}>{obj}</Badge>
+      })
     return (
       <div className="row">
-        <div className="center col-md-10">
-          <div className="panel br2 bg-light-blue jumbotron center ma3" style={{textAlign:"center",color:"white"}}>
+        <div className="center col-md-12">
+          <div className="panel br2 like jumbotron center ma3" style={{textAlign:"center",color:"white"}}>
           <h3> {project.name}</h3>
           <h5>{project.description}</h5>
           <button
           type="button"
-          className="btn btn-primary"
+          className="btn btn-primary rounded-circle mh2"
+          title="get in touch"
           >
-          Get in contact
+          <Octicon icon={getIconByName("comment-discussion")}/>
           </button>
           <button
           type="button"
-          className='btn btn-warning'
+          className='btn btn-info rounded-circle mh2'
+          title="request to join"
           >
-          Request to join
+          <Octicon icon={getIconByName("request-changes")}/>
           </button>
+          <div className="row center mv2">
+          <div className="col-sm-12">
+          {rdom}
+          </div>
+          </div>
          </div>
         </div>
       </div>
