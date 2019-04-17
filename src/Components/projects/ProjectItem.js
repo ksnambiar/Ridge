@@ -3,8 +3,13 @@ import {Link} from 'react-router-dom';
 class ProjectItem extends Component {
   render() {
     const {project} = this.props;
-    let doma = project.domains.split(",");
-    let domains=doma;
+    let domains;
+    if((typeof project.domains)==="string"){
+      domains=project.domains.split(",");
+    }else{
+      domains=project.domains
+    }
+    
     return (
       <div>
       <div className="card card-body bg-light mb-3">
@@ -21,9 +26,9 @@ class ProjectItem extends Component {
       Guided by {project.guide}
       </p>
       {
-    //  <Link to={`/projects/${project.institution}/${project.name}`} className="btn btn-info">
-    //   View Details
-    //  </Link>
+     <Link to={`/projects/${project.institution}/${project.name}`} className="btn btn-info">
+       View Details
+     </Link>
       }   
       </div>
       <div className="col-md-4 d-none d-md-block">

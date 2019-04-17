@@ -62,14 +62,14 @@ class PostItem extends Component {
             {post.postData}
             </Card.Body>
             <Card.Footer>
-            <Button variant="dark" onClick={this.onClickLike.bind(this,post.key)} disabled={!(this.findUserLike.bind(this,post.likes))?true:false}>
+            <Button className="like" onClick={this.onClickLike.bind(this,post.key)} disabled={!(this.findUserLike.bind(this,post.likes))?true:false}>
             <div>
             <Octicon icon={getIconByName("thumbsup")} style={{float:"left"}}  />
             <Badge variant="light" className="ml1">{post.likes?Object.keys(post.likes).length:0}</Badge>
             </div>
             
             </Button>
-            <Button variant="dark"  className="mh2" onClick={this.onClickDisLike.bind(this,post.key)}>
+            <Button className="mh2 dislike" onClick={this.onClickDisLike.bind(this,post.key)}>
             <div>
             <Octicon icon={getIconByName("thumbsdown")} style={{float:"left"}}/>
             <Badge variant="light" className="ml1">{post.dislikes?Object.keys(post.dislikes).length:0}</Badge>
@@ -84,7 +84,7 @@ class PostItem extends Component {
 
             </Link>
             {post.ownerUid===ud?
-            <Button variant="danger" style={{justifyContent:"end"}} onClick={this.onClickDelete.bind(this,post.key)}>
+            <Button variant="dark" style={{justifyContent:"end"}} onClick={this.onClickDelete.bind(this,post.key)}>
             <Octicon icon={getIconByName("trashcan")}/>
 
             </Button>:null

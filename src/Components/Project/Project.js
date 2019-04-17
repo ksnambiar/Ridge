@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import {getProjectByName} from '../../actions/projectAction';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types';
 import Spinner from '../Common/Spinner';
 import ProjectHeader from './ProjectHeader';
-import ProjectOrigin from './ProjectOrigin';
+import ProjectOrigin from './ProjectTeam';
 import ProjectGithub from './ProjectGithub';
+import ProjectGuide from './ProjectGuide'; 
+import RepoOwner from './RepoOwner';
 class Project extends Component {
     componentDidMount(){
         if(this.props.match.params.name){
@@ -19,15 +22,33 @@ class Project extends Component {
           data=<Spinner />
       }else{
           data=<div className="container">
+          <div className="row">
+          <Link to={`/dev/projects/${project.institution}`} className="btn btn-light mv2 ba b--light-gray">Go back</Link>
+          </div>
           <ProjectHeader project={project}/>
           <div className="ma3">
-          <h3>Project Info</h3>
+          <h3>Team</h3>
           </div>
           <ProjectOrigin project={project}/>
-          <div className="ma3">
-          <h3>Repo Owner</h3>
+          <h3>Guide</h3>
+          <div>
+          <ProjectGuide project={project}/>
+          </div>
+
+          {project.githublink?<div className="row">
+          <div className="col-md-6">
+          <div className="ma3 center">
+          <h3>Github Details</h3>
           </div>
           <ProjectGithub projectlink={project}/>
+          </div>
+          <div className="col-md-6">
+          <div className="ma3 center">
+          <h3>Repo Owner</h3>
+          </div>
+          <RepoOwner projectlink={project}/>
+          </div>
+          </div>:null}
           </div>
       }
     return (

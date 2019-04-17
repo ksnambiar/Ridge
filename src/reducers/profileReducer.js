@@ -1,8 +1,10 @@
-import {PROFILE_LOADING,GET_PROFILE,CLEAR_CURRENT_PROFILE, GET_PROFILES} from '../actions/types'; 
+import {PROFILE_LOADING,GET_GUIDE_PROFILE,GET_GUIDE_PROFILES,CLEAR_CURRENT_GUIDE_PROFILE,GET_PROFILE,CLEAR_CURRENT_PROFILE, GET_PROFILES} from '../actions/types'; 
 const initialState={
     profile:null,
     profiles:null,
-    loading:false
+    loading:false,
+    guideProfile:null,
+    guideProfiles:null
 }
 export default function(state = initialState,action){
     switch(action.type){
@@ -26,6 +28,24 @@ export default function(state = initialState,action){
         return {
             ...state,
             profiles:action.payload,
+            loading:false
+        }
+        
+        case GET_GUIDE_PROFILE:
+        return {
+            ...state,
+            guideProfile:action.payload,
+            loading:false
+        }
+        case CLEAR_CURRENT_GUIDE_PROFILE:
+        return {
+            ...state,
+            guideProfile:null
+        }
+        case GET_GUIDE_PROFILES:
+        return {
+            ...state,
+            guideProfiles:action.payload,
             loading:false
         }
         default:

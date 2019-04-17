@@ -1,9 +1,10 @@
 import {GET_PROJECT,GET_PROJECTS,PROJECT_LOADING,GET_ERRORS} from './types';
 import axios from 'axios';
+import {getCurrentProfile} from './profileAction'
 import {local_host, heroku_url} from '../api/Api_ref'
 export const getProjectsByCollege=(college) =>dispatch=>{
     dispatch(setProjectLoading)
-    axios.get(local_host+"/api/devs/project/allProjects/"+college)
+    axios.get(heroku_url+"/api/devs/project/allProjects/"+college)
         .then(obj=>{
             let indat=obj.data;
             dispatch({
@@ -20,7 +21,7 @@ export const getProjectsByCollege=(college) =>dispatch=>{
 
 export const getProjectByName = (college,name)=>dispatch=>{
     dispatch(setProjectLoading())
-    axios.get(local_host+"/api/devs/project/projects/"+college+"/"+name)
+    axios.get(heroku_url+"/api/devs/project/projects/"+college+"/"+name)
         .then(obj=>{
             let indat=obj.data.data;
             dispatch({
@@ -35,6 +36,18 @@ export const getProjectByName = (college,name)=>dispatch=>{
             })
         })
 }
+//function to respond to a project request
+export const devResponse = (college,pid,aid,rid,decision)=>dispatch=>{
+    let uid=localStorage.getItem("uid");
+    axios.get(heroku_url+`/api/devs/request/${uid}/projects/${college}/${pid}/developer/${aid}/request/${rid}/${decision}`)
+        .then(obj=>{
+            dispatch(getCurrentProfile())
+        })
+        .catch(err=>{
+            console.log("error",err)
+        })
+}
+
 
 export const setProjectLoading = ()=>{
     return {

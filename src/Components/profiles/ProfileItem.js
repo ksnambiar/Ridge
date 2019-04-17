@@ -5,6 +5,8 @@ import {Link} from "react-router-dom";
 class ProfileItem extends Component {
   render() {
       const {profile,uid} =this.props;
+      console.log(profile.skills)
+      if(profile.skills){      
       let skil=profile.skills.split(',');
     return (
       <div className="card card-body bg-light mb-3">
@@ -39,7 +41,10 @@ class ProfileItem extends Component {
         </div>
       </div>
     )
+  }else{
+    return null
   }
+}
 }
 
 ProfileItem.propTypes={

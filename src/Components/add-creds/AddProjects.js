@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import {Link,withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import {addProject} from '../../actions/profileAction';
+import {addProject,addGuideProject} from '../../actions/profileAction';
 class AddProject extends Component {
     constructor(props) {
       super(props)
@@ -10,45 +10,44 @@ class AddProject extends Component {
       this.state = {
          name:'',
          domains:'',
-         team:'',
          githublink:'',
          description: '',
-         guide:'',
+        //  guide:'',
          errors:{}
       }
       this.onChange = this.onChange.bind(this);
-      this.onCheck=this.onCheck.bind(this);
       this.onSubmit=this.onSubmit.bind(this);
     }
     onChange(e){
         this.setState({[e.target.name]:e.target.value})
     }
-    onCheck(e){
-        this.setState({
-            disabled:!this.state.disabled,
-            current:!this.state.current
-        })
-    }
     onSubmit(e){
         e.preventDefault();
+        const {utype,user} = this.props.auth
+        const uid = localStorage.getItem("uid")
         const projData={
          name:this.state.name,
          domains:this.state.domains,
-         team:this.state.team,
+         team:[{fullName:user.fullName,uid:uid}],
          githublink:this.state.githublink,
-         description: this.state.description,
-         guide:this.state.guide
+         description: this.state.description
         }
-        this.props.addProject(projData,this.props.history);
+        if(utype==="dev"){
+            this.props.addProject(projData,this.props.history);
+        }else{
+            this.props.addGuideProject(projData,this.props.history);
+
+        }
     }
     
   render() {
+      const {utype} = this.props.auth
     return (
       <div className="add-experience">
       <div className="container ">
       <div className="mv4 pd5">
       <div className="m-auto">
-      <Link to="/dashboard" className="btn btn-light">
+      <Link to={`/${utype}/dashboard`} className="btn btn-light">
       Go Back 
       </Link>
       <h1 className="display-4 text-center">New Project</h1>
@@ -69,17 +68,15 @@ class AddProject extends Component {
       <input type="text" name="domains" placeholder="Eg. NLP,DeepLearning,WebDevelopment etc" className="form-control" value={this.state.domains} onChange={this.onChange} />
       </div>
       <div className="form-group">
-      <label htmlFor="team">Team Members</label>
-      <input type="text" name="team" placeholder="Name of the team member separated with ," className="form-control" value={this.state.team} onChange={this.onChange} />
-      </div>
-      <div className="form-group">
       <label htmlFor="githublink">Github Link</label>
       <input type="url" name="githublink" placeholder="Github Link for the project" className="form-control" value={this.state.githublink} onChange={this.onChange} />
       </div>
-      <div className="form-group">
-      <label htmlFor="guide">Project Guide/Mentor</label>
-      <input type="text" name="guide" placeholder="Mentor" className="form-control" value={this.state.guide} onChange={this.onChange} />
-      </div>
+      {
+    //   <div className="form-group">
+    //   <label htmlFor="guide">Project Guide/Mentor</label>
+    //   <input type="text" name="guide" placeholder="Mentor" className="form-control" value={this.state.guide} onChange={this.onChange} />
+    //   </div>
+      }
       <div className="form-group">
       <label htmlFor="description">Description about your Project</label>
       <input type="text" name="description" placeholder="Tell us about your experience in it" className="form-control" value={this.state.description} onChange={this.onChange} />
@@ -101,10 +98,13 @@ class AddProject extends Component {
 AddProject.propTypes = {
     profile: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,
-    addProject:PropTypes.func.isRequired
+    addProject:PropTypes.func.isRequired,
+    addGuideProject:PropTypes.func.isRequired,
+    auth:PropTypes.object.isRequired
 }
 const mapStateToProps = (state)=>({
     profile:state.profile,
-    errors:state.errors
+    errors:state.errors,
+    auth:state.auth
 })
-export default connect(mapStateToProps,{addProject})(withRouter(AddProject));
+export default connect(mapStateToProps,{addProject,addGuideProject})(withRouter(AddProject));

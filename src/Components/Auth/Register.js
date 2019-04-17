@@ -53,13 +53,13 @@ class Register extends Component {
   render() {
     const {errors} = this.state
     return (
-      <div className="br2 ba dark-gray b--black-10 mv4 shadow-5 center col-lg-5 col-md-6 bg-light-gray">
+      <div className="br2 ba b--black-10 mv4 shadow-5 center col-lg-5 col-md-6">
       <article className="pa4 black-80">
       <form onSubmit={this.onSubmit}>
         <fieldset id="sign_up" className="ba b--transparent ph0 mh0" >
-          <legend className="f4 fw6 ph0 mh0">Sign Up</legend>
+          <legend className="f4 fw6 ph0 mh0 form_col">Sign Up</legend>
           <div className="mt3">
-            <label className="db fw4 lh-copy f6" htmlFor="full-name">Full Name</label>
+            <label className="db fw4 lh-copy f6 form_col" htmlFor="full-name">Full Name</label>
             <input className={classnames('form-control', {
               'is-invalid': errors.fullName
             })} type="text" name="fullName"  id="fname" onChange={this.onChange} value={this.state.fullName} />
@@ -68,7 +68,7 @@ class Register extends Component {
 
             </div>
           <div className="mt3">
-            <label className="db fw4 lh-copy f6" htmlFor="USN">USN</label>
+            <label className="db fw4 lh-copy f6 form_col" htmlFor="USN">USN</label>
             <input className={classnames('form-control', {
               'is-invalid': errors.usn
             })} type="text" name="usn"  id="usn" onChange={this.onChange} value={this.state.usn}/>
@@ -76,7 +76,7 @@ class Register extends Component {
 
             </div>
           <div className="mt3">
-            <label className="db fw4 lh-copy f6" htmlFor="email">Email address</label>
+            <label className="db fw4 lh-copy f6 form_col" htmlFor="email">Email address</label>
             <input className={classnames('form-control', {
               'is-invalid': errors.email
             })} type="email" name="email"  id="email-address" onChange={this.onChange} value={this.state.email}/>
@@ -84,7 +84,7 @@ class Register extends Component {
 
             </div>
           <div className="mt3">
-            <label className="db fw4 lh-copy f6" htmlFor="contact">Contact no</label>
+            <label className="db fw4 lh-copy f6 form_col" htmlFor="contact">Contact no</label>
             <input className={classnames('form-control', {
               'is-invalid': errors.contact
             })} type="text" name="contact"  id="contact" onChange={this.onChange} value={this.state.contact}/>
@@ -92,7 +92,7 @@ class Register extends Component {
 
             </div>
           <div className="mt3">
-            <label className="db fw4 lh-copy f6" htmlFor="password">Password</label>
+            <label className="db fw4 lh-copy f6 form_col" htmlFor="password">Password</label>
             <input className={classnames('form-control', {
               'is-invalid': errors.password
             })} type="password" name="password"  id="password" onChange={this.onChange} value={this.state.password}/>
@@ -100,7 +100,7 @@ class Register extends Component {
 
           </div>
         </fieldset>
-        <div className="mt3"><input className="btn btn-info btn-block" type="submit" value="Sign Up" /></div>
+        <div className="mt3"><input className="btn btn_col btn-block" type="submit" value="Sign Up" /></div>
       </form>
     </article>
       </div>

@@ -12,7 +12,7 @@ class ProjectGithub extends Component {
     }
   }
   
-  componentDidMount(){
+  componentWillMount(){
     let arr = this.props.projectlink.githublink.split('/');
     this.setState({isLoading:true});
     Axios.get("https://api.github.com/repos/"+arr[arr.length-2]+"/"+arr[arr.length-1])
@@ -38,7 +38,7 @@ class ProjectGithub extends Component {
   }
   render() {
     return (
-      <div className="row center">
+      <div className="row">
       {this.state.isLoading?<Spinner/>:<ProjectDetails data={this.state.data}/>}
       </div>
     )

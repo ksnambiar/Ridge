@@ -7,18 +7,18 @@ const ProfileActions=({institution})=> {
     <div>
 
     <div className="btn-group mb-4 " role="group">
-    <Link to="/edit-profile" className="btn btn-light">
+    <Link to="/dev/edit-profile" className="btn btn-light">
     <i className="fab fa-user-circle text-info mr-1"/>Edit Profile
     </Link>
-    <Link to={`/projects/${institution}`} className="btn btn-light">
+    <Link to={`/dev/projects/${institution}`} className="btn btn-light">
     <i className="fab fa-black-tie text-info mr-1"/>View Projects
     </Link>
     </div>
     <div className="btn-group mb-4 " role="group">
-    <Link to="/add-project" className="btn btn-light">
+    <Link to="/dev/add-project" className="btn btn-light">
     <i className="fab fa-graduation-cap text-info mr-1"/>Add Projects
     </Link>
-    <Link to="/add-experience" className="btn btn-light">
+    <Link to="/dev/add-experience" className="btn btn-light">
     <i className="fab fa-black-tie text-info mr-1"/>Add Experience
     </Link>
     </div>

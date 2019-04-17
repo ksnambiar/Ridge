@@ -4,28 +4,28 @@ import {connect} from "react-redux";
 import PropTypes from "prop-types";
 class Landing extends Component {
   componentDidMount(){
-    let {isAuthenticated} = this.props.auth;
+    let {isAuthenticated,utype} = this.props.auth;
     if(isAuthenticated){
-      this.props.history.push('/dashboard')
+      this.props.history.push('/'+utype+'/dashboard')
     }
   }
   render() {
-    let {isAuthenticated} = this.props.auth;
+    let {isAuthenticated,utype} = this.props.auth;
     return (
       <div>
-        <div className="landing">
+        <div>
           <div className="dark-overlay landing-inner text-light">
             <div className="container">
               <div className="row">
                 <div className="col-md-12 text-center">
-                  <h1 className="display-3 mb-4">TecRidge</h1>
-                  <p className="lead">
+                  <h1 className="display-3 mb-4 form_col">TecRidge</h1>
+                  <p className="lead form_col">
                     {" "}
                     A Complete Social Network for Showing off your Innovative Projects
                   </p>
                   <hr />
                   {isAuthenticated?
-                    <Link to='/dashboard' className="btn btn-lg btn-info mr-2">Enter</Link>
+                    <Link to={`/${utype}/dashboard`} className="btn btn-lg btn-info mr-2">Enter</Link>
                     :
                     <div>
                     <Link to="/register" className="btn btn-lg btn-info mr-2">

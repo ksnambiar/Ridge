@@ -1,45 +1,68 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {deleteProject} from '../../actions/profileAction';
+import {getprofilesbycollege,deleteProject,addDeveloperToTeam} from '../../actions/profileAction';
 import Modal from 'react-responsive-modal'
+import Octicon,{getIconByName} from '@githubprimer/octicons-react';
+import AddDeveloper from './AddDeveloper';
 class Projects extends Component {
     state={
         open:false,
+        addDev:false,
+        addMentor:false,
+        pid:null,
         selectedState:{}
     }
     onClickDelete(id){
         this.setState({open:false,selectedState:{}})
         this.props.deleteProject(id);
     }
+    onAddDev = (pid,did,name,college)=>{
+      console.log("reached onAddDev")
+      this.props.addDeveloperToTeam(pid,did,name,college)
+    }
+    componentDidMount(){
+      const {institution} = this.props.profile.profile
+      this.props.getprofilesbycollege(institution);
+    }
     onOpenModal = (val,key) => {
+      console.log(val)
         this.setState({ open: true,selectedState:{
             name:val.name,
             domains:val.domains,
-            team:val.team,
+            team:val.team.map(obj=>obj.fullName),
             description:val.description,
             key:key,
-            guide:val.guide,
+            guide:val.guide?val.guide.map(obj=>obj.fullName):"None",
             githublink:val.githublink
         } });
 
       };
-     
+      openAddDev=(pid)=>{
+        this.setState({addDev:true,pid:pid})
+      }
+      closeAddDev=()=>{
+        this.setState({addDev:false})
+      }
       onCloseModal = () => {
         this.setState({ open: false,selectedState:{} });
       };
   render() {
       let {open} = this.state;
+
+      console.log("asdas",this.selectedState)
       let disp;
       if(this.props.projects)
      { let exp=this.props.projects;
       let keys=Object.keys(exp);
       let values = Object.values(exp);
       disp = values.map((val,i)=>(
-        <div key={keys[i]} className="panel bg-white ma2 pa2" style={{float:"left"}}>
+        <div key={keys[i]} className="panel ma1 pb2" style={{float:"left"}}>
         <div className="jumbotron bg-white ba shadow-5">
-        <h5 className="mr3" style={{float:"left"}}>{val.name}</h5>
-        <button className="btn btn-info" onClick={this.onOpenModal.bind(this,val,keys[i])}>Details</button>
+        <h5 className="mr2" >{val.name}</h5>
+        <button className="btn btn-info white mr1" onClick={this.onOpenModal.bind(this,val,keys[i])} title="info about the project"><Octicon icon={getIconByName("info")}/></button>
+        <button className="btn mr1" title="add developer to team" onClick={this.openAddDev.bind(this,keys[i])}><Octicon icon={getIconByName("person")}/> </button>
+        <button className="btn" title="find a guide"><Octicon icon={getIconByName("mortar-board")}/> </button>
           <Modal open={open} onClose={this.onCloseModal} center>
           <div className="panel">
           <h3>{this.state.selectedState.name}</h3>
@@ -48,9 +71,13 @@ class Projects extends Component {
           <h6>Guided By:</h6><p>{this.state.selectedState.guide}</p>
           <a href={this.state.selectedState.githublink} target="_blank">Github Link</a>
           <br/>
-          <button className="btn btn-danger" onClick={this.onClickDelete.bind(this,this.state.selectedState.key)}>Delete</button>
+          <button className="btn btn-danger" onClick={this.onClickDelete.bind(this,this.state.selectedState.key)}><Octicon icon={getIconByName("trashcan")}/></button>
           </div>
       </Modal>
+      {
+      this.state.pid?<AddDeveloper show={this.state.addDev} pid={this.state.pid} onAddDev={this.onAddDev} profiles={this.props.profile.profiles} profile={this.props.profile.profile} onHide={this.closeAddDev.bind(this)}/>
+     :null 
+    }
       </div>
         </div>
     ))
@@ -94,7 +121,10 @@ class Projects extends Component {
   }
 }
 Projects.propTypes={
-    deleteProject:PropTypes.func.isRequired
+    deleteProject:PropTypes.func.isRequired,
+    addDeveloperToTeam:PropTypes.func.isRequired
 }
-
-export default connect(null,{deleteProject})(Projects);
+const mapStateToProps = (state)=>({
+  profile:state.profile
+})
+export default connect(mapStateToProps,{deleteProject,getprofilesbycollege,addDeveloperToTeam})(Projects);
