@@ -27,6 +27,7 @@ import AddProjects from './Components/add-creds/AddProjects';
 import Projects from './Components/projects/Projects';
 import NotFound from './Components/Not-found/NotFound';
 import Posts from './Components/Posts/Posts';
+import QueryForm from "./Components/Posts/QueryPost/Queryform"
 import SocPost from './Components/Post/SocialPost/SocPost';
 import Notification from './Components/Notification/Notification'
 import GuideDashboard from './Components/Dashboard/GuideDashboard/GuideDashboard';
@@ -79,6 +80,9 @@ class App extends Component {
             </Switch>
             <Switch>
             <PrivateRoute exact path='/feeds' component={Posts} />
+            </Switch>
+            <Switch>
+            <PrivateRoute exact path='/feeds/addQuery' component={QueryForm } />
             </Switch>
             <Switch>
             <PrivateRoute exact path='/dev/projects/:institution' component={Projects} />

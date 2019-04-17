@@ -114,7 +114,7 @@ export const disLikePost = (college,id)=>dispatch=>{
             })
         })
 }
-
+//adding comment to a post
 export const addComment=(obj,id)=>dispatch=>{
     dispatch(setPostLoading);
 let college=obj.institution;
@@ -134,8 +134,97 @@ axios.post(heroku_url+"/api/posts/"+college+"/post/"+id+"/comment",comment)
     }))
 }
 //adding query
+export const addQuery = (data,history)=>dispatch=>{
+    let college=data.institution;
+    let obj={
+        data:{fullName:data.fullName,
+        post:data.data
+        },
+        type:"query",
+        timeofsend:Date.now()
+    }
+    axios.post(heroku_url+'/api/posts/'+college+'/addPost',obj)
+        .then(obj=>{
+            console.log(obj)
+            dispatch({
+                type:ADD_POST,
+                payload:obj.data.response
+            })
+            history.push("/feeds")
+        }).catch(err=>{
+            dispatch({
+                type:GET_ERRORS,
+                payload:err
+            })
+        })
+}
+//getting all the queries
+export const getQueries = (college)=>dispatch=>{
+dispatch(setPostLoading())
 
+    axios.get(heroku_url+`/api/posts/${college}/allQueries`)
+        .then(obj=>{
+            let data=obj.data.queries;
+            let datakeys = Object.keys(data);
+            let mapped = datakeys.map(obj=>{
+                let parse=data[obj]
+                parse.key=obj
+                return parse
+            })
+            dispatch({
+                type:GET_POSTS,
+                payload:mapped.reverse()
+            })
+        }).catch(err=>{
+            dispatch({
+                type:GET_ERRORS,
+                payload:err
+            })
+        })
 
+}
+//delete Query
+export const deleteQuery = (college,id)=>dispatch=>{   
+    axios.delete(heroku_url+'/api/posts/'+college+'/deleteQuery/'+id)
+        .then(obj=>{
+            dispatch({
+                type:DELETE_POST,
+                payload:id
+            })
+        }).catch(err=>{
+            dispatch({
+                type:GET_ERRORS,
+                payload:err
+            })
+        })
+}
+
+//like post
+export const likeQuery = (college,id)=>dispatch=>{
+    axios.get(heroku_url+'/api/posts/'+college+'/query/'+id+'/like')
+        .then(obj=>{
+            dispatch(getQueries(college))
+        })
+        .catch(err=>{
+            dispatch({
+                type:GET_ERRORS,
+                payload:err
+            })
+        })
+}
+//dislike posts
+export const disLikeQuery = (college,id)=>dispatch=>{
+    axios.get(heroku_url+'/api/posts/'+college+'/query/'+id+'/dislike')
+        .then(obj=>{
+            dispatch(getQueries(college))
+        })
+        .catch(err=>{
+            dispatch({
+                type:GET_ERRORS,
+                payload:err
+            })
+        })
+}
 //set post loading
 export const setPostLoading=()=>{
     return{

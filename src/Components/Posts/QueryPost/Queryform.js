@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {addPost} from '../../../actions/postAction';
+import {addQuery} from '../../../actions/postAction';
 import {Nav,Button} from 'react-bootstrap';
-class SocPostForm extends Component {
+import {withRouter} from "react-router-dom";
+class QueryForm extends Component {
     constructor(props) {
       super(props)
     
@@ -21,7 +22,7 @@ class SocPostForm extends Component {
     }
     onSubmit(e){
         e.preventDefault();
-        const {addPost} = this.props;
+        const {addQuery} = this.props;
         const {user} = this.props.auth;
         const {profile} = this.props.profile
         let obj={
@@ -29,7 +30,7 @@ class SocPostForm extends Component {
             data:this.state.post,
             institution:profile.institution
         }
-        addPost(obj)
+        addQuery(obj,this.props.history)
         this.setState({post:''})
     }
     onChange(e){
@@ -48,8 +49,8 @@ class SocPostForm extends Component {
         </div>
         <div className="panel-body">
         <form onSubmit={this.onSubmit}>
-        <textarea cols="10" rows="3" placeholder="Whats on your mind today?" value={this.state.post} name="post" onChange={this.onChange} className="form-control"></textarea>
-        <Button variant="dark" className="mt2" type="Submit">Post</Button>
+        <textarea cols="15" rows="7" placeholder="What is your doubt?" value={this.state.post} name="post" onChange={this.onChange} className="form-control"></textarea>
+        <Button variant="dark" className="mt3" type="Submit">Post Query</Button>
         </form>
         </div>
       </div>
@@ -57,10 +58,10 @@ class SocPostForm extends Component {
     )
   }
 }
- SocPostForm.propTypes = {
+ QueryForm.propTypes = {
     auth:PropTypes.object.isRequired,
     errors:PropTypes.object.isRequired,
-    addPost:PropTypes.func.isRequired,
+    addQuery:PropTypes.func.isRequired,
     profile:PropTypes.object.isRequired
 }
 
@@ -70,4 +71,4 @@ const mapStateToProps = (state)=>({
     profile:state.profile
 })
 
-export default connect(mapStateToProps,{addPost})(SocPostForm);
+export default connect(mapStateToProps,{addQuery})(withRouter(QueryForm));
