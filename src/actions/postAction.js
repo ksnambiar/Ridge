@@ -133,6 +133,10 @@ axios.post(heroku_url+"/api/posts/"+college+"/post/"+id+"/comment",comment)
         payload:err
     }))
 }
+
+
+
+
 //adding query
 export const addQuery = (data,history)=>dispatch=>{
     let college=data.institution;
@@ -158,6 +162,27 @@ export const addQuery = (data,history)=>dispatch=>{
             })
         })
 }
+
+//get query by id
+export const getQuery = (college,id)=>dispatch=>{
+    dispatch(setPostLoading())
+    axios.get(heroku_url+'/api/posts/'+college+'/getQuery/'+id)
+        .then(obj=>{
+            console.log(obj)
+            let data=obj.data;
+            dispatch({
+                type:GET_POST,
+                payload:data.data
+            })
+        
+        }).catch(err=>{
+            dispatch({
+                type:GET_POST,
+                payload:null
+            })
+        })
+}
+
 //getting all the queries
 export const getQueries = (college)=>dispatch=>{
 dispatch(setPostLoading())

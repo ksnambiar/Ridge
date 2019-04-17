@@ -10,6 +10,7 @@ import Footer from "./Components/Common/Footer";
 import LoginPar from "./Components/Auth/LoginPar";
 import PrivateRoute from "./Components/Common/PrivateRoute";
 import PrivateGuideRoute from "./Components/Common/PrivateGuideRoute";
+import QPost from './Components/Post/Query/QPost';
 import RegPar from "./Components/Auth/RegPar";
 import Dashboard from './Components/Dashboard/Dashboard';
 import Profiles from './Components/profiles/Profiles';
@@ -89,6 +90,9 @@ class App extends Component {
             </Switch>
             <Switch>
             <PrivateRoute exact path='/post/:id' component={SocPost} />
+            </Switch>
+            <Switch>
+            <PrivateRoute exact path='/query/:id' component={QPost} />
             </Switch>
             <Switch>
             <PrivateRoute exact path='/projects/:institution/:name' component={Project} />

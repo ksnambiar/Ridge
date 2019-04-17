@@ -57,16 +57,16 @@ class QueryItem extends Component {
             <Badge variant="light" className="ml1">{query.dislikes?Object.keys(query.dislikes).length:0}</Badge>
             </div>
             </Button>
-            {
-            // <Link to={`/post/${post.key}`}  className="mh2 btn btn-dark" >
-            // <div style={{float:"left"}}>
-            // <Octicon icon={getIconByName("comment")}/>
-            // </div>
             
-            // <Badge variant="light" className="ml1">{post.comments?Object.keys(post.comments).length:0}</Badge>
+            <Link to={`/query/${query.key}`}  className="mh2 btn btn-dark" >
+            <div style={{float:"left"}}>
+            <Octicon icon={getIconByName("comment-discussion")}/>
+            </div>
+            
+            <Badge variant="light" className="ml1">{query.answers?Object.keys(query.answers).length:0}</Badge>
 
-            // </Link>
-            }
+            </Link>
+            
             {query.ownerUid===ud?
             <Button variant="dark" style={{justifyContent:"end"}} onClick={this.onClickDelete.bind(this,query.key)}>
             <Octicon icon={getIconByName("trashcan")}/>
