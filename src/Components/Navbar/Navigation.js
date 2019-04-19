@@ -18,8 +18,9 @@ class Navigation extends Component {
     let uid = localStorage.getItem('uid')
     const authLinks = (
       <Nav> 
-          
-      <Link to='/register' className="f6 fw6 db silver link dim hover-silver">Register</Link>
+      <Link to='/team' className="f6 fw6 db silver link dim hover-silver">Team</Link>
+  
+      <Link to='/register' className="f6 fw6 db silver link dim hover-silver ml2">Register</Link>
      
       <Link to='/login' className="f6 fw6 db silver link dim hover-silver ml2">sign in</Link>
      

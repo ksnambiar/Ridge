@@ -58,7 +58,7 @@ class QueryItem extends Component {
             </div>
             </Button>
             
-            <Link to={`/query/${query.key}`}  className="mh2 btn btn-dark" >
+            <Link to={`/query/${query.key}`} title="answers"  className="mh2 btn btn-dark" >
             <div style={{float:"left"}}>
             <Octicon icon={getIconByName("comment-discussion")}/>
             </div>

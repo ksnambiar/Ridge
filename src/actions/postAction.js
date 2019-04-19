@@ -250,6 +250,27 @@ export const disLikeQuery = (college,id)=>dispatch=>{
             })
         })
 }
+//adding answer to a query
+export const addAnswer=(obj,id)=>dispatch=>{
+    dispatch(setPostLoading);
+let college=obj.institution;
+let comment={
+    description:obj.data,
+    fullName:obj.fullName,
+    college:college
+}
+console.log()
+axios.post(heroku_url+"/api/posts/"+college+"/query/"+id+"/answer",comment)
+    .then(obj=>{
+        dispatch(getQuery(college,id))
+       
+    })
+    .catch(err=>dispatch({
+        type:GET_ERRORS,
+        payload:err
+    }))
+}
+
 //set post loading
 export const setPostLoading=()=>{
     return{
