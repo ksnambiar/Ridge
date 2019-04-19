@@ -46,7 +46,7 @@ class Navigation extends Component {
       <Link to='/feeds' className="f6 fw6 db silver link dim hover-silver">Post Feeds</Link>    
       } 
       <Link to='/guide/dashboard' className="f6 fw6 db silver link dim hover-silver ml3">Dashboard</Link>         
-      <a href="#" onClick={this.onLogoutClick.bind(this)} className="f4 fw6 db silver link dim hover-silver ml3">Logout</a>
+      <a href="#" onClick={this.onLogoutClick.bind(this)} className="f6 fw6 db silver link dim hover-silver ml3">Logout</a>
     </Nav>
     </div>
     )

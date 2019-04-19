@@ -9,9 +9,15 @@ import PostShow from './PostShow'
 import CommentFeed from './CommentFeed'
 class SocPost extends Component {
     componentDidMount(){
-        const {profile} = this.props.profile
+        const {profile,guideProfile} = this.props.profile
         let id=this.props.match.params.id;
-        this.props.getPost(profile.institution,id);
+        if(this.props.auth.utype==="guide"){
+            this.props.getPost(guideProfile.institution,id);
+
+        }else{
+            this.props.getPost(profile.institution,id);
+
+        }
     }
   render() {
       const {post,loading} = this.props;
@@ -54,7 +60,8 @@ SocPost.propTypes = {
 
 const mapStateToProps = state=>({
     profile:state.profile,
-    post:state.post
+    post:state.post,
+    auth:state.auth
 })
 
 export default connect(mapStateToProps,{getPost})(SocPost)

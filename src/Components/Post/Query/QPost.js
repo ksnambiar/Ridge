@@ -10,9 +10,15 @@ class QPost extends Component {
     visible:false
   }
     componentDidMount(){
-        const {profile} = this.props.profile
+        const {profile,guideProfile} = this.props.profile
         let id=this.props.match.params.id;
-        this.props.getQuery(profile.institution,id);
+        if(this.props.auth.utype==="guide"){
+          this.props.getQuery(guideProfile.institution,id);
+
+        }else{
+          this.props.getQuery(profile.institution,id);
+
+        }
     }
     showForm(){
       const {visible} = this.state
@@ -43,6 +49,7 @@ class QPost extends Component {
 }
 const mapStateToProps = state=>({
     profile:state.profile,
-    post:state.post
+    post:state.post,
+    auth:state.auth
 })
 export default connect(mapStateToProps,{getQuery})(QPost)

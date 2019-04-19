@@ -18,12 +18,17 @@ class AnswerForm extends Component {
     }
     onSubmit(e){
         e.preventDefault()
-        const {profile} = this.props.profile
+        const {profile,guideProfile} = this.props.profile
         const {auth,id} = this.props
+
         let obj={
             data:this.state.answer,
-            institution:profile.institution,
             fullName:auth.user.fullName
+        }
+        if(auth.utype==="guide"){
+            obj.institution=guideProfile.institution
+        }else{
+            obj.institution=profile.institution
         }
         this.props.addAnswer(obj,id)
         this.setState({answer:""})
