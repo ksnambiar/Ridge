@@ -5,6 +5,7 @@ import PropTypes from "prop-types"
 import {getProjectByName} from "../../actions/projectAction";
 import Spinner from "../Common/Spinner"
 import Details from "./SubComponents/Details";
+import AddMembers from "./SubComponents/AddMembers";
 export class ProjectMoreAction extends Component {
   constructor(props) {
     super(props)
@@ -31,7 +32,7 @@ export class ProjectMoreAction extends Component {
     if(selected==="details"){
       view=<Details project={project}/>
     }else if(selected==="add-person"){
-      view=<p>Add To Team</p>
+      view=<AddMembers project={project}/>
     }else if(selected==="add-guide"){
       view=<p>Add Guide</p>
     }else if(selected==="reports"){
