@@ -26,6 +26,7 @@ import AddEducation from "./Components/add-creds/AddEducation";
 import AddGuideExperience from './Components/add-creds/AddGuideExperience';
 import AddProjects from './Components/add-creds/AddProjects';
 import Projects from './Components/projects/Projects';
+import ProjectMoreAction from "./Components/ProjectAction/ProjectMoreAction";
 import NotFound from './Components/Not-found/NotFound';
 import Posts from './Components/Posts/Posts';
 import QueryForm from "./Components/Posts/QueryPost/Queryform"
@@ -123,7 +124,10 @@ class App extends Component {
         </Switch>
         <Switch>
             <PrivateRoute exact path='/guide/projects/:institution' component={Projects} />
-            </Switch>
+        </Switch>
+        <Switch>
+            <PrivateRoute exact path='/project-action/:institution/:id' component={ProjectMoreAction} />
+        </Switch>
         
             { 
             // <Switch>
