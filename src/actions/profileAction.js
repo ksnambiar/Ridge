@@ -271,6 +271,25 @@ export const getGuideProfiles = (institution)=>dispatch=>{
             })
         )
     }
+
+//get profile by college
+export const getGuideProfilesByCollege=(college)=>dispatch=>{
+    axios.get(heroku_url+"/api/guides/profile/"+college+"/allProfiles")
+        .then(obj=>{
+            let dat=obj.data
+            console.log(dat)
+            dispatch({
+                type:GET_GUIDE_PROFILES,
+                payload:dat.data
+            })
+        }).catch(err=>
+            dispatch({
+                type:GET_ERRORS,
+                payload:err
+            })
+        )
+    }
+
 //get current profile
 export const getCurrentGuideProfile = ()=>dispatch=>{
     dispatch(setProfileLoading)

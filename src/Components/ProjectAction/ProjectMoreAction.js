@@ -6,6 +6,8 @@ import {getProjectByName} from "../../actions/projectAction";
 import Spinner from "../Common/Spinner"
 import Details from "./SubComponents/Details";
 import AddMembers from "./SubComponents/AddMembers";
+import AddGuides from "./SubComponents/AddGuides";
+import ReportMain from "./SubComponents/ReportMain";
 export class ProjectMoreAction extends Component {
   constructor(props) {
     super(props)
@@ -34,9 +36,9 @@ export class ProjectMoreAction extends Component {
     }else if(selected==="add-person"){
       view=<AddMembers project={project} institution={this.props.match.params.institution} pid={this.props.match.params.pid}/>
     }else if(selected==="add-guide"){
-      view=<p>Add Guide</p>
+      view=<AddGuides project={project} institution={this.props.match.params.institution} pid={this.props.match.params.pid}/>
     }else if(selected==="reports"){
-      view=<p>Reports</p>
+      view=<ReportMain project={project} />
     }
   }
     return (

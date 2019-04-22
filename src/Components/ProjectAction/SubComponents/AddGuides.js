@@ -2,38 +2,38 @@ import React, { Component } from 'react'
 import {Card} from "react-bootstrap";
 import {connect} from "react-redux";
 import PropTypes from "prop-types"
-import {getprofilesbycollege} from "../../../actions/profileAction";
-import MemberList from "./MemberList";
-import ProjectTeam from "../../Project/ProjectTeam"
+import {getGuideProfilesByCollege} from "../../../actions/profileAction";
+import GuideList from "./GuideList";
+import ProjectGuide from "../../Project/ProjectGuide"
 import Spinner from "../../Common/Spinner"
-export class AddMembers extends Component {
+export class AddGuides extends Component {
   componentDidMount(){
     const {institution}=this.props
-    this.props.getprofilesbycollege(institution);
+    this.props.getGuideProfilesByCollege(institution);
   }
   render() {
-    const {profiles,loading} = this.props.profile;
+    const {guideProfiles,loading} = this.props.profile;
     let view1,view2;
     if(loading){
       view1=<Spinner />
       view2=<Spinner />
     }else{
-      view1=<MemberList profiles={profiles} pid={this.props.pid}/>
+      view1=<GuideList profiles={guideProfiles} pid={this.props.pid}/>
     }
     
     return (
       <div>
         <Card className="ma2">
         <Card.Header>
-        <h4>Members</h4>
+        <h4>Guides</h4>
         </Card.Header>
         <Card.Body>
-        <ProjectTeam project={this.props.project}/>
+        <ProjectGuide project={this.props.project}/>
         </Card.Body>
         </Card>
         <Card className="ma2">
         <Card.Header>
-        <h4>Developers around you</h4>
+        <h4>Guides around you</h4>
         </Card.Header>
         <Card.Body>
         {view1}
@@ -43,12 +43,12 @@ export class AddMembers extends Component {
     )
   }
 }
-AddMembers.propTypes={
+AddGuides.propTypes={
   profile:PropTypes.object.isRequired,
-  getprofilesbycollege:PropTypes.func.isRequired
+  getGuideProfilesByCollege:PropTypes.func.isRequired
 }
 const mapStateToProps = state=>({
   profile:state.profile
 })
 
-export default connect(mapStateToProps,{getprofilesbycollege})(AddMembers);
+export default connect(mapStateToProps,{getGuideProfilesByCollege})(AddGuides);

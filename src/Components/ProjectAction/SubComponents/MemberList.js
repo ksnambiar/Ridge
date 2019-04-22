@@ -14,6 +14,7 @@ export class MemberList extends Component {
     }
   render() {
       const {profiles} = this.props
+      const uid = localStorage.getItem("uid");
       let view
       if(profiles){
           view=Object.keys(profiles).map((obj,i)=>{
@@ -21,6 +22,7 @@ export class MemberList extends Component {
               const domains=data.skills.split(",").map((obj,i)=>{
                 return <Badge key={i} variant="success" className="mh1">{obj}</Badge>
               })
+              
               return <Card key={i} className="mv2">
               <Card.Body>
               <div className="row">
@@ -38,7 +40,8 @@ export class MemberList extends Component {
                 {domains}
               </div>
               <div className="row center">
-              {<Button variant="success" className="mh2" onClick={this.addDev.bind(this,this.props.pid,obj,data.fullName,data.institution)}><Octicon icon={getIconByName("plus")}/></Button>
+              {
+              <Button variant="success" className="mh2" onClick={this.addDev.bind(this,this.props.pid,obj,data.fullName,data.institution)}><Octicon icon={getIconByName("plus")}/></Button>
               }<Button variant="info" className="mh2"><Octicon icon={getIconByName("file")}/></Button>
               </div>
               </div>
