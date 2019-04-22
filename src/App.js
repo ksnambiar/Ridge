@@ -6,6 +6,7 @@ import { BrowserRouter as Router ,Route,Switch} from "react-router-dom";
 import pconfig from './particlesjs-config.json'
 import Navigation from "./Components/Navbar/Navigation";
 import Landing from "./Components/Common/Landing";
+import Team from "./Components/Common/Team";
 import Footer from "./Components/Common/Footer";
 import LoginPar from "./Components/Auth/LoginPar";
 import PrivateRoute from "./Components/Common/PrivateRoute";
@@ -23,9 +24,9 @@ import EditGuideProfile from './Components/edit-profile/EditGuideProfile';
 import AddExperience from './Components/add-creds/AddExperience';
 import AddEducation from "./Components/add-creds/AddEducation";
 import AddGuideExperience from './Components/add-creds/AddGuideExperience';
-import Team from './Components/Team/Team';
 import AddProjects from './Components/add-creds/AddProjects';
 import Projects from './Components/projects/Projects';
+import ProjectMoreAction from "./Components/ProjectAction/ProjectMoreAction";
 import NotFound from './Components/Not-found/NotFound';
 import Posts from './Components/Posts/Posts';
 import QueryForm from "./Components/Posts/QueryPost/Queryform"
@@ -121,7 +122,12 @@ class App extends Component {
         <Switch>
         <PrivateRoute exact path='/guide/add-experience' component={AddGuideExperience} />
         </Switch>
-        
+        <Switch>
+            <PrivateRoute exact path='/guide/projects/:institution' component={Projects} />
+        </Switch>
+        <Switch>
+            <PrivateRoute exact path='/project-action/:institution/:id/:pid' component={ProjectMoreAction} />
+        </Switch>
         
             { 
             // <Switch>

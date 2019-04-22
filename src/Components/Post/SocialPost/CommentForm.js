@@ -22,15 +22,19 @@ class CommentForm extends Component {
     onSubmit(e){
         e.preventDefault();
         const {addComment} = this.props;
-        const {user} = this.props.auth;
-        const {profile} = this.props.profile
+        const {user,utype} = this.props.auth;
+        const {profile,guideProfile} = this.props.profile
 
         let obj={
             fullName:user.fullName,
             data:this.state.comment,
-            institution:profile.institution,
+            
         }
-        console.log(this.props.post_id)
+        if(utype==="guide"){
+            obj.institution=guideProfile.institution
+        }else{
+            obj.institution=profile.institution
+        }
         addComment(obj,this.props.post_id)
         this.setState({comment:''})
     }

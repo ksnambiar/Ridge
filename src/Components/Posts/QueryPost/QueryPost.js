@@ -10,7 +10,13 @@ import Spinner from '../../Common/Spinner';
 import {getQueries} from "../../../actions/postAction";
 class QueryPost extends Component {
   componentDidMount(){
-    this.props.getQueries(this.props.profile.profile.institution)
+    if(this.props.auth.utype==="guide"){
+      this.props.getQueries(this.props.profile.guideProfile.institution)
+
+    }else{
+      this.props.getQueries(this.props.profile.profile.institution)
+
+    }
   }
   render() {
     const {posts,loading} = this.props.post
@@ -54,6 +60,7 @@ QueryPost.propTypes = {
 }
 const mapStateToProps = (state)=>({
   post:state.post,
-  profile:state.profile
+  profile:state.profile,
+  auth:state.auth
 })
 export default connect(mapStateToProps,{getQueries})(QueryPost);

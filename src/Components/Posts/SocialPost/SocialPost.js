@@ -7,7 +7,12 @@ import PostFeed from './PostFeed';
 import Spinner from '../../Common/Spinner';
 class SocialPost extends Component {
     componentDidMount(){
-        this.props.getPosts(this.props.profile.profile.institution)
+        if(this.props.auth.utype==="guide"){
+          this.props.getPosts(this.props.profile.guideProfile.institution)
+
+        }else{
+          this.props.getPosts(this.props.profile.profile.institution)
+        }
     }
   render() {
       const {posts,loading} = this.props.post;
@@ -37,6 +42,7 @@ SocialPost.propTypes = {
 }
 const mapStateToProps = state=>({
     post:state.post,
-    profile:state.profile
+    profile:state.profile,
+    auth:state.auth
 })
 export default connect(mapStateToProps,{getPosts})(SocialPost);

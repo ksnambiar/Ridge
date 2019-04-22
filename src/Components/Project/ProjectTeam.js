@@ -7,8 +7,8 @@ class ProjectOrigin extends Component {
     const {project} = this.props
     let team=project.team
     let domains = project.domains
-    let tview=team.map(obj=>{
-      return <Card className="ml2 dim " style={{ width: '15rem',height: '16rem',float:"left"}}>
+    let tview=team.map((obj,i)=>{
+      return <Card key={i} className="ml2 dim " style={{ width: '15rem',height: '16rem',float:"left"}}>
       <Card.Body className="center">
       <div className="row">
       <img src={`https://robohash.org/${obj.fullName}`} className="center br-100 ba h3 w3 dib" style={{ width: '11rem',height: '11rem' }} alt="profile pic" className="rounded-circle"/>

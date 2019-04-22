@@ -6,6 +6,10 @@ import Spinner from '../../Common/Spinner';
 import {Nav} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import  GuideProfileActions from './GuideProfileActions'
+import GuideProjects from "./GuideProjects";
+import MentoringProjects from "./MentoringProjects"
+import GuideEducation from "./GuideEducation";
+import GuideExperience from "./GuideExperience";
 class GuideDashboard extends Component {
     componentDidMount(){
         this.props.getCurrentGuideProfile()
@@ -27,13 +31,26 @@ class GuideDashboard extends Component {
             
             <div>
             <p className="lead text-muted">
-            Welcome, <Link to={`/profile/${uid}`}>{user.fullName}</Link>
+            Welcome, <Link to={`/guide-profile/${uid}`}>{user.fullName}</Link>
             </p>
             <GuideProfileActions institution={guideProfile.institution}/>
             <div style={{marginBottom: '60px'}}>
-            <button className="btn btn-danger" onClick={this.onClickDelete.bind(this)}>Delete Account</button>
-            
             </div>
+            </div>
+            <div className="mv2">
+            <GuideProjects profile={guideProfile}/>
+            </div>
+            <div className="mv2">
+            <MentoringProjects profile={guideProfile} />
+            </div>
+            <div className="mv2">
+            <GuideEducation profile={guideProfile} />
+            </div>
+            <div className="mv2">
+            <GuideExperience profile={guideProfile} />
+            </div>
+            <div className="mv2">
+            <button className="btn btn-danger" onClick={this.onClickDelete.bind(this)}>Delete Account</button>
             </div>
             </div>
         }else{
