@@ -32,7 +32,7 @@ export class ProjectMoreAction extends Component {
     if(selected==="details"){
       view=<Details project={project}/>
     }else if(selected==="add-person"){
-      view=<AddMembers project={project}/>
+      view=<AddMembers project={project} institution={this.props.match.params.institution} pid={this.props.match.params.pid}/>
     }else if(selected==="add-guide"){
       view=<p>Add Guide</p>
     }else if(selected==="reports"){

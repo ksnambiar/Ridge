@@ -126,7 +126,7 @@ class App extends Component {
             <PrivateRoute exact path='/guide/projects/:institution' component={Projects} />
         </Switch>
         <Switch>
-            <PrivateRoute exact path='/project-action/:institution/:id' component={ProjectMoreAction} />
+            <PrivateRoute exact path='/project-action/:institution/:id/:pid' component={ProjectMoreAction} />
         </Switch>
         
             { 

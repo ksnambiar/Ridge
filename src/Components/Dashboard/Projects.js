@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {getprofilesbycollege,deleteProject,addDeveloperToTeam} from '../../actions/profileAction';
 import Modal from 'react-responsive-modal'
+import {Link} from "react-router-dom"
 import Octicon,{getIconByName} from '@githubprimer/octicons-react';
 import AddDeveloper from './AddDeveloper';
 class Projects extends Component {
@@ -49,20 +50,21 @@ class Projects extends Component {
       };
   render() {
       let {open} = this.state;
-
+      const {profile} = this.props.profile;
       console.log("asdas",this.selectedState)
       let disp;
       if(this.props.projects)
      { let exp=this.props.projects;
       let keys=Object.keys(exp);
-      let values = Object.values(exp);
-      disp = values.map((val,i)=>(
-        <div key={keys[i]} className="panel ma1 pb2" style={{float:"left"}}>
+      disp = keys.map((key,i)=>{
+        const val=exp[key]
+        return(
+        <div key={key} className="panel ma1 pb2" style={{float:"left"}}>
         <div className="jumbotron bg-white ba shadow-5">
         <h5 className="mr2" >{val.name}</h5>
         <button className="btn btn-info white mr1" onClick={this.onOpenModal.bind(this,val,keys[i])} title="info about the project"><Octicon icon={getIconByName("info")}/></button>
         <button className="btn mr1" title="add developer to team" onClick={this.openAddDev.bind(this,keys[i])}><Octicon icon={getIconByName("person")}/> </button>
-        <button className="btn" title="find a guide"><Octicon icon={getIconByName("mortar-board")}/> </button>
+        <Link to={`/project-action/${profile.institution}/${val.name}/${key}`} className="btn btn-info" title="more actions"><Octicon icon={getIconByName("gear")}/> </Link>
           <Modal open={open} onClose={this.onCloseModal} center>
           <div className="panel">
           <h3>{this.state.selectedState.name}</h3>
@@ -80,7 +82,7 @@ class Projects extends Component {
     }
       </div>
         </div>
-    ))
+    )})
     
       //   disp = values.map((val,i)=>(
     //       <tr key={keys[i]}>

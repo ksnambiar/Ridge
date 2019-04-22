@@ -48,7 +48,7 @@ export class GuideProjects extends Component {
             <h5 className="center">{data.name}</h5>
             <div className="row center">
             <Button className="rounded-circle mh1" title="info" onClick={this.onOpenModal.bind(this,data,obj)}><Octicon icon={getIconByName("info")}/></Button>
-            <Link to={`/project-action/${profile.institution}/${data.name}`}  className=" btn btn-info rounded-circle mh1"><Octicon icon={getIconByName("gear")}/></Link>
+            <Link to={`/project-action/${profile.institution}/${data.name}/${obj}`}  className=" btn btn-info rounded-circle mh1"><Octicon icon={getIconByName("gear")}/></Link>
             </div>
             <Modal open={open} onClose={this.onCloseModal} center>
           <div className="panel">
