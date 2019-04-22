@@ -48,7 +48,15 @@ export const devResponse = (college,pid,aid,rid,decision)=>dispatch=>{
         })
 }
 
-
+export const uploadReport = (pid,data)=>dispatch=>{
+    let uid = localStorage.getItem("uid")
+    axios.post(heroku_url+"/api/devs/project/"+uid+"/projects/"+pid+"/addReport",data)
+    .then(obj=>{
+        console.log("uploaded successfully",obj)
+    }).catch(err=>{
+        console.log("some error")
+    })
+}
 export const setProjectLoading = ()=>{
     return {
         type:PROJECT_LOADING

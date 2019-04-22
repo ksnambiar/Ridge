@@ -1,12 +1,16 @@
 import React, { Component } from 'react'
 import {Card,Button,Modal} from "react-bootstrap"
 import ReportList from "./ReportList";
+import {uploadReport} from "../../../actions/projectAction";
+import {connect} from "react-redux";
+
 export class ReportMain extends Component {
     constructor(props) {
       super(props)
     
       this.state = {
-         upload:false
+         upload:false,
+         selectedFile:null
       }
     }
     closeModal(){
@@ -17,10 +21,14 @@ export class ReportMain extends Component {
     }
     uploadSubmit(e){
         e.preventDefault()
-        console.log("submitted")
+        console.log(this.state.selectedFile)
+        const {pid} = this.props
+        const data = new FormData()
+        data.append('file',this.state.selectedFile)
+        this.props.uploadReport(pid,data)
     }
     onChangeHandler(e){
-        console.log(e.target.files[0])
+        this.setState({selectedFile:e.target.files[0]})
     }
   render() {
     const {project} =this.props 
@@ -49,7 +57,7 @@ export class ReportMain extends Component {
         <Card.Body>
         <form onSubmit={this.uploadSubmit.bind(this)}>
         <div className="form-control">
-        <input type="file" name="rep" onChange={this.onChangeHandler}/>
+        <input type="file" name="rep" onChange={this.onChangeHandler.bind(this)}/>
         </div>
         <Button type="submit">Upload</Button>
         </form>
@@ -66,4 +74,4 @@ export class ReportMain extends Component {
   }
 }
 
-export default ReportMain
+export default connect(null,{uploadReport})(ReportMain)
