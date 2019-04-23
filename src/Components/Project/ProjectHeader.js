@@ -19,9 +19,8 @@ class ProjectHeader extends Component {
     return (
       <div className="row">
         <div className="center col-md-12">
-          <div className="panel br2 like jumbotron center ma3" style={{textAlign:"center",color:"white"}}>
-          <h3> {project.name}</h3>
-          <h5>{project.description}</h5>
+          <div className="panel br2 projecthead jumbotron center ma3" style={{textAlign:"center",color:"white"}}>
+          <h2 style={{fontFamily:"Oswald"}}> {project.name}</h2>
           <button
           type="button"
           className="btn btn-primary rounded-circle mh2"

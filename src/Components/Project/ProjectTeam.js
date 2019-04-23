@@ -8,23 +8,28 @@ class ProjectOrigin extends Component {
     let team=project.team
     let domains = project.domains
     let tview=team.map((obj,i)=>{
-      return <Card key={i} className="ml2 dim " style={{ width: '15rem',height: '16rem',float:"left"}}>
-      <Card.Body className="center">
-      <div className="row">
-      <img src={`https://robohash.org/${obj.fullName}`} className="center br-100 ba h3 w3 dib" style={{ width: '11rem',height: '11rem' }} alt="profile pic" className="rounded-circle"/>
-      </div>
-      </Card.Body>
-      <Card.Footer>
-      <div className="row">
-      <Link to={`/profile/${obj.uid}`} className="center"><h6>{obj.fullName}</h6></Link>
-      </div>
-      </Card.Footer>
-      </Card>
+      return <Link to={`/profile/${obj.uid}`}><li key={i} className="list-group-item dim">
+      <i className="fa fa-check pr-1" />
+     <h6  className="center">{obj.fullName}</h6>
+      </li></Link>
+      
+      // <Card key={i} className="ml2 dim " style={{ width: '15rem'}}>
+      // <Card.Body className="center">
+      // <div className="row">
+      // <Link to={`/profile/${obj.uid}`} className="center"><h6>{obj.fullName}</h6></Link>
+      // </div>
+      // </Card.Body>
+      // </Card>
     })
     return (
      <div className="row">
      <div className="col-xs-12">
-     {tview}
+     <Card className="projecthead">
+       <Card.Body>
+       {tview}
+       </Card.Body>
+     </Card>
+     
      </div>
      </div>
     )
