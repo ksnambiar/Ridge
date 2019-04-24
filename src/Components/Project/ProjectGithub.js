@@ -38,7 +38,7 @@ class ProjectGithub extends Component {
   }
   render() {
     return (
-      <div className="row">
+      <div className="row mh2">
       {this.state.isLoading?<Spinner/>:<ProjectDetails data={this.state.data}/>}
       </div>
     )

@@ -8,27 +8,24 @@ class ProjectGuide extends Component {
     if(project.guide){
         let guide=project.guide
     tview=guide.map(obj=>{
-      return <Card className="ml2" style={{ width: '15rem',height: '16rem',float:"left"}}>
+      return <Card className="ml2 lightbutton" style={{ width: '15rem',height: '16rem',float:"left"}}>
       <Card.Body className="center">
       <div className="row">
-      <img src={`https://robohash.org/${obj.fullName}`} className="btn_col center" style={{ width: '11rem',height: '11rem' }} alt="profile pic" className="rounded-circle"/>
-      </div>
-      <div className="row">
-      <Link to={`/profile/${obj.uid}`} className="center">{obj.fullName}</Link>
+      <Link to={`/profile/${obj.uid}`} className="center projecttext">{obj.fullName}</Link>
       </div>
       </Card.Body>
       </Card>
     })
     }else{
-        tview=<Card className="center">
+        tview=<Card className="center lightbutton projecttext">
         <Card.Body>
         <h6>No Guides yet</h6>
         </Card.Body>
         </Card>
     }
     return (
-     <div className="row">
-     <div className="col-xs-12">
+     <div className="row mh2">
+     <div className="col-xs-12 project head">
      {tview}
      </div>
      </div>

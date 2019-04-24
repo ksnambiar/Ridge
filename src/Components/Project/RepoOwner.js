@@ -42,7 +42,7 @@ export default class RepoOwner extends Component {
           }
       }
     return (
-      <div>
+      <div className="mv2">
         {view}
       </div>
     )

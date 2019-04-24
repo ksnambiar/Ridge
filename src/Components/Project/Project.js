@@ -9,6 +9,7 @@ import ProjectOrigin from './ProjectTeam';
 import ProjectGithub from './ProjectGithub';
 import ProjectGuide from './ProjectGuide'; 
 import RepoOwner from './RepoOwner';
+import ProjectDescription from './ProjectDescription'
 class Project extends Component {
     componentDidMount(){
         if(this.props.match.params.name){
@@ -26,11 +27,17 @@ class Project extends Component {
           <Link to={`/dev/projects/${project.institution}`} className="btn btn-light mv2 ba b--light-gray">Go back</Link>
           </div>
           <ProjectHeader project={project}/>
-          <div className="ma3">
-          <h3>Team</h3>
-          </div>
+          <div className="mh2 row">
+          <div className="col-md-6">
+          <h3 style={{fontFamily:"Oswald"}}>Team</h3>
           <ProjectOrigin project={project}/>
-          <h3>Guide</h3>
+          </div>
+          <div className="col-md-6">
+          <h3 style={{fontFamily:"Oswald"}}>Description</h3>
+          <ProjectDescription project={project}/>
+          </div>
+          </div>
+          <h3 style={{fontFamily:"Oswald"}}>Guide</h3>
           <div>
           <ProjectGuide project={project}/>
           </div>
@@ -38,13 +45,13 @@ class Project extends Component {
           {project.githublink?<div className="row">
           <div className="col-md-6">
           <div className="ma3 center">
-          <h3>Github Details</h3>
+          <h3 style={{fontFamily:"Oswald"}}>Github Details</h3>
           </div>
           <ProjectGithub projectlink={project}/>
           </div>
           <div className="col-md-6">
           <div className="ma3 center">
-          <h3>Repo Owner</h3>
+          <h3 style={{fontFamily:"Oswald"}}>Repo Owner</h3>
           </div>
           <RepoOwner projectlink={project}/>
           </div>

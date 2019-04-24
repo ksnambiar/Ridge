@@ -8,8 +8,7 @@ class ProjectOrigin extends Component {
     let team=project.team
     let domains = project.domains
     let tview=team.map((obj,i)=>{
-      return <Link to={`/profile/${obj.uid}`}><li key={i} className="list-group-item dim">
-      <i className="fa fa-check pr-1" />
+      return <Link to={`/profile/${obj.uid}`}><li key={i} className="list-group-item dim lightbutton">
      <h6  className="center">{obj.fullName}</h6>
       </li></Link>
       

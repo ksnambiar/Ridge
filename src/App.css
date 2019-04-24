@@ -16,6 +16,15 @@
 .projecthead{
   background-color: #696969
 }
+.projecttext{
+  color: #ffffff;
+}
+.roundedge{
+  border-radius: 2px;
+}
+.lightbutton{
+  background-color: #d3d3d3;
+}
 .dislike{
   background-color: #b80c09;
 }
