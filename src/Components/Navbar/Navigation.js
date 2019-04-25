@@ -31,7 +31,8 @@ class Navigation extends Component {
       
       <Nav>
       <DropdownButton
-      title="Browse"
+      title="Explore"
+      className="mh1"
       variant="secondary"
       size="sm"
       >
@@ -40,6 +41,14 @@ class Navigation extends Component {
           
        </Dropdown.Item>:null
       }
+
+      {profile?<Dropdown.Item eventKey="4"> 
+      <Link to={`/dev/projects/${profile.institution}`} className="f6 fw6 db silver link dim hover-silver">
+      View Projects
+      </Link>
+   </Dropdown.Item>:null
+  }
+
         <Dropdown.Item eventKey="2">
         <Link to='/developers' className="f6 fw6 db silver link dim hover-silver">Developers</Link>
         </Dropdown.Item>
@@ -49,19 +58,55 @@ class Navigation extends Component {
         }
         </Dropdown.Item>
       </DropdownButton>
+    {
+      //adding creds
+    } 
+    <DropdownButton
+    variant="secondary"
+    className="mh1"
+    size="sm"
+    title={<Octicon icon={getIconByName("plus-small")}/>}
+    >
+    <Dropdown.Item>
+    Add projects
+    </Dropdown.Item>
+    <Dropdown.Item>
+    Add Experience
+    </Dropdown.Item>
+    </DropdownButton>
      
+    {
+       //profile related
+     }
 
-      <Link to="/dev/notifications" className="f6 fw6 db link dim hover-silver mh3 btn btn-secondary" title="Notifications"><Octicon icon={getIconByName("bell")}/></Link>
       <SplitButton
-      className="rounded-circle"
-      title={<Link to='/dev/dashboard' className="f6 fw6 db white link dim hover-silver ml3"><Octicon icon={getIconByName("home")}/></Link>}
+      className="mh1"
+      title={<Link to='/dev/dashboard' className="f6 fw6 db white link dim hover-silver"><Octicon icon={getIconByName("home")}/></Link>}
       size="sm"
       variant="secondary"
       >
-        <Dropdown.Item eventKey="1">
-        <a href="#" onClick={this.onLogoutClick.bind(this)} className="f6 fw6 db silver link dim hover-silver ml3">Logout</a>
-        </Dropdown.Item>
-      </SplitButton>         
+        
+      <Dropdown.Item eventKey="1">
+      {
+        <Link to={`/profile/${uid}`} className="f6 fw6 db silver link dim hover-silver">Your Profile</Link>
+      }
+      </Dropdown.Item>
+      <Dropdown.Item eventKey="2">
+      <Link to="/dev/edit-profile" className="f6 fw6 db silver link dim hover-silver">
+      Edit Profile
+    </Link>
+      </Dropdown.Item>
+      <Dropdown.Divider/>
+      <Dropdown.Item eventKey="3">
+      <Link to="/dev/settings" className="f6 fw6 db silver link dim hover-silver">
+      Settings
+    </Link>
+      </Dropdown.Item>
+  
+      </SplitButton>
+      <Link to="/dev/notifications" className="f6 fw6 db link dim hover-silver mh1 btn btn-secondary" title="Notifications"><Octicon icon={getIconByName("bell")}/></Link>
+
+      <a href="#" onClick={this.onLogoutClick.bind(this)} className="f6 fw6 db silver link dim hover-silver mh1">Logout</a>         
     </Nav>
     </div>
     )
