@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import {Nav} from 'react-bootstrap'
 import ProjectRequests from './DevStat/ProjectRequests';
+import Announcements from "./Announcements/Announcements";
 export default class Notification extends Component {
     state={
         selected:"projrequests",
         loading:false
     }
-
     onSelect(choice){
         this.setState({selected:choice})
     }
@@ -17,7 +17,7 @@ export default class Notification extends Component {
         view=<ProjectRequests />
       }
       else if(selected==="announcements"){
-        view=<p>announcements</p>
+        view=<Announcements />
       }
     return (
       <div className="row">

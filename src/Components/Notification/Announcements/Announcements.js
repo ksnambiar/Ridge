@@ -4,7 +4,11 @@ export class Announcements extends Component {
   render() {
     return (
       <div>
-        
+        <Card>
+        <Card.Body>
+        announcements
+        </Card.Body>
+        </Card>
       </div>
     )
   }

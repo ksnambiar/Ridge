@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Navbar, Nav, NavDropdown,Dropdown,DropdownButton } from "react-bootstrap";
 import {SplitButton} from "react-bootstrap";
 import PropTypes from 'prop-types';
+import {withRouter} from "react-router-dom"
 import {connect} from 'react-redux';
 import {logoutUser} from '../../actions/authAction';
 import {clearCurrentProfile} from '../../actions/profileAction';
@@ -12,6 +13,9 @@ class Navigation extends Component {
    e.preventDefault();
    this.props.clearCurrentProfile();
    this.props.logoutUser();
+ }
+ linkSelected(url){
+   this.props.history.push(url)
  }
   render() {
     const {isAuthenticated,user,utype} = this.props.auth;
@@ -36,26 +40,23 @@ class Navigation extends Component {
       variant="secondary"
       size="sm"
       >
-     {profile?<Dropdown.Item eventKey="1"> 
-          <Link to={`/guides/${profile.institution}`} className="f6 fw6 db silver link dim hover-silver">Guides</Link>
-          
+     {profile?<Dropdown.Item eventKey="1" className="f6 fw6 db silver link dim hover-silver" onClick={this.linkSelected.bind(this,`/guides/${profile.institution}`)}> 
+          Guides  
        </Dropdown.Item>:null
       }
 
-      {profile?<Dropdown.Item eventKey="4"> 
-      <Link to={`/dev/projects/${profile.institution}`} className="f6 fw6 db silver link dim hover-silver">
+      {profile?<Dropdown.Item eventKey="4" className="f6 fw6 db silver link dim hover-silver" onClick={this.linkSelected.bind(this,`/dev/projects/${profile.institution}`)}> 
       View Projects
-      </Link>
    </Dropdown.Item>:null
   }
 
-        <Dropdown.Item eventKey="2">
-        <Link to='/developers' className="f6 fw6 db silver link dim hover-silver">Developers</Link>
+        <Dropdown.Item eventKey="2" className="f6 fw6 db silver link dim hover-silver" onClick={this.linkSelected.bind(this,'/developers')}>
+        Developers
         </Dropdown.Item>
-        <Dropdown.Item eventKey="3">
-        {
-        <Link to='/feeds' className="f6 fw6 db silver link dim hover-silver">Post Feeds</Link>    
-        }
+        <Dropdown.Item eventKey="3" className="f6 fw6 db silver link dim hover-silver" onClick={this.linkSelected.bind(this,'/feeds')}>
+        
+        Post Feeds  
+        
         </Dropdown.Item>
       </DropdownButton>
     {
@@ -67,10 +68,10 @@ class Navigation extends Component {
     size="sm"
     title={<Octicon icon={getIconByName("plus-small")}/>}
     >
-    <Dropdown.Item>
-    Add projects
+    <Dropdown.Item  eventKey="1" className="f6 fw6 db silver link dim hover-silver" onClick={this.linkSelected.bind(this,"/dev/add-project")}>
+    Add Projects
     </Dropdown.Item>
-    <Dropdown.Item>
+    <Dropdown.Item  eventKey="2" className="f6 fw6 db silver link dim hover-silver" onClick={this.linkSelected.bind(this,"/dev/add-experience")}>
     Add Experience
     </Dropdown.Item>
     </DropdownButton>
@@ -81,31 +82,24 @@ class Navigation extends Component {
 
       <SplitButton
       className="mh1"
-      title={<Link to='/dev/dashboard' className="f6 fw6 db white link dim hover-silver"><Octicon icon={getIconByName("home")}/></Link>}
+      title={<Octicon className="f6 fw6 db white link dim hover-silver" icon={getIconByName("home")}/>}
       size="sm"
+      onClick={this.linkSelected.bind(this,'/dev/dashboard')}
       variant="secondary"
       >
         
-      <Dropdown.Item eventKey="1">
-      {
-        <Link to={`/profile/${uid}`} className="f6 fw6 db silver link dim hover-silver">Your Profile</Link>
-      }
+      <Dropdown.Item eventKey="1" className="f6 fw6 db silver link dim hover-silver" onClick={this.linkSelected.bind(this,`/profile/${uid}`)}>
+        Your Profile
       </Dropdown.Item>
-      <Dropdown.Item eventKey="2">
-      <Link to="/dev/edit-profile" className="f6 fw6 db silver link dim hover-silver">
+      <Dropdown.Item eventKey="2" className="f6 fw6 db silver link dim hover-silver" onClick={this.linkSelected.bind(this,"/dev/edit-profile")}>
       Edit Profile
-    </Link>
       </Dropdown.Item>
       <Dropdown.Divider/>
-      <Dropdown.Item eventKey="3">
-      <Link to="/dev/settings" className="f6 fw6 db silver link dim hover-silver">
+      <Dropdown.Item eventKey="3" className="f6 fw6 db silver link dim hover-silver" onClick={this.linkSelected.bind(this,"/dev/settings")}>
       Settings
-    </Link>
       </Dropdown.Item>
-  
       </SplitButton>
       <Link to="/dev/notifications" className="f6 fw6 db link dim hover-silver mh1 btn btn-secondary" title="Notifications"><Octicon icon={getIconByName("bell")}/></Link>
-
       <a href="#" onClick={this.onLogoutClick.bind(this)} className="f6 fw6 db silver link dim hover-silver mh1">Logout</a>         
     </Nav>
     </div>
@@ -160,4 +154,4 @@ const mapStateToProps=(state)=>({
   profile:state.profile
 })
 
-export default connect(mapStateToProps,{logoutUser,clearCurrentProfile})(Navigation);
+export default connect(mapStateToProps,{logoutUser,clearCurrentProfile})(withRouter(Navigation));
