@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ProfileHeader from "../profile/ProfileHeader";
 import {getGuideProfileByGid} from "../../actions/profileAction";
 import {connect} from "react-redux"
+import {Link} from "react-router-dom"
 import PropTypes from "prop-types"
 import GuideCreds from "./GuideCreds";
 import GuideGithub from "./GuideGithub";
@@ -19,6 +20,11 @@ export class Guide extends Component {
           view=<Spinner />
       }else{
           view=<div>
+          <div className="row mv2">
+          <Link to={`/guides/${guideProfile.institution}`} className="btn btn-light mb-3 float-left">
+       Back to Profiles
+         </Link>
+         </div>
           <div>
           <ProfileHeader profile={guideProfile}/>
           </div>
@@ -36,11 +42,7 @@ export class Guide extends Component {
       }
     return (
       <div>
-      <div>
-      <Link to="/guide" className="btn btn-light mb-3 float-left">
-       Back to Profiles
-        </Link>
-      </div>
+      
       {view}
       </div>
     )

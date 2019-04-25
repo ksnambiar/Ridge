@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Navbar, Nav, NavDropdown } from "react-bootstrap";
+import { Navbar, Nav, NavDropdown,Dropdown,DropdownButton } from "react-bootstrap";
+import {SplitButton} from "react-bootstrap";
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {logoutUser} from '../../actions/authAction';
@@ -29,18 +30,38 @@ class Navigation extends Component {
     const userLinks = (<div>
       
       <Nav>
-      {
-      profile?<Link to={`/guides/${profile.institution}`} className="f6 fw6 db silver link dim hover-silver">Guides</Link>
-      :null
-    }
-      <Link to='/developers' className="f6 fw6 db silver link dim hover-silver">Developers</Link>
-
-      {
-      <Link to='/feeds' className="f6 fw6 db silver link dim hover-silver ml3">Post Feeds</Link>    
+      <DropdownButton
+      title="Browse"
+      variant="secondary"
+      size="sm"
+      >
+     {profile?<Dropdown.Item eventKey="1"> 
+          <Link to={`/guides/${profile.institution}`} className="f6 fw6 db silver link dim hover-silver">Guides</Link>
+          
+       </Dropdown.Item>:null
       }
-      <Link to="/dev/notifications" className="f6 fw6 db silver link dim hover-silver ml3" title="Notifications"><Octicon icon={getIconByName("bell")}/></Link>
-      <Link to='/dev/dashboard' className="f6 fw6 db silver link dim hover-silver ml3">Dashboard</Link>         
-      <a href="#" onClick={this.onLogoutClick.bind(this)} className="f6 fw6 db silver link dim hover-silver ml3">Logout</a>
+        <Dropdown.Item eventKey="2">
+        <Link to='/developers' className="f6 fw6 db silver link dim hover-silver">Developers</Link>
+        </Dropdown.Item>
+        <Dropdown.Item eventKey="3">
+        {
+        <Link to='/feeds' className="f6 fw6 db silver link dim hover-silver">Post Feeds</Link>    
+        }
+        </Dropdown.Item>
+      </DropdownButton>
+     
+
+      <Link to="/dev/notifications" className="f6 fw6 db link dim hover-silver mh3 btn btn-secondary" title="Notifications"><Octicon icon={getIconByName("bell")}/></Link>
+      <SplitButton
+      className="rounded-circle"
+      title={<Link to='/dev/dashboard' className="f6 fw6 db white link dim hover-silver ml3"><Octicon icon={getIconByName("home")}/></Link>}
+      size="sm"
+      variant="secondary"
+      >
+        <Dropdown.Item eventKey="1">
+        <a href="#" onClick={this.onLogoutClick.bind(this)} className="f6 fw6 db silver link dim hover-silver ml3">Logout</a>
+        </Dropdown.Item>
+      </SplitButton>         
     </Nav>
     </div>
     )
