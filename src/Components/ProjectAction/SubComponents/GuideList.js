@@ -1,17 +1,23 @@
 import React, { Component } from 'react'
 import {Card,Button,Badge} from "react-bootstrap"
 import Octicon,{getIconByName} from '@githubprimer/octicons-react';
-
+import {addGuide} from "../../../actions/projectAction";
+import {connect} from "react-redux";
+import PropTypes from "prop-types"
 export class GuideList extends Component {
+  choseGuide(college,pid,gid,name,guideName){
+    const {project} = this.props
+    this.props.addGuide(college,pid,gid,name,project.name,guideName)
+  }
     render() {
-        const {profiles} = this.props
+        const {profiles,pid} = this.props
         const uid = localStorage.getItem("uid");
         let view
         if(profiles){
             view=Object.keys(profiles).map((obj,i)=>{
                 const data=profiles[obj]
-                const domains=data.aoi.split(",").map((obj,i)=>{
-                  return <Badge key={i} variant="success" className="mh1">{obj}</Badge>
+                const domains=data.aoi.split(",").map((obj1,i)=>{
+                  return <Badge key={i} variant="success" className="mh1">{obj1}</Badge>
                 })
                 
                 return <Card key={i} className="mv2">
@@ -32,7 +38,7 @@ export class GuideList extends Component {
                 </div>
                 <div className="row center">
                 {
-                <Button variant="success" className="mh2"><Octicon icon={getIconByName("plus")}/></Button>
+                <Button variant="success" className="mh2" onClick={this.choseGuide.bind(this,data.institution,pid,obj,data.fullName,data.fullName)}><Octicon icon={getIconByName("plus")}/></Button>
                 }<Button variant="info" className="mh2"><Octicon icon={getIconByName("file")}/></Button>
                 </div>
                 </div>
@@ -50,5 +56,8 @@ export class GuideList extends Component {
       )
     }
 }
+GuideList.propTypes = {
+  addGuide:PropTypes.func.isRequired
+}
 
-export default GuideList
+export default connect(null,{addGuide})(GuideList)

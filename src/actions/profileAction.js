@@ -180,12 +180,20 @@ export const deleteAccount = ()=>dispatch=>{
 
 
 //send join request from admin to developer
-export const addDeveloperToTeam = (pid,did,name,college)=>dispatch=>{
+export const addDeveloperToTeam= (pid,did,name,college,projName)=>dispatch=>{
     const uid = localStorage.getItem("uid")
-    axios.get(`${heroku_url}/api/devs/request/${uid}/projects/${college}/${pid}/developer/${did}/${name}/request`)
+    const data = {
+        pid:pid,
+        did:did,
+        developerName:name,
+        college:college,
+        projectName:projName
+    }
+    axios.post(`${heroku_url}/api/devs/request/${uid}/projects/adddeveloper/request`,data)
         .then(obj=>{
             console.log(obj)
-            dispatch(getCurrentProfile())
+            // dispatch(getCurrentProfile())
+            
         }).catch(err=>{
             console.log(err)
             dispatch({
@@ -273,13 +281,13 @@ export const getGuideProfiles = (institution)=>dispatch=>{
     }
 
 //get profile by college
-export const getGuideProfilesByCollege=(college)=>dispatch=>{
-    axios.get(heroku_url+"/api/guides/profile/"+college+"/allProfiles")
+export const getGuideProfileByGid=(gid)=>dispatch=>{
+    axios.get(heroku_url+"/api/guides/profile/"+gid+"/getProfile")
         .then(obj=>{
             let dat=obj.data
             console.log(dat)
             dispatch({
-                type:GET_GUIDE_PROFILES,
+                type:GET_GUIDE_PROFILE,
                 payload:dat.data
             })
         }).catch(err=>

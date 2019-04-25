@@ -12,11 +12,13 @@ import LoginPar from "./Components/Auth/LoginPar";
 import PrivateRoute from "./Components/Common/PrivateRoute";
 import PrivateGuideRoute from "./Components/Common/PrivateGuideRoute";
 import QPost from './Components/Post/Query/QPost';
+import Guides from "./Components/Guides/Guides";
 import RegPar from "./Components/Auth/RegPar";
 import Dashboard from './Components/Dashboard/Dashboard';
 import Profiles from './Components/profiles/Profiles';
 import Project from './Components/Project/Project';
 import Profile from './Components/profile/Profile';
+import Guide from "./Components/Guide/Guide";
 import CreateProfile from './Components/create-profile/CreateProfile';
 import CreateGuideProfile from './Components/create-profile/CreateGuideProfile';
 import EditProfile from './Components/edit-profile/EditProfile';
@@ -64,9 +66,16 @@ class App extends Component {
             <Route exact path='/Login' component={LoginPar}/>
             <Route exact path='/developers' component={Profiles}/>
             <Route exact path='/profile/:handle' component={Profile}/>
+
             <Route exact path='/not-found' component={NotFound}/>
             <Switch>
             <PrivateRoute exact path='/dev/dashboard' component={Dashboard} />
+            </Switch>
+            <Switch>
+            <PrivateRoute exact path='/guides/:college' component={Guides} />
+            </Switch>
+            <Switch>
+            <PrivateRoute exact path='/guide-profile/:gid' component={Guide} />
             </Switch>
             <Switch>
             <PrivateRoute exact path='/dev/create-profile' component={CreateProfile} />

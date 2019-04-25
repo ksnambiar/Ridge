@@ -29,6 +29,10 @@ class Navigation extends Component {
     const userLinks = (<div>
       
       <Nav>
+      {
+      profile?<Link to={`/guides/${profile.institution}`} className="f6 fw6 db silver link dim hover-silver">Guides</Link>
+      :null
+    }
       <Link to='/developers' className="f6 fw6 db silver link dim hover-silver">Developers</Link>
 
       {

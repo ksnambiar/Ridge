@@ -18,7 +18,7 @@ export class AddMembers extends Component {
       view1=<Spinner />
       view2=<Spinner />
     }else{
-      view1=<MemberList profiles={profiles} pid={this.props.pid}/>
+      view1=<MemberList profiles={profiles} project={this.props.project} pid={this.props.pid}/>
     }
     
     return (

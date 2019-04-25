@@ -7,10 +7,9 @@ import {addDeveloperToTeam} from "../../../actions/profileAction";
 
 
 export class MemberList extends Component {
-
     addDev(pid,did,name,college){
-        this.props.addDeveloperToTeam(pid,did,name,college)
-
+        const {project}=this.props;
+        this.props.addDeveloperToTeam(pid,did,name,college,project.name)
     }
   render() {
       const {profiles} = this.props

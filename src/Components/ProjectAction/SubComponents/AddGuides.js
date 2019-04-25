@@ -2,14 +2,14 @@ import React, { Component } from 'react'
 import {Card} from "react-bootstrap";
 import {connect} from "react-redux";
 import PropTypes from "prop-types"
-import {getGuideProfilesByCollege} from "../../../actions/profileAction";
+import {getGuideProfiles,addGuide} from "../../../actions/profileAction";
 import GuideList from "./GuideList";
 import ProjectGuide from "../../Project/ProjectGuide"
 import Spinner from "../../Common/Spinner"
 export class AddGuides extends Component {
   componentDidMount(){
     const {institution}=this.props
-    this.props.getGuideProfilesByCollege(institution);
+    this.props.getGuideProfiles(institution);
   }
   render() {
     const {guideProfiles,loading} = this.props.profile;
@@ -18,7 +18,7 @@ export class AddGuides extends Component {
       view1=<Spinner />
       view2=<Spinner />
     }else{
-      view1=<GuideList profiles={guideProfiles} pid={this.props.pid}/>
+      view1=<GuideList profiles={guideProfiles} project={this.props.project} pid={this.props.pid}/>
     }
     
     return (
@@ -45,10 +45,10 @@ export class AddGuides extends Component {
 }
 AddGuides.propTypes={
   profile:PropTypes.object.isRequired,
-  getGuideProfilesByCollege:PropTypes.func.isRequired
+  getGuideProfiles:PropTypes.func.isRequired
 }
 const mapStateToProps = state=>({
   profile:state.profile
 })
 
-export default connect(mapStateToProps,{getGuideProfilesByCollege})(AddGuides);
+export default connect(mapStateToProps,{getGuideProfiles})(AddGuides);
