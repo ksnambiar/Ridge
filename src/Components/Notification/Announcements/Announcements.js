@@ -6,7 +6,7 @@ export class Announcements extends Component {
       <div>
         <Card>
         <Card.Body>
-        announcements
+        No announcements currently
         </Card.Body>
         </Card>
       </div>

@@ -36,6 +36,29 @@ export const getProjectByName = (college,name)=>dispatch=>{
             })
         })
 }
+//send join request from admin to developer
+export const addDeveloperToTeam= (pid,did,name,college,projName)=>dispatch=>{
+    const uid = localStorage.getItem("uid")
+    const data = {
+        pid:pid,
+        did:did,
+        developerName:name,
+        college:college,
+        projectName:projName
+    }
+    axios.post(`${heroku_url}/api/devs/request/${uid}/projects/adddeveloper/request`,data)
+        .then(obj=>{
+            console.log(obj)
+            dispatch(getProjectByName(college,projName))
+            
+        }).catch(err=>{
+            console.log(err)
+            dispatch({
+                type:GET_ERRORS,
+                payload:err
+            })
+        })
+}
 //function to respond to a project request
 export const devResponse = (college,pid,aid,rid,decision)=>dispatch=>{
     let uid=localStorage.getItem("uid");
