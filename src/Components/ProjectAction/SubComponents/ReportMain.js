@@ -21,11 +21,13 @@ export class ReportMain extends Component {
     }
     uploadSubmit(e){
         e.preventDefault()
+        const {institution,project} = this.props
         console.log(this.state.selectedFile)
         const {pid} = this.props
         const data = new FormData()
         data.append('file',this.state.selectedFile)
-        this.props.uploadReport(pid,data)
+        this.props.uploadReport(pid,institution,project.name,data)
+        this.setState({upload:false})
     }
     onChangeHandler(e){
         this.setState({selectedFile:e.target.files[0]})

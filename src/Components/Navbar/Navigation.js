@@ -82,7 +82,7 @@ class Navigation extends Component {
 
       <SplitButton
       className="mh1"
-      title={<Octicon className="f6 fw6 db white link dim hover-silver" icon={getIconByName("home")}/>}
+      title={<Octicon className="f6 fw6 db white link dim hover-silver" icon={getIconByName("home")} size="small"/>}
       size="sm"
       onClick={this.linkSelected.bind(this,'/dev/dashboard')}
       variant="secondary"
@@ -99,7 +99,7 @@ class Navigation extends Component {
       Settings
       </Dropdown.Item>
       </SplitButton>
-      <Link to="/dev/notifications" className="f6 fw6 db link dim hover-silver mh1 btn btn-secondary" title="Notifications"><Octicon icon={getIconByName("bell")}/></Link>
+      <Link to="/dev/notifications" className="f6 fw6 db link dim hover-silver mh1 btn btn-secondary" title="Notifications"><Octicon icon={getIconByName("bell")} size="small" /></Link>
       <a href="#" onClick={this.onLogoutClick.bind(this)} className="f6 fw6 db silver link dim hover-silver mh1">Logout</a>         
     </Nav>
     </div>

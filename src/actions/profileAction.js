@@ -179,29 +179,7 @@ export const deleteAccount = ()=>dispatch=>{
 }
 
 
-//send join request from admin to developer
-export const addDeveloperToTeam= (pid,did,name,college,projName)=>dispatch=>{
-    const uid = localStorage.getItem("uid")
-    const data = {
-        pid:pid,
-        did:did,
-        developerName:name,
-        college:college,
-        projectName:projName
-    }
-    axios.post(`${heroku_url}/api/devs/request/${uid}/projects/adddeveloper/request`,data)
-        .then(obj=>{
-            console.log(obj)
-            // dispatch(getCurrentProfile())
-            
-        }).catch(err=>{
-            console.log(err)
-            dispatch({
-                type:GET_ERRORS,
-                payload:err
-            })
-        })
-}
+
 
 
 

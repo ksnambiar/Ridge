@@ -84,6 +84,7 @@ export const  addGuide = (college,pid,gid,name,projectName,guideName)=>dispatch=
     axios.post(heroku_url+`/api/devs/request/${uid}/projects/addguide/request`,data)
     .then(obj=>{
         console.log(obj)
+        dispatch(getProjectByName(college,projectName))
     }).catch(err=>{
         dispatch({
             type:GET_ERRORS,
@@ -107,11 +108,11 @@ export const guideResponse = (college,pid,aid,rid,dec)=>dispatch=>{
         })
 }
 
-export const uploadReport = (pid,data)=>dispatch=>{
+export const uploadReport = (pid,college,name,data)=>dispatch=>{
     let uid = localStorage.getItem("uid")
     axios.post(heroku_url+"/api/devs/project/"+uid+"/projects/"+pid+"/addReport",data)
     .then(obj=>{
-        console.log("uploaded successfully",obj)
+        dispatch(getProjectByName(college,name))
     }).catch(err=>{
         console.log("some error")
     })

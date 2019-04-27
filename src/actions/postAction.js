@@ -5,13 +5,14 @@ import {local_host,heroku_url} from '../api/Api_ref'
 //add post
 export const addPost = (data)=>dispatch=>{
     let college=data.institution;
+    let uid=localStorage.getItem("uid");
     let obj={
         data:{fullName:data.fullName,
         post:data.data
         },
         timeofsend:Date.now()
     }
-    axios.post(heroku_url+'/api/posts/'+college+'/addPost',obj)
+    axios.post(heroku_url+'/api/posts/'+uid+"/"+college+'/addPost',obj)
         .then(obj=>{
             console.log(obj)
             dispatch({
@@ -90,7 +91,8 @@ export const deletePost = (college,id)=>dispatch=>{
 
 //like post
 export const likePost = (college,id)=>dispatch=>{
-    axios.get(heroku_url+'/api/posts/'+college+'/post/'+id+'/like')
+    let uid=localStorage.getItem("uid");
+    axios.get(heroku_url+'/api/posts/'+uid+"/"+college+'/post/'+id+'/like')
         .then(obj=>{
             dispatch(getPosts(college))
         })
@@ -103,7 +105,8 @@ export const likePost = (college,id)=>dispatch=>{
 }
 //dislike posts
 export const disLikePost = (college,id)=>dispatch=>{
-    axios.get(heroku_url+'/api/posts/'+college+'/post/'+id+'/dislike')
+    let uid=localStorage.getItem("uid");
+    axios.get(heroku_url+'/api/posts/'+uid+'/'+college+'/post/'+id+'/dislike')
         .then(obj=>{
             dispatch(getPosts(college))
         })
@@ -117,13 +120,14 @@ export const disLikePost = (college,id)=>dispatch=>{
 //adding comment to a post
 export const addComment=(obj,id)=>dispatch=>{
     dispatch(setPostLoading);
+    let uid=localStorage.getItem("uid");
 let college=obj.institution;
 let comment={
     description:obj.data,
     fullName:obj.fullName,
     college:college
 }
-axios.post(heroku_url+"/api/posts/"+college+"/post/"+id+"/comment",comment)
+axios.post(heroku_url+"/api/posts/"+uid+'/'+college+"/post/"+id+"/comment",comment)
     .then(obj=>{
         dispatch(getPost(college,id))
        
@@ -140,6 +144,8 @@ axios.post(heroku_url+"/api/posts/"+college+"/post/"+id+"/comment",comment)
 //adding query
 export const addQuery = (data,history)=>dispatch=>{
     let college=data.institution;
+    let uid=localStorage.getItem("uid");
+
     let obj={
         data:{fullName:data.fullName,
         post:data.data
@@ -147,7 +153,7 @@ export const addQuery = (data,history)=>dispatch=>{
         type:"query",
         timeofsend:Date.now()
     }
-    axios.post(heroku_url+'/api/posts/'+college+'/addPost',obj)
+    axios.post(heroku_url+'/api/posts/'+uid+"/"+college+'/addPost',obj)
         .then(obj=>{
             console.log(obj)
             dispatch({
@@ -226,7 +232,9 @@ export const deleteQuery = (college,id)=>dispatch=>{
 
 //like post
 export const likeQuery = (college,id)=>dispatch=>{
-    axios.get(heroku_url+'/api/posts/'+college+'/query/'+id+'/like')
+    let uid=localStorage.getItem("uid");
+
+    axios.get(heroku_url+'/api/posts/'+uid+"/"+college+'/query/'+id+'/like')
         .then(obj=>{
             dispatch(getQueries(college))
         })
@@ -239,7 +247,9 @@ export const likeQuery = (college,id)=>dispatch=>{
 }
 //dislike posts
 export const disLikeQuery = (college,id)=>dispatch=>{
-    axios.get(heroku_url+'/api/posts/'+college+'/query/'+id+'/dislike')
+    let uid=localStorage.getItem("uid");
+
+    axios.get(heroku_url+'/api/posts/'+uid+"/"+college+'/query/'+id+'/dislike')
         .then(obj=>{
             dispatch(getQueries(college))
         })
@@ -253,14 +263,14 @@ export const disLikeQuery = (college,id)=>dispatch=>{
 //adding answer to a query
 export const addAnswer=(obj,id)=>dispatch=>{
     dispatch(setPostLoading);
+    let uid=localStorage.getItem("uid");
 let college=obj.institution;
 let comment={
     description:obj.data,
     fullName:obj.fullName,
     college:college
 }
-console.log()
-axios.post(heroku_url+"/api/posts/"+college+"/query/"+id+"/answer",comment)
+axios.post(heroku_url+"/api/posts/"+uid+"/"+college+"/query/"+id+"/answer",comment)
     .then(obj=>{
         dispatch(getQuery(college,id))
        
