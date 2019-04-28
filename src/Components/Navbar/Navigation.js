@@ -19,7 +19,7 @@ class Navigation extends Component {
  }
   render() {
     const {isAuthenticated,user,utype} = this.props.auth;
-    const {profile} = this.props.profile;
+    const {profile,guideProfile} = this.props.profile;
     let uid = localStorage.getItem('uid')
     const authLinks = (
       <Nav> 
@@ -106,12 +106,70 @@ class Navigation extends Component {
     )
     const guideLinks = (<div>
       <Nav>
-      {
-      <Link to='/feeds' className="f6 fw6 db silver link dim hover-silver">Post Feeds</Link>    
-      } 
-      <Link to='/guide/dashboard' className="f6 fw6 db silver link dim hover-silver ml3">Dashboard</Link>         
-      <a href="#" onClick={this.onLogoutClick.bind(this)} className="f6 fw6 db silver link dim hover-silver ml3">Logout</a>
-    </Nav>
+      <DropdownButton
+      title="Explore"
+      className="mh1"
+      variant="secondary"
+      size="sm"
+      >
+     {guideProfile?<Dropdown.Item eventKey="1" className="f6 fw6 db silver link dim hover-silver" onClick={this.linkSelected.bind(this,`/guides/${guideProfile.institution}`)}> 
+          Guides  
+       </Dropdown.Item>:null
+      }
+
+      {guideProfile?<Dropdown.Item eventKey="4" className="f6 fw6 db silver link dim hover-silver" onClick={this.linkSelected.bind(this,`/guide/projects/${guideProfile.institution}`)}> 
+      View Projects
+   </Dropdown.Item>:null
+  }
+
+        <Dropdown.Item eventKey="2" className="f6 fw6 db silver link dim hover-silver" onClick={this.linkSelected.bind(this,'/developers')}>
+        Developers
+        </Dropdown.Item>
+        <Dropdown.Item eventKey="3" className="f6 fw6 db silver link dim hover-silver" onClick={this.linkSelected.bind(this,'/feeds')}>
+        
+        Post Feeds  
+        
+        </Dropdown.Item>
+      </DropdownButton>
+
+      <DropdownButton
+    variant="secondary"
+    className="mh1"
+    size="sm"
+    title={<Octicon icon={getIconByName("plus-small")}/>}
+    >
+    <Dropdown.Item  eventKey="1" className="f6 fw6 db silver link dim hover-silver" onClick={this.linkSelected.bind(this,"/guide/add-project")}>
+    Add Projects
+    </Dropdown.Item>
+    <Dropdown.Item  eventKey="2" className="f6 fw6 db silver link dim hover-silver" onClick={this.linkSelected.bind(this,"/guide/add-experience")}>
+    Add Experience
+    </Dropdown.Item>
+    <Dropdown.Item  eventKey="3" className="f6 fw6 db silver link dim hover-silver" onClick={this.linkSelected.bind(this,"/guide/add-education")}>
+    Add Education
+    </Dropdown.Item>
+    </DropdownButton> 
+    <SplitButton
+      className="mh1"
+      title={<Octicon className="f6 fw6 db white link dim hover-silver" icon={getIconByName("home")} size="small"/>}
+      size="sm"
+      onClick={this.linkSelected.bind(this,'/guide/dashboard')}
+      variant="secondary"
+      >
+        
+      <Dropdown.Item eventKey="1" className="f6 fw6 db silver link dim hover-silver" onClick={this.linkSelected.bind(this,`/guide-profile/${uid}`)}>
+        Your Profile
+      </Dropdown.Item>
+      <Dropdown.Item eventKey="2" className="f6 fw6 db silver link dim hover-silver" onClick={this.linkSelected.bind(this,"/guide/edit-profile")}>
+      Edit Profile
+      </Dropdown.Item>
+      <Dropdown.Divider/>
+      <Dropdown.Item eventKey="3" className="f6 fw6 db silver link dim hover-silver" onClick={this.linkSelected.bind(this,"/guide/settings")}>
+      Settings
+      </Dropdown.Item>
+      </SplitButton>
+      <Link to="/guide/notifications" className="f6 fw6 db link dim hover-silver mh1 btn btn-secondary" title="Notifications"><Octicon icon={getIconByName("bell")} size="small" /></Link>
+      <a href="#" onClick={this.onLogoutClick.bind(this)} className="f6 fw6 db silver link dim hover-silver mh1">Logout</a>         
+      </Nav>
     </div>
     )
     return (
