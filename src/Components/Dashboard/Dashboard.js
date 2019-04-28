@@ -28,9 +28,8 @@ class Dashboard extends Component {
             dashboardContent=<div>
             <p className="lead text-muted">
             Welcome, <Link to={`/profile/${uid}`}>{user.fullName}</Link>
-            </p>
-            <ProfileActions institution={profile.institution}/>
-            <Experience experience={profile.experience}/>
+            </p>           
+             <Experience experience={profile.experience}/>
            <Projects projects={profile.projects}/>
         
             <div style={{marginBottom: '60px'}}>

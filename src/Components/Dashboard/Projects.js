@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {getprofilesbycollege,deleteProject,addDeveloperToTeam} from '../../actions/profileAction';
+import {getprofilesbycollege,deleteProject} from '../../actions/profileAction';
+import {addDeveloperToTeam} from "../../actions/projectAction";
 import Modal from 'react-responsive-modal'
 import {Link} from "react-router-dom"
 import Octicon,{getIconByName} from '@githubprimer/octicons-react';

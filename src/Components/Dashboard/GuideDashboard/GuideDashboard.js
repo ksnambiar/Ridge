@@ -33,7 +33,9 @@ class GuideDashboard extends Component {
             <p className="lead text-muted">
             Welcome, <Link to={`/guide-profile/${uid}`}>{user.fullName}</Link>
             </p>
-            <GuideProfileActions institution={guideProfile.institution}/>
+            {
+            // <GuideProfileActions institution={guideProfile.institution}/>
+            }
             <div style={{marginBottom: '60px'}}>
             </div>
             </div>

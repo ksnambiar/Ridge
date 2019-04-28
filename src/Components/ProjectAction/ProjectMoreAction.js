@@ -38,7 +38,7 @@ export class ProjectMoreAction extends Component {
     }else if(selected==="add-guide"){
       view=<AddGuides project={project} institution={this.props.match.params.institution} pid={this.props.match.params.pid}/>
     }else if(selected==="reports"){
-      view=<ReportMain project={project} pid={this.props.match.params.pid}/>
+      view=<ReportMain project={project} pid={this.props.match.params.pid} institution={this.props.match.params.institution}/>
     }
   }
     return (

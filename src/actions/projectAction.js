@@ -36,6 +36,29 @@ export const getProjectByName = (college,name)=>dispatch=>{
             })
         })
 }
+//send join request from admin to developer
+export const addDeveloperToTeam= (pid,did,name,college,projName)=>dispatch=>{
+    const uid = localStorage.getItem("uid")
+    const data = {
+        pid:pid,
+        did:did,
+        developerName:name,
+        college:college,
+        projectName:projName
+    }
+    axios.post(`${heroku_url}/api/devs/request/${uid}/projects/adddeveloper/request`,data)
+        .then(obj=>{
+            console.log(obj)
+            dispatch(getProjectByName(college,projName))
+            
+        }).catch(err=>{
+            console.log(err)
+            dispatch({
+                type:GET_ERRORS,
+                payload:err
+            })
+        })
+}
 //function to respond to a project request
 export const devResponse = (college,pid,aid,rid,decision)=>dispatch=>{
     let uid=localStorage.getItem("uid");
@@ -47,12 +70,49 @@ export const devResponse = (college,pid,aid,rid,decision)=>dispatch=>{
             console.log("error",err)
         })
 }
+//function to add guides to project
+export const  addGuide = (college,pid,gid,name,projectName,guideName)=>dispatch=>{
+    let uid = localStorage.getItem("uid")
+    let data={
+        gid:gid,
+        pid:pid,
+        projectName:projectName,
+        name:name,
+        college:college,
+        guideName:guideName
+    }
+    axios.post(heroku_url+`/api/devs/request/${uid}/projects/addguide/request`,data)
+    .then(obj=>{
+        console.log(obj)
+        dispatch(getProjectByName(college,projectName))
+    }).catch(err=>{
+        dispatch({
+            type:GET_ERRORS,
+            payload:err
+        })
+    })
+}
 
-export const uploadReport = (pid,data)=>dispatch=>{
+//function to respond to the developer to guide request
+export const guideResponse = (college,pid,aid,rid,dec)=>dispatch=>{
+    let uid = localStorage("uid")
+    axios.get(heroku_url+`api/devs/request/${uid}/projects/${college}/${pid}/guide/${aid}/request/${rid}/${dec}`)
+        .then(obj=>{
+            console.log(obj)
+        })
+        .catch(err=>{
+            dispatch({
+                type:GET_ERRORS,
+                payload:err
+            })
+        })
+}
+
+export const uploadReport = (pid,college,name,data)=>dispatch=>{
     let uid = localStorage.getItem("uid")
     axios.post(heroku_url+"/api/devs/project/"+uid+"/projects/"+pid+"/addReport",data)
     .then(obj=>{
-        console.log("uploaded successfully",obj)
+        dispatch(getProjectByName(college,name))
     }).catch(err=>{
         console.log("some error")
     })

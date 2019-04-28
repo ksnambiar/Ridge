@@ -3,18 +3,35 @@ import {Card,Badge, Button} from "react-bootstrap"
 import Octicon,{getIconByName} from '@githubprimer/octicons-react';
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
-import {addDeveloperToTeam} from "../../../actions/profileAction";
+import {addDeveloperToTeam} from "../../../actions/projectAction";
 
 
 export class MemberList extends Component {
-
     addDev(pid,did,name,college){
-        this.props.addDeveloperToTeam(pid,did,name,college)
-
+        const {project}=this.props;
+        this.props.addDeveloperToTeam(pid,did,name,college,project.name)
     }
   render() {
-      const {profiles} = this.props
+      const {profiles,project} = this.props
       const uid = localStorage.getItem("uid");
+      let join_req=project.join_requests
+      console.log(join_req)
+      let pend=[],acc=[];
+      if(join_req){
+
+      pend=Object.keys(join_req).map((key,i)=>{
+        if(join_req[key].status==="pending"){
+        return join_req[key].uid
+        }
+      })
+      acc=Object.keys(join_req).map((key,i)=>{
+        if(join_req[key].status==="accepted"){
+        return join_req[key].uid
+        }
+      })
+    }
+      acc.push(uid)
+      console.log(pend)
       let view
       if(profiles){
           view=Object.keys(profiles).map((obj,i)=>{
@@ -22,8 +39,21 @@ export class MemberList extends Component {
               const domains=data.skills.split(",").map((obj,i)=>{
                 return <Badge key={i} variant="success" className="mh1">{obj}</Badge>
               })
-              
-              return <Card key={i} className="mv2">
+              let act_view
+              if(pend.includes(obj)){
+                act_view=<div className="row center">
+                <Badge variant="warning">
+                Yet to Respond
+                </Badge>
+                </div>
+              }
+              else {
+                act_view=<div className="row center">
+                <Button variant="success" className="mh2" onClick={this.addDev.bind(this,this.props.pid,obj,data.fullName,data.institution)}><Octicon icon={getIconByName("plus")}/></Button>
+                <Button variant="info" className="mh2"><Octicon icon={getIconByName("file")}/></Button>
+                </div>
+              }
+              return acc.includes(obj)?null:<Card key={i} className="mv2">
               <Card.Body>
               <div className="row">
               <div className="col-md-3">
@@ -39,11 +69,7 @@ export class MemberList extends Component {
               <h5 className="mv1">{data.fullName}</h5>
                 {domains}
               </div>
-              <div className="row center">
-              {
-              <Button variant="success" className="mh2" onClick={this.addDev.bind(this,this.props.pid,obj,data.fullName,data.institution)}><Octicon icon={getIconByName("plus")}/></Button>
-              }<Button variant="info" className="mh2"><Octicon icon={getIconByName("file")}/></Button>
-              </div>
+              {act_view}
               </div>
               </div>
               </Card.Body>

@@ -13,19 +13,21 @@ export default class GuideProfileActions extends Component {
     <i className="fab fa-black-tie text-info mr-1"/>View Projects
     </Link>
     </div>
-    <div className="btn-group mb-4 " role="group">
-    <Link to="/guide/add-project" className="btn btn-light">
-    <i className="fab fa-graduation-cap text-info mr-1"/>Add Projects
-    </Link>
-    <Link to="/guide/add-experience" className="btn btn-light">
-    <i className="fab fa-black-tie text-info mr-1"/>Add Experience
-    </Link>
-    <Link to="/guide/add-education" className="btn btn-light">
-    <i className="fab fa-black-tie text-info mr-1"/>Add Education
-    </Link>
-
+  
+    {
+    // <div className="btn-group mb-4 " role="group">
+    // <Link to="/guide/add-project" className="btn btn-light">
+    // <i className="fab fa-graduation-cap text-info mr-1"/>Add Projects
+    // </Link>
+    // <Link to="/guide/add-experience" className="btn btn-light">
+    // <i className="fab fa-black-tie text-info mr-1"/>Add Experience
+    // </Link>
+    // <Link to="/guide/add-education" className="btn btn-light">
+    // <i className="fab fa-black-tie text-info mr-1"/>Add Education
+    // </Link>
+    }
     </div>
-      </div>
+      
     )
   }
 }

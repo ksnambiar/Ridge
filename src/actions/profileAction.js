@@ -179,21 +179,7 @@ export const deleteAccount = ()=>dispatch=>{
 }
 
 
-//send join request from admin to developer
-export const addDeveloperToTeam = (pid,did,name,college)=>dispatch=>{
-    const uid = localStorage.getItem("uid")
-    axios.get(`${heroku_url}/api/devs/request/${uid}/projects/${college}/${pid}/developer/${did}/${name}/request`)
-        .then(obj=>{
-            console.log(obj)
-            dispatch(getCurrentProfile())
-        }).catch(err=>{
-            console.log(err)
-            dispatch({
-                type:GET_ERRORS,
-                payload:err
-            })
-        })
-}
+
 
 
 
@@ -273,13 +259,13 @@ export const getGuideProfiles = (institution)=>dispatch=>{
     }
 
 //get profile by college
-export const getGuideProfilesByCollege=(college)=>dispatch=>{
-    axios.get(heroku_url+"/api/guides/profile/"+college+"/allProfiles")
+export const getGuideProfileByGid=(gid)=>dispatch=>{
+    axios.get(heroku_url+"/api/guides/profile/"+gid+"/getProfile")
         .then(obj=>{
             let dat=obj.data
             console.log(dat)
             dispatch({
-                type:GET_GUIDE_PROFILES,
+                type:GET_GUIDE_PROFILE,
                 payload:dat.data
             })
         }).catch(err=>
