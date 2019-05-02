@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {Card,Button} from 'react-bootstrap'
+import {Link} from "react-router-dom";
 export default class Rejected extends Component {
     render() {
         const profile=this.props.profile;
@@ -12,7 +13,10 @@ export default class Rejected extends Component {
             if(data.status==="rejected"){
             return <Card key={i}>
             <Card.Body>
-            <p style={{float:"left"}}>id:{data.projectKey}</p>
+            <div className="row">
+            Project:<Link to={`/projects/${profile.institution}/${data.projectName}`} className="f5">{data.projectName}</Link>
+            <Link to={`/profile/${data.projectAdmin}`} className="ml5 btn btn-dark">View Admin Profile</Link>
+            </div>
             </Card.Body>
             </Card>
             }

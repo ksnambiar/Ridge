@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Octicon,{getIconByName} from '@githubprimer/octicons-react';
 import {Card,Button} from 'react-bootstrap'
 import {devResponse} from '../../../actions/projectAction';
+import {Link} from "react-router-dom";
 class Requests extends Component {
   acceptProj(college,pid,aid,rid){
     this.props.devResponse(college,pid,aid,rid,"yes")
@@ -22,7 +23,8 @@ class Requests extends Component {
         if(data.status==="pending"){
         return <Card key={i}>
         <Card.Body>
-        <p style={{float:"left"}}>You have got a request for project</p>
+        <p style={{float:"left"}}>You have an offer to join:</p>
+        <Link to={`/projects/${profile.institution}/${data.projectName}`}>{data.projectName}</Link>
         <Button className="btn like mh1" onClick={this.acceptProj.bind(this,college,data.projectKey,data.projectAdmin,obj)}><Octicon icon={getIconByName("thumbsup")}/></Button>
         <Button className="btn dislike hover-bg-red mh1" onClick={this.rejectProj.bind(this,college,data.projectKey,data.projectAdmin,obj)}><Octicon icon={getIconByName("thumbsdown")}/></Button>
         </Card.Body>
