@@ -64,7 +64,11 @@ class Projects extends Component {
         <div className="jumbotron bg-white ba shadow-5">
         <h5 className="mr2">{val.name}</h5>
         <button className="btn btn-info white mr1" onClick={this.onOpenModal.bind(this,val,keys[i])} title="info about the project"><Octicon icon={getIconByName("info")}/></button>
-        <button className="btn mr1" title="add developer to team" onClick={this.openAddDev.bind(this,keys[i])}><Octicon icon={getIconByName("person")}/> </button>
+        {
+        // <button className="btn mr1" title="add developer to team" onClick={this.openAddDev.bind(this,keys[i])}><Octicon icon={getIconByName("person")}/> </button>
+        }
+        <Link to={`/projects/${profile.institution}/${val.name}`} className="btn btn-info mr1" title="project page"><Octicon icon={getIconByName("project")}/></Link>
+
         <Link to={`/project-action/${profile.institution}/${val.name}/${key}`} className="btn btn-info" title="more actions"><Octicon icon={getIconByName("gear")}/> </Link>
     {
       //       <Modal open={open} onClose={this.onCloseModal} center>

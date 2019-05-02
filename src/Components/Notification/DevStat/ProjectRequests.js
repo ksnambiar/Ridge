@@ -16,7 +16,14 @@ class ProjectRequests extends Component {
   render() {
       let view;
       let {selected}=this.state;
-      const {profile,loading}=this.props.profile
+      const {loading,guideProfile}=this.props.profile
+      let profile
+      const {utype} = this.props.auth;
+      if(utype==="guide"){
+        profile=guideProfile;
+      }else{
+        profile=this.props.profile.profile;
+      }
       const {join_request}=profile
       let pend=0,acc=0,rej=0;
       if(join_request){
@@ -71,10 +78,12 @@ class ProjectRequests extends Component {
   }
 }
 ProjectRequests.propTypes={
-    profile:PropTypes.object.isRequired
+    profile:PropTypes.object.isRequired,
+    auth:PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state)=>({
-  profile:state.profile
+  profile:state.profile,
+  auth:state.auth
 })
 export default connect(mapStateToProps)(ProjectRequests)
