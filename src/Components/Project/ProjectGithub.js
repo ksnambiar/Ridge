@@ -8,14 +8,17 @@ class ProjectGithub extends Component {
   
     this.state = {
        data:null,
-       isLoading:false
+       isLoading:false,
+       clientId:'5d8243ed93467bbc02c7',
+       clientSecret: '1df9aad9b3bf785cb2ba29cbf9d34de3229ec651'
     }
   }
   
   componentWillMount(){
     let arr = this.props.projectlink.githublink.split('/');
+    const {clientId,clientSecret} = this.state;
     this.setState({isLoading:true});
-    Axios.get("https://api.github.com/repos/"+arr[arr.length-2]+"/"+arr[arr.length-1])
+    Axios.get("https://api.github.com/repos/"+arr[arr.length-2]+"/"+arr[arr.length-1]+`?client_id=${clientId}&client_secret=${clientSecret}`)
     .then(obj=>{
       let dat={
         owner:obj.data.owner,
