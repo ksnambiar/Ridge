@@ -54,6 +54,9 @@ class Project extends Component {
           <h3 style={{fontFamily:"Oswald"}}>Repo Owner</h3>
           </div>
           <RepoOwner projectlink={project}/>
+          </div> 
+          <div className="row mv2">
+          
           </div>
           </div>:null}
           </div>

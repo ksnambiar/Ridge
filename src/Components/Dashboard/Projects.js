@@ -62,21 +62,27 @@ class Projects extends Component {
         return(
         <div key={key} className="panel ma1 pb2" style={{float:"left"}}>
         <div className="jumbotron bg-white ba shadow-5">
-        <h5 className="mr2" >{val.name}</h5>
+        <h5 className="mr2">{val.name}</h5>
         <button className="btn btn-info white mr1" onClick={this.onOpenModal.bind(this,val,keys[i])} title="info about the project"><Octicon icon={getIconByName("info")}/></button>
-        <button className="btn mr1" title="add developer to team" onClick={this.openAddDev.bind(this,keys[i])}><Octicon icon={getIconByName("person")}/> </button>
+        {
+        // <button className="btn mr1" title="add developer to team" onClick={this.openAddDev.bind(this,keys[i])}><Octicon icon={getIconByName("person")}/> </button>
+        }
+        <Link to={`/projects/${profile.institution}/${val.name}`} className="btn btn-info mr1" title="project page"><Octicon icon={getIconByName("project")}/></Link>
+
         <Link to={`/project-action/${profile.institution}/${val.name}/${key}`} className="btn btn-info" title="more actions"><Octicon icon={getIconByName("gear")}/> </Link>
-          <Modal open={open} onClose={this.onCloseModal} center>
-          <div className="panel">
-          <h3>{this.state.selectedState.name}</h3>
-          <h6>Domains Covered:</h6><p>{this.state.selectedState.domains}</p>
-          <h6>Team Members:</h6><p>{this.state.selectedState.team}</p>
-          <h6>Guided By:</h6><p>{this.state.selectedState.guide}</p>
-          <a href={this.state.selectedState.githublink} target="_blank">Github Link</a>
-          <br/>
-          <button className="btn btn-danger" onClick={this.onClickDelete.bind(this,this.state.selectedState.key)}><Octicon icon={getIconByName("trashcan")}/></button>
-          </div>
-      </Modal>
+    {
+      //       <Modal open={open} onClose={this.onCloseModal} center>
+      //     <div className="panel">
+      //     <h3>{this.state.selectedState.name}</h3>
+      //     <h6>Domains Covered:</h6><p>{this.state.selectedState.domains}</p>
+      //     <h6>Team Members:</h6><p>{this.state.selectedState.team}</p>
+      //     <h6>Guided By:</h6><p>{this.state.selectedState.guide}</p>
+      //     <a href={this.state.selectedState.githublink} target="_blank">Github Link</a>
+      //     <br/>
+      //     <button className="btn btn-danger" onClick={this.onClickDelete.bind(this,this.state.selectedState.key)}><Octicon icon={getIconByName("trashcan")}/></button>
+      //     </div>
+      // </Modal>
+    }
       {
       this.state.pid?<AddDeveloper show={this.state.addDev} pid={this.state.pid} onAddDev={this.onAddDev} profiles={this.props.profile.profiles} profile={this.props.profile.profile} onHide={this.closeAddDev.bind(this)}/>
      :null 
