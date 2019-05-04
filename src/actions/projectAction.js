@@ -95,8 +95,14 @@ export const  addGuide = (college,pid,gid,name,projectName,guideName)=>dispatch=
 
 //function to respond to the developer to guide request
 export const guideResponse = (college,pid,aid,rid,dec)=>dispatch=>{
-    let uid = localStorage("uid")
-    axios.get(heroku_url+`api/devs/request/${uid}/projects/${college}/${pid}/guide/${aid}/request/${rid}/${dec}`)
+    let uid = localStorage.getItem("uid")
+    let data={
+        pid:pid,
+        aid:aid,
+        rid:rid,
+        college:college
+    }
+    axios.post(heroku_url+`/api/devs/request/${uid}/projects/guide/request/${dec}`,data)
         .then(obj=>{
             console.log(obj)
         })
