@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Nav} from "react-bootstrap"
+import {Nav, Card} from "react-bootstrap"
 import {connect} from "react-redux"
 import PropTypes from "prop-types"
 import {getProjectByName} from "../../actions/projectAction";
@@ -8,6 +8,7 @@ import Details from "./SubComponents/Details";
 import AddMembers from "./SubComponents/AddMembers";
 import AddGuides from "./SubComponents/AddGuides";
 import ReportMain from "./SubComponents/ReportMain";
+import EditDetails from "./SubComponents/EditDetails";
 export class ProjectMoreAction extends Component {
   constructor(props) {
     super(props)
@@ -40,13 +41,21 @@ export class ProjectMoreAction extends Component {
     }else if(selected==="reports"){
       view=<ReportMain project={project} pid={this.props.match.params.pid} institution={this.props.match.params.institution}/>
     }
+    else if(selected==="edit-details"){
+      view=<EditDetails project={project} pid={this.props.match.params.pid} institution={this.props.match.params.institution}/>
+    }
   }
     return (
-      <div className="row ">
-      <div className="col-md-2 jumbotron">
+      <div className="row mv3">
+      <div className="col-md-2">
+      <Card>
+      <Card.Body>
       <Nav variant="pills" defaultActiveKey={this.state.selected} className="flex-column">
       <Nav.Item>
       <Nav.Link eventKey="details" onSelect={this.onSelect.bind(this,"details")}><h6>Details</h6></Nav.Link>
+    </Nav.Item>
+    <Nav.Item>
+      <Nav.Link eventKey="edit-details" onSelect={this.onSelect.bind(this,"edit-details")}><h6>edit-details</h6></Nav.Link>
     </Nav.Item>
       <Nav.Item>
     <Nav.Link eventKey="add-person" onSelect={this.onSelect.bind(this,"add-person")}><h6>Add Members</h6></Nav.Link>
@@ -60,8 +69,10 @@ export class ProjectMoreAction extends Component {
     </Nav.Link>
   </Nav.Item>
     </Nav>
+    </Card.Body>
+    </Card>
       </div>
-      <div className="col-md-10 jumbotron">
+      <div className="col-md-10">
       {view}
       </div>
       </div>

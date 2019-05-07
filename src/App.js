@@ -35,7 +35,8 @@ import QueryForm from "./Components/Posts/QueryPost/Queryform"
 import SocPost from './Components/Post/SocialPost/SocPost';
 import Notification from './Components/Notification/Notification'
 import GuideDashboard from './Components/Dashboard/GuideDashboard/GuideDashboard';
-import GuideNotification from "./Components/guideNotification/GuideNotification"
+import GuideNotification from "./Components/guideNotification/GuideNotification";
+import Settings from "./Components/Settings/Settings"
 import "./App.css";
 import { setCurrentUser,logoutUser,checkSession} from "./actions/authAction";
 if(localStorage.uid){
@@ -110,6 +111,9 @@ class App extends Component {
             </Switch>
             <Switch>
             <PrivateRoute exact path='/dev/notifications' component={Notification} />
+            </Switch>
+            <Switch>
+            <PrivateRoute exact path='/dev/settings' component={Settings} />
             </Switch>
             {
   ///////guide routes//////////
