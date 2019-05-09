@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {Nav, Card} from "react-bootstrap"
 import {connect} from "react-redux"
 import PropTypes from "prop-types"
+import {Link} from "react-router-dom";
 import {getProjectByName} from "../../actions/projectAction";
 import Spinner from "../Common/Spinner"
 import Details from "./SubComponents/Details";
@@ -28,6 +29,7 @@ export class ProjectMoreAction extends Component {
   render() {
     const {selected} = this.state
     const {project,loading} = this.props.project
+    const {auth} = this.props;
     let view
     if(loading){
       view=<Spinner />
@@ -46,7 +48,12 @@ export class ProjectMoreAction extends Component {
     }
   }
     return (
-      <div className="row mv3">
+      <div>
+      <div className="row mt3">
+      <Link to={`/${auth.utype}/dashboard`} className="btn btn-light">Back to Dashboard</Link>
+
+      </div>
+      <div className="row mt1">
       <div className="col-md-2">
       <Card>
       <Card.Body>
@@ -76,15 +83,18 @@ export class ProjectMoreAction extends Component {
       {view}
       </div>
       </div>
+      </div>
     )
   }
 }
 ProjectMoreAction.propTypes={
   project:PropTypes.object.isRequired,
-  getProjectByName:PropTypes.func.isRequired
+  getProjectByName:PropTypes.func.isRequired,
+  auth:PropTypes.object.isRequired
 }
 
 const mapStateToProps = state=>({
-  project:state.project
+  project:state.project,
+  auth:state.auth
 })
 export default connect(mapStateToProps,{getProjectByName})(ProjectMoreAction)

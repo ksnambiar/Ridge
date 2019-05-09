@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import {Card} from "react-bootstrap";
+import {editProject} from "../../../actions/projectAction";
+import {connect} from "react-redux";
 export class EditDetails extends Component {
     constructor(props) {
         super(props)
@@ -31,13 +33,14 @@ export class EditDetails extends Component {
           e.preventDefault();
         //   const {utype,user} = this.props.auth
           const uid = localStorage.getItem("uid")
+          const {pid,institution,project}=this.props;
           const projData={
            name:this.state.name,
            domains:this.state.domains.split(","),
            githublink:this.state.githublink,
            description: this.state.description
           }
-          console.log(projData)
+          this.props.editProject(projData,pid,institution,project.name)
       }
       
     
@@ -76,4 +79,4 @@ export class EditDetails extends Component {
   }
 }
 
-export default EditDetails
+export default connect(null,{editProject})(EditDetails)

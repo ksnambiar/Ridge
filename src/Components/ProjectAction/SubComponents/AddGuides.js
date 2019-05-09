@@ -23,7 +23,19 @@ export class AddGuides extends Component {
     
     return (
       <div>
-        <Card className="ma2">
+      <div className="row">
+      <div className="col-md-8">
+      <Card className="ma2">
+      <Card.Header>
+      <h4>Guides around you</h4>
+      </Card.Header>
+      <Card.Body>
+      {view1}
+      </Card.Body>
+      </Card>
+      </div>
+      <div className="col-md-4">
+      <Card className="ma2">
         <Card.Header>
         <h4>Guides</h4>
         </Card.Header>
@@ -31,14 +43,10 @@ export class AddGuides extends Component {
         <ProjectGuide project={this.props.project}/>
         </Card.Body>
         </Card>
-        <Card className="ma2">
-        <Card.Header>
-        <h4>Guides around you</h4>
-        </Card.Header>
-        <Card.Body>
-        {view1}
-        </Card.Body>
-        </Card>
+        </div>
+      </div>
+        
+       
       </div>
     )
   }

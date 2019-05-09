@@ -9,12 +9,20 @@ export class Details extends Component {
       if(project){
         view=<Card>
         <Card.Body>
+        <div className="row">
+        <div className="col-md-6">
         <h5 className="ma2">{project.name}</h5>
         <h6 className="ma2">{project.description}</h6>
-        <h5 className="ma2">team</h5>
+        </div>
+        <div className="col-md-3">
+        <h5 className="ma2">Team</h5>
         <ProjectTeam project={project}/>
+        </div>
+        <div className="col-md-3">
         <h5 className="ma2">Guide</h5>
         <ProjectGuide project={project}/>
+        </div>
+        </div>
         </Card.Body>
       </Card>
       }else{

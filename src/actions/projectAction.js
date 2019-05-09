@@ -36,6 +36,20 @@ export const getProjectByName = (college,name)=>dispatch=>{
             })
         })
 }
+//editing project details
+export const editProject = (projData,pid,college,pname)=>dispatch=>{
+    let uid=localStorage.getItem("uid");
+    axios.post(heroku_url+`/api/devs/project/${uid}/editProject/${pid}`,projData)
+        .then(obj=>{
+            dispatch(getProjectByName(college,projData.name))
+        })
+        .catch(err=>{
+            dispatch({
+                type:GET_ERRORS,
+                payload:err
+            })
+        })
+}
 //send join request from admin to developer
 export const addDeveloperToTeam= (pid,did,name,college,projName)=>dispatch=>{
     const uid = localStorage.getItem("uid")
