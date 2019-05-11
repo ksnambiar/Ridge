@@ -14,6 +14,7 @@
     "react-bulma-components": "^2.3.0",
     "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.7.0",
+    "react-minimal-pie-chart": "^4.0.0",
     "react-particles-js": "^2.4.2",
     "react-redux": "^6.0.0",
     "react-responsive-modal": "^3.6.0",
