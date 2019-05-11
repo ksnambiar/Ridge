@@ -10,6 +10,7 @@ import AddMembers from "./SubComponents/AddMembers";
 import AddGuides from "./SubComponents/AddGuides";
 import ReportMain from "./SubComponents/ReportMain";
 import EditDetails from "./SubComponents/EditDetails";
+import Stats from "./SubComponents/Stats";
 export class ProjectMoreAction extends Component {
   constructor(props) {
     super(props)
@@ -45,6 +46,8 @@ export class ProjectMoreAction extends Component {
     }
     else if(selected==="edit-details"){
       view=<EditDetails project={project} pid={this.props.match.params.pid} institution={this.props.match.params.institution}/>
+    }else if (selected==="stats"){
+      view=<Stats project={project} pid={this.props.match.params.pid} institution={this.props.match.params.institution}/>
     }
   }
     return (
@@ -60,6 +63,9 @@ export class ProjectMoreAction extends Component {
       <Nav variant="pills" defaultActiveKey={this.state.selected} className="flex-column">
       <Nav.Item>
       <Nav.Link eventKey="details" onSelect={this.onSelect.bind(this,"details")}><h6>Details</h6></Nav.Link>
+    </Nav.Item>
+    <Nav.Item>
+      <Nav.Link eventKey="stats" onSelect={this.onSelect.bind(this,"stats")}><h6>Stats</h6></Nav.Link>
     </Nav.Item>
     <Nav.Item>
       <Nav.Link eventKey="edit-details" onSelect={this.onSelect.bind(this,"edit-details")}><h6>edit-details</h6></Nav.Link>

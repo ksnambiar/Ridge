@@ -141,6 +141,7 @@ export const addProject = (projData,history)=>dispatch=>{
         })
 }
 
+
 //delete projects
 export const deleteProject = (id)=>dispatch=>{
     let uid=localStorage.getItem("uid")
