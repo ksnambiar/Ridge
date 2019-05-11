@@ -46,7 +46,8 @@ export class Stats extends Component {
         }else{
             view=<Contribution contribution={contribution[index]}/>
         }
-        if(contribution){
+        if(contribution.length>0){
+            console.log(contribution)
         side=contribution.map((obj,i)=>{
             return  <Nav.Item key={i}>
             <Nav.Link eventKey={obj.author.login} onSelect={this.onSelect.bind(this,obj.author.login,i)}><h6>{obj.author.login}</h6></Nav.Link>
