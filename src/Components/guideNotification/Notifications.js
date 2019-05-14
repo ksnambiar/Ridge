@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import {Card} from "react-bootstrap"
 export class Notifications extends Component {
   render() {
       const {profile} = this.props;
@@ -11,7 +11,9 @@ export class Notifications extends Component {
           return <p>a notification</p>
       })
       }else{
-          notifications=<p>no notifications yet</p>
+          notifications=<Card><Card.Body>
+          <p>no notifications yet</p>
+          </Card.Body></Card>  
       }
     }else{
         notifications=<p>loading...</p>

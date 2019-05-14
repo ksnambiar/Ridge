@@ -23,7 +23,7 @@ export class Requests extends Component {
           </Card.Body>
           </Card>:null
       })
-      if(view.length===0){
+      if(view.length===0){ 
           view=<Card><Card.Body>No requests from anyone yet</Card.Body></Card>
       }
     return (

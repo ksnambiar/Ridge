@@ -37,6 +37,7 @@ import Notification from './Components/Notification/Notification'
 import GuideDashboard from './Components/Dashboard/GuideDashboard/GuideDashboard';
 import GuideNotification from "./Components/guideNotification/GuideNotification";
 import Settings from "./Components/Settings/Settings"
+import MprojectAction from "./Components/mprojectAction/MprojectAction";
 import "./App.css";
 import { setCurrentUser,logoutUser,checkSession} from "./actions/authAction";
 if(localStorage.uid){
@@ -141,6 +142,9 @@ class App extends Component {
         </Switch>
         <Switch>
             <PrivateRoute exact path='/project-action/:institution/:id/:pid' component={ProjectMoreAction} />
+        </Switch>
+        <Switch>
+            <PrivateRoute exact path='/project-status/:institution/:name/:pid' component={MprojectAction} />
         </Switch>
         <Switch>
             <PrivateRoute exact path='/guide/notifications' component={GuideNotification} />

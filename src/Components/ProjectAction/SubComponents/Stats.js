@@ -40,7 +40,8 @@ export class Stats extends Component {
       if(loading||contribution===null){
           view=<Spinner />
           side=null
-      }else{
+      }else{if(Array.isArray(contribution)){
+
         if(index===-1){
             view=<TotalContribution contribution={contribution}/>
         }else{
@@ -53,6 +54,11 @@ export class Stats extends Component {
             <Nav.Link eventKey={obj.author.login} onSelect={this.onSelect.bind(this,obj.author.login,i)}><h6>{obj.author.login}</h6></Nav.Link>
           </Nav.Item>
         })
+      }else{
+          view=<p>No results</p>
+          side=null
+      }
+        
     }else{
         side=null
     }

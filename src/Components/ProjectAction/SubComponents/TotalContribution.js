@@ -7,16 +7,17 @@ export class TotalContribution extends Component {
       const {contribution}=this.props
       let sum,team,total_commits=0,total_lines=0,total_linesperperson=0;
       let total_lines_arr=[]
-      contribution.forEach(obj=>{
-        total_commits+=obj.total;
-        total_linesperperson=0
-        obj.weeks.forEach(obj=>{
-            total_linesperperson+=(obj.a+obj.d)
-            total_lines+=(obj.a+obj.d)
+      if(contribution!=={}){
+        contribution.forEach(obj=>{
+          total_commits+=obj.total;
+          total_linesperperson=0
+          obj.weeks.forEach(obj=>{
+              total_linesperperson+=(obj.a+obj.d)
+              total_lines+=(obj.a+obj.d)
+          })
+          total_lines_arr.push(total_linesperperson)
         })
-        total_lines_arr.push(total_linesperperson)
-      })
-      team=contribution.map((obj,i)=>{
+        team=contribution.map((obj,i)=>{
           return <Card key={i} className="w5 mv2">
           <Card.Body>
           <div className="row">
@@ -33,6 +34,10 @@ export class TotalContribution extends Component {
           </Card.Body>
           </Card>
       })
+      }else{
+        team=null
+      }
+      
     return (
       <div>
       <div className='mv1 row'>

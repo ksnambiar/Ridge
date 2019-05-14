@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import {Card,Button} from "react-bootstrap"
+import {Link} from "react-router-dom"
 import Octicon,{getIconByName} from '@githubprimer/octicons-react';
 export class MentoringProjects extends Component {
   render() {
     const {profile} = this.props;
-      let view
+      let view;
       if(profile.mprojects){
         view = Object.keys(profile.mprojects).map((obj,i)=>{
             const data=profile.mprojects[obj]
@@ -12,8 +13,7 @@ export class MentoringProjects extends Component {
             <Card.Body className="center">
             <h5 className="center">{data.name}</h5>
             <div className="row center">
-            <Button className="rounded-circle mh1" title="info"><Octicon icon={getIconByName("info")}/></Button>
-            <Button className="rounded-circle mh1" title="view weekly reports"><Octicon icon={getIconByName("report")}/></Button>
+            <Link className="btn btn-info rounded-circle mh1" to={`/project-status/${profile.institution}/${data.name}/${obj}`}  title="view weekly reports"><Octicon icon={getIconByName("report")}/></Link>
             </div>
             </Card.Body>
             </Card>

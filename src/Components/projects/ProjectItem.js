@@ -22,9 +22,6 @@ class ProjectItem extends Component {
       <p>
       {project.institution};
       </p>
-      <p>
-      Guided by {project.guide}
-      </p>
       {
      <Link to={`/projects/${project.institution}/${project.name}`} className="btn btn-info">
        View Details

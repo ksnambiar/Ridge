@@ -20,8 +20,7 @@ export class ReportList extends Component {
       }else{
           view=<Card>
           <Card.Body>
-          <h6>No reports yet</h6>
-          <Button>Add one now</Button>
+          <h6>No reports added yet </h6>
           </Card.Body>
           </Card>
       }

@@ -47,7 +47,7 @@ export class GuideNotification extends Component {
   </Nav.Item>
     </Nav>
         </div>
-        <div className="col-md-12 ba b--light-gray jumbotron">
+        <div className="col-md-12">
         {view}
         </div>
       </div>
