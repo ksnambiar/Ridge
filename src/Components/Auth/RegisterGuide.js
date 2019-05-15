@@ -90,7 +90,7 @@ class RegisterGuide extends Component {
 
           </div>
         </fieldset>
-        <div className="mt3"><input className="btn btn_col btn-block" type="submit" value="Sign Up" /></div>
+        <div className="mt3"><input className="btn btn-info btn-block" type="submit" value="Sign Up" /></div>
       </form>
     </article>
       </div>

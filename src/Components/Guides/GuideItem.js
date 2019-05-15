@@ -25,13 +25,13 @@ export class GuideItem extends Component {
         </p>
         <Badge variant="success" className="ma1">Projects : {projlen}</Badge>
         <Badge variant="success" className="ma1">Mentoring Projects : {mprojlen}</Badge>
-        <Link to={`/guide-profile/${gid}`} className="btn btn-dark mh3">Explore Profile</Link>
+        <Link to={`/guide-profile/${gid}`} className="btn btn-info mh3">Explore Profile</Link>
         </div>
         <div className="col-md-4">
         <h4>Area of Interests</h4>
         <ul className="list-group">
         {aoi.slice(0,4).map((interest,index)=>
-           ( <Badge className="mv1" variant="dark" key={index} >
+           ( <Badge className="mv1" variant="info" key={index} >
             
             {interest}
             </Badge>)

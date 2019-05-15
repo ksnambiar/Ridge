@@ -73,7 +73,7 @@ class Login extends Component {
         </div>
     </fieldset>
     <div className="">
-      <input className="btn btn_col dim btn-block" type="submit" value="Sign in"/>
+      <input className="btn btn-info dim btn-block" type="submit" value="Sign in"/>
     </div>
     <div className="lh-copy mt3">
       <p className="form_col">Don't have an account?</p>

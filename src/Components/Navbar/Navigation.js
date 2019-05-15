@@ -95,9 +95,11 @@ class Navigation extends Component {
       Edit Profile
       </Dropdown.Item>
       <Dropdown.Divider/>
-      <Dropdown.Item eventKey="3" className="f6 fw6 db silver link dim hover-silver" onClick={this.linkSelected.bind(this,"/dev/settings")}>
-      Settings
-      </Dropdown.Item>
+      {
+      // <Dropdown.Item eventKey="3" className="f6 fw6 db silver link dim hover-silver" onClick={this.linkSelected.bind(this,"/dev/settings")}>
+      // Settings
+      // </Dropdown.Item>
+      }
       </SplitButton>
       <Link to="/dev/notifications" className="f6 fw6 db link dim hover-silver mh1 btn btn-secondary" title="Notifications"><Octicon icon={getIconByName("bell")} size="small" /></Link>
       <a href="#" onClick={this.onLogoutClick.bind(this)} className="f6 fw6 db silver link dim hover-silver mh1">Logout</a>         
@@ -163,10 +165,11 @@ class Navigation extends Component {
       Edit Profile
       </Dropdown.Item>
       <Dropdown.Divider/>
-      <Dropdown.Item eventKey="3" className="f6 fw6 db silver link dim hover-silver" onClick={this.linkSelected.bind(this,"/guide/settings")}>
-      Settings
-      </Dropdown.Item>
-      </SplitButton>
+      {
+      // <Dropdown.Item eventKey="3" className="f6 fw6 db silver link dim hover-silver" onClick={this.linkSelected.bind(this,"/guide/settings")}>
+      // Settings
+      // </Dropdown.Item>
+      }</SplitButton>
       <Link to="/guide/notifications" className="f6 fw6 db link dim hover-silver mh1 btn btn-secondary" title="Notifications"><Octicon icon={getIconByName("bell")} size="small" /></Link>
       <a href="#" onClick={this.onLogoutClick.bind(this)} className="f6 fw6 db silver link dim hover-silver mh1">Logout</a>         
       </Nav>
@@ -183,20 +186,6 @@ class Navigation extends Component {
           // <Link to='/developers' className="f4 fw6 db silver link dim hover-silver">Developers</Link>
         }
         </Nav>
-    
-            {//<Nav.Link href="#pricing">Pricing</Nav.Link>
-            // <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-            //   <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-            //   <NavDropdown.Item href="#action/3.2">
-            //     Another action
-            //   </NavDropdown.Item>
-            //   <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-            //   <NavDropdown.Divider />
-            //   <NavDropdown.Item href="#action/3.4">
-            //     Separated link
-            //   </NavDropdown.Item>
-            // </NavDropdown>
-    }
           {isAuthenticated?utype==="dev"?userLinks:guideLinks:authLinks}
         </Navbar.Collapse>
       </Navbar>

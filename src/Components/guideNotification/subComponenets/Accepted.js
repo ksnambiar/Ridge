@@ -16,11 +16,11 @@ class Accepted extends Component {
           </Card>:null
       })
       if(view.length===0){
-          view=<p>No accepted requests</p>
+          view=<Card><Card.Body>No accepted requests</Card.Body></Card>
       }
     }
       else{
-        view=<p>No Requests Yet</p>
+        view=<Card><Card.Body>No Requests Yet</Card.Body></Card>
       }
     return (
       <div>

@@ -64,9 +64,11 @@ export class ProjectMoreAction extends Component {
       <Nav.Item>
       <Nav.Link eventKey="details" onSelect={this.onSelect.bind(this,"details")}><h6>Details</h6></Nav.Link>
     </Nav.Item>
-    <Nav.Item>
+    {
+    project?project.githublink!==""?<Nav.Item>
       <Nav.Link eventKey="stats" onSelect={this.onSelect.bind(this,"stats")}><h6>Stats</h6></Nav.Link>
-    </Nav.Item>
+    </Nav.Item>:null:null
+    }
     <Nav.Item>
       <Nav.Link eventKey="edit-details" onSelect={this.onSelect.bind(this,"edit-details")}><h6>edit-details</h6></Nav.Link>
     </Nav.Item>

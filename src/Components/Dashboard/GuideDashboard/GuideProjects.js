@@ -43,8 +43,8 @@ export class GuideProjects extends Component {
       if(profile.projects){
         view = Object.keys(profile.projects).map((obj,i)=>{
             const data=profile.projects[obj]
-            return <Card bg="secondary" key={i} className="ma2" style={{ width: '15rem' }}>
-            <Card.Body className="center white">
+            return <Card key={i} className="ma2" style={{ width: '15rem' }}>
+            <Card.Body className="center">
             <h5 className="center">{data.name}</h5>
             <div className="row center">
             {

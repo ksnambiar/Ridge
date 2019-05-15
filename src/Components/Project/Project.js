@@ -29,29 +29,32 @@ class Project extends Component {
           <ProjectHeader project={project}/>
           <div className="mh2 row">
           <div className="col-md-6">
-          <h3 style={{fontFamily:"Oswald"}}>Team</h3>
-          <ProjectOrigin project={project}/>
-          </div>
-          <div className="col-md-6">
-          <h3 style={{fontFamily:"Oswald"}}>Description</h3>
+          <h3 style={{fontFamily:"Oswald"}} className="text-info">Description</h3>
           <ProjectDescription project={project}/>
           </div>
+          <div className="col-md-3">
+          <h3 style={{fontFamily:"Oswald"}} className="text-info">Team</h3>
+          <ProjectOrigin project={project}/>
           </div>
-          <h3 style={{fontFamily:"Oswald"}}>Guide</h3>
+          <div className="col-md-3">
+          <h3 style={{fontFamily:"Oswald"}} className="text-info">Guide</h3>
           <div>
           <ProjectGuide project={project}/>
+          </div>
+          </div>
+
           </div>
 
           {project.githublink?<div className="row">
           <div className="col-md-6">
           <div className="ma3 center">
-          <h3 style={{fontFamily:"Oswald"}}>Github Details</h3>
+          <h3 style={{fontFamily:"Oswald"}} className="text-info">Github Details</h3>
           </div>
           <ProjectGithub projectlink={project}/>
           </div>
           <div className="col-md-6">
           <div className="ma3 center">
-          <h3 style={{fontFamily:"Oswald"}}>Repo Owner</h3>
+          <h3 style={{fontFamily:"Oswald"}} className="text-info">Repo Owner</h3>
           </div>
           <RepoOwner projectlink={project}/>
           </div> 

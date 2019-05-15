@@ -80,10 +80,11 @@ class ProfileCreds extends Component {
               </span>
             )}
           </p>
-          <p>
-            <strong>Guide:</strong> {proj.guide?proj.guide:<p>no one yet</p>}
-          </p>
-          
+          {
+          // <p>
+          //   <strong>Guide:</strong> {proj.guide?proj.guide:<p>no one yet</p>}
+          // </p>
+          }
           <p>
             <a href={proj.githublink}>Github Link</a>
           </p>
