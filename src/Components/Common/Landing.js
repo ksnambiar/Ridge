@@ -18,11 +18,13 @@ class Landing extends Component {
             <div className="container">
               <div className="row">
                 <div className="col-md-12 text-center">
-                  <h1 className="display-3 mb-4 form_col">TecRidge</h1>
-                  <p className="lead form_col">
+                <div className=" bg-secondary jumbotron mt2">
+                  <h1 className="display-3 mb-4 ">TecRidge</h1>
+                  <p className="lead ">
                     {" "}
                     A Complete Social Network for Showing off your Innovative Projects
                   </p>
+                  
                   <hr />
                   {isAuthenticated?
                     <Link to={`/${utype}/dashboard`} className="btn btn-lg btn-info mr-2">Enter</Link>
@@ -31,11 +33,12 @@ class Landing extends Component {
                     <Link to="/register" className="btn btn-lg btn-info mr-2">
                     Register
                   </Link>
-                  <Link to="/login" className="btn btn-lg btn-light">
+                  <Link to="/login" className="btn btn-lg btn-primary">
                     Sign in
                   </Link>
                 </div>
                 }
+                </div>
                 </div>
               </div>
             </div>

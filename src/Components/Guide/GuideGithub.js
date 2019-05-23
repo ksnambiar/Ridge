@@ -13,7 +13,7 @@ export class GuideGithub extends Component {
     componentDidMount(){
         const {profile} = this.props
         const {clientId,clientSecret} = this.state;
-        this.setState({isLoading:true})
+        this.setState({isLoading:true,user:null})
         axios.get(`
         https://api.github.com/users/${profile.githubusername}?client_id=${clientId}&client_secret=${clientSecret}
         `).then(obj=>{

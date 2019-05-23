@@ -7,8 +7,9 @@ class ProjectOrigin extends Component {
     const {project} = this.props
     let team=project.team
     let domains = project.domains
+    // lightbutton
     let tview=team.map((obj,i)=>{
-      return <Link to={`/profile/${obj.uid}`} key={i}><li className="list-group-item dim lightbutton">
+      return <Link to={`/profile/${obj.uid}`} key={i}><li className="list-group-item dim">
      <h6  className="center">{obj.fullName}</h6>
       </li></Link>
       
@@ -23,12 +24,15 @@ class ProjectOrigin extends Component {
     return (
      <div className="row">
      <div className="col-xs-12">
-     <Card className="projecthead">
-       <Card.Body>
+     {
+    //  <Card className="projecthead">
+    //    <Card.Body>
+     }
        {tview}
-       </Card.Body>
-     </Card>
-     
+       {
+    //    </Card.Body>
+    //  </Card>
+       }
      </div>
      </div>
     )

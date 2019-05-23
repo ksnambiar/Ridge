@@ -12,14 +12,14 @@ class ProjectHeader extends Component {
       }else{
         domains=project.domains
       }
-      let vars=["info","light","dark","primary","danger","success","secondary"];
+      let vars=["light","dark","primary","danger","success","secondary"];
       let rdom=domains.map((obj,i)=>{
         return <Badge className="center mh1" key={i} variant={vars[i%vars.length]}>{obj}</Badge>
       })
     return (
       <div className="row">
         <div className="center col-md-12">
-          <div className="panel br2 projecthead jumbotron center ma3" style={{textAlign:"center",color:"white"}}>
+          <div className="panel br2 bg-info center ma3 pv3" style={{textAlign:"center",color:"white"}}>
           <h2 style={{fontFamily:"Oswald"}}> {project.name}</h2>
           <button
           type="button"

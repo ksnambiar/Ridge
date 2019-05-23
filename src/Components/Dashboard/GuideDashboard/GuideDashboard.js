@@ -57,7 +57,7 @@ class GuideDashboard extends Component {
             </div>
         }else{
             dashboardContent=(<div>
-                <h4>Welcome, {user.user.fullName}</h4>
+                <h4>Welcome, {user.fullName}</h4>
                 <p>You have not created a profile yet</p>
                 <Link to='/guide/create-profile' className='btn btn-large btn-info'>Create Profile</Link>
                 </div>)

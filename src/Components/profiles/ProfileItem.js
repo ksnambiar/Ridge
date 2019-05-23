@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import {Link} from "react-router-dom";
+import { Badge } from 'react-bootstrap';
 
 class ProfileItem extends Component {
   render() {
@@ -29,12 +30,20 @@ class ProfileItem extends Component {
         <div className="col-md-4 d-none d-md-block">
         <h4>Skill Set</h4>
         <ul className="list-group">
-        {skil.slice(0,4).map((skill,index)=>
-           ( <li key={index} className="list-group-item">
-            <i className="fa fa-check pr-1" />
+        {
+      //     skil.slice(0,4).map((skill,index)=>
+      //      ( <li key={index} className="list-group-item">
+      //       <i className="fa fa-check pr-1" />
+      //       {skill}
+      //       </li>)
+      //  )
+       skil.slice(0,4).map((skill,index)=>
+           (<Badge key={index} variant="info" className="mv1">
             {skill}
-            </li>)
-       )}
+            </Badge>
+            )
+       )
+      }
         </ul>
         
         </div>

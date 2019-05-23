@@ -11,7 +11,8 @@ export class Requests extends Component {
   render() {
       const {profile} = this.props;
       let view
-      view = Object.keys(profile.guide_request).map((obj,i)=>{
+      if(profile.guide_request){
+        view = Object.keys(profile.guide_request).map((obj,i)=>{
           let data = profile.guide_request[obj];
           return data.status==="pending"?<Card key={i}>
           <Card.Body>
@@ -23,6 +24,14 @@ export class Requests extends Component {
           </Card.Body>
           </Card>:null
       })
+      }else{
+        view=<Card>
+        <Card.Body>
+        No requests Yet
+        </Card.Body>
+        </Card>
+      }
+      
       if(view.length===0){ 
           view=<Card><Card.Body>No requests from anyone yet</Card.Body></Card>
       }

@@ -36,7 +36,7 @@ export class GuideNotification extends Component {
         <div className="col-md-12 ph3 mv3">
         <Nav variant="tabs" defaultActiveKey={this.state.selected}>
   <Nav.Item>
-    <Nav.Link eventKey="notifications" onSelect={this.onSelect.bind(this,"notifictions")}>Notifications</Nav.Link>
+    <Nav.Link eventKey="notifications" onSelect={this.onSelect.bind(this,"notifications")}>Notifications</Nav.Link>
   </Nav.Item>
   <Nav.Item>
     <Nav.Link eventKey="projrequests" onSelect={this.onSelect.bind(this,"projrequests")}>Project Requests</Nav.Link>

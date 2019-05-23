@@ -9,13 +9,13 @@ export class GuideCreds extends Component {
           return <Card key={i} className="center mv2" >
         <Card.Body>
         <h4>{data.company}</h4>
-        <h5>Designation:</h5><p>{data.designation}</p>
+        <h5>Designation:</h5><Badge variant="success">{data.designation}</Badge>
         {
             data.to?<div>
             <h5>From : </h5><p>{data.from}</p>
             <h5>To : </h5><p>{data.to}</p>
             </div>:<Badge variant="dark">Latest</Badge>
-        }DataTransferItem
+        }
         </Card.Body>
           </Card>
       }):<Card>
@@ -29,7 +29,7 @@ export class GuideCreds extends Component {
         return <Card key={i} className="center mv2" >
       <Card.Body>
       <h4>{data.institution}</h4>
-      <h5>Degree:</h5><p>{data.degree}</p>
+      <h5>Degree:</h5><Badge variant="success">{data.degree}</Badge>
       {
           data.to?<div>
           <h5>From : </h5><p>{data.from}</p>
@@ -82,11 +82,11 @@ export class GuideCreds extends Component {
 
       <div className="row">
       <div className="col-md-6">
-      <h3 className="center">Experience</h3>
+      <h3 className="center text-info">Experience</h3>
       {exp}
       </div>
       <div className="col-md-6">
-      <h3 className="center">Education</h3>
+      <h3 className="center text-info">Education</h3>
       {edu}
       </div>
       </div>
@@ -94,11 +94,11 @@ export class GuideCreds extends Component {
 
       <div className="row">
       <div className="col-md-6">
-      <h3 className="center">Projects</h3>
+      <h3 className="center text-info">Projects</h3>
       {proj}
       </div>
       <div className="col-md-6">
-      <h3 className="center">Mentoring Projects</h3>
+      <h3 className="center text-info">Mentoring Projects</h3>
       {mproj}
       </div>
       </div>

@@ -32,8 +32,9 @@ class Team extends Component {
     <h3>K Sidhartha Nambiar</h3>
     <h6>Popularly known as</h6><Badge variant="info">Nambiar</Badge>
     <p class="w3-opacity">Team Lead</p>
-    <p>An ambivert coder who developes crush on every girl he sees</p>
-    
+    {
+    // <p>An ambivert coder who developes crush on every girl he sees</p>
+    }
     <div className="row">
     <div className="center">
     <a className="mh2 btn btn-dark rounded-circle" href="https://github.com/NambiarSidharth" target="_blank">
@@ -64,8 +65,9 @@ class Team extends Component {
     <h3>Keshava Pranath K</h3>
     <h6>Popularly known as</h6><Badge variant="info">The unstoppable orator</Badge>
     <p class="w3-opacity"></p>
-    <p>An extreme extrovert who will start explaining concepts even if the person listening to him is not interested</p>
-    
+    {
+    // <p>An extreme extrovert who will start explaining concepts even if the person listening to him is not interested</p>
+    }
     <div className="row">
     <div className="center">
     <a className="mh2 btn btn-dark rounded-circle" href="https://github.com/kpranath" target="_blank">
@@ -97,8 +99,9 @@ class Team extends Component {
     <h3>Abhishek S</h3>
     <h6>Popularly known as</h6><Badge variant="info">Boss Ambi</Badge>
     <p class="w3-opacity"></p>
-    <p>A Boss personality who can burn each and everyone in the room with just a sentence</p>
-            
+    {
+    // <p>A Boss personality who can burn each and everyone in the room with just a sentence</p>
+    }       
     <div className="row">
     <div className="center">
     <a className="mh2 btn btn-dark rounded-circle" href="https://github.com/NambiarSidharth" target="_blank">
@@ -130,7 +133,9 @@ class Team extends Component {
     <h3>Lakshya Sharma</h3>
     <h6>Popularly known as</h6><Badge variant="info">Genetic algorithm forever</Badge>
     <p class="w3-opacity"></p>
-    <p>The Laughing Buddha who solves all the problems in the world with his genetic algorithm</p>
+    {
+    // <p>The Laughing Buddha who solves all the problems in the world with his genetic algorithm</p>
+    }
     <div className="row">
     <div className="center">
     <a className="mh2 btn btn-dark rounded-circle" href="https://github.com/Lakshya31" target="_blank">
@@ -168,7 +173,9 @@ class Team extends Component {
     <h3>Rushikesh C</h3>
     <h6>Popularly known as</h6><Badge variant="info">Rushi</Badge>
     <p class="w3-opacity">Beta Tester</p>
-    <p>Fit Traveller who codes while travelling and sleeps with protein cans to fullfill his dream of bulking up</p>
+    {
+    // <p>Fit Traveller who codes while travelling and sleeps with protein cans to fullfill his dream of bulking up</p>
+    }
     <div className="row">
     <div className="center">
     <a className="mh2 btn btn-dark rounded-circle" href="https://github.com/rushikc" target="_blank">

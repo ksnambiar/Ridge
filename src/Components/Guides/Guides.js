@@ -24,6 +24,12 @@ export class Guides extends Component {
         }
     return (
       <div >
+      <div className="display-4 text-center">
+      Guide Profiles
+      </div>
+      <p className="lead text-center">
+      Browse Guide developers    
+      </p>
         {view}
       </div>
     )

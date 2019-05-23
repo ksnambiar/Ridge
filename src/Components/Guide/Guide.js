@@ -7,8 +7,9 @@ import PropTypes from "prop-types"
 import GuideCreds from "./GuideCreds";
 import GuideGithub from "./GuideGithub";
 import Spinner from '../Common/Spinner';
+import GuideAbout from "./GuideAbout";
 export class Guide extends Component {
-    componentDidMount(){
+    componentWillMount(){
         if(this.props.match.params.gid){
             this.props.getGuideProfileByGid(this.props.match.params.gid);            
         }
@@ -28,8 +29,9 @@ export class Guide extends Component {
           <div>
           <ProfileHeader profile={guideProfile}/>
           </div>
+          <hr />
           <div>
-          aoi and bio
+          <GuideAbout profile={guideProfile} />
           </div>
           <div>
           <GuideCreds profile={guideProfile} />

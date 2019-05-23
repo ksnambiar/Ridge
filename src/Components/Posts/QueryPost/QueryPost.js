@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Queryform from './Queryform';
-import {Button} from "react-bootstrap";
+import {Button, Alert} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import QuerySearch from "./QuerySearch";
 import {connect} from 'react-redux';
@@ -30,24 +30,34 @@ class QueryPost extends Component {
       <div>
         <div className="row mv3 pa2">
         <div className="col-md-9">
-        <QuerySearch style={{float:"left"}}/>
+        {
+          // <QuerySearch style={{float:"left"}}/> 
+          <Alert variant="info">Query Area for announcing your queries to other developers</Alert>
+        }
         </div>
-        <div className="col-md-3">
+        {
+          <div className="col-md-3">
         <Link to="/feeds/addQuery" className="btn btn-info">
         Add Query
         </Link>
         </div>
+        }
+        
         </div>
         <div className="row">
-         <div className="col-md-3">
-         filters
-         </div>
-         <div className="col-md-7">
+        {
+        //   <div className="col-md-3">
+        //  filters
+        //  </div>
+        }
+        <div className="col-md-8 center">
          {qview}
          </div>
-         <div className="col-md-2">
-         recommended queries
-         </div>
+        {
+        //   <div className="col-md-2">
+        //  recommended queries
+        //  </div>
+        }
         </div>
       </div>
     )
