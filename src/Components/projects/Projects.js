@@ -5,6 +5,7 @@ import Spinner from '../../Components/Common/Spinner';
 import {getProjectsByCollege} from '../../actions/projectAction';
 import ProjectItem from './ProjectItem';
 import PropTypes from 'prop-types';
+import Domains from "./Domains"; 
 import Search from './Search';
 class Projects extends Component {
   state={
@@ -53,7 +54,14 @@ class Projects extends Component {
       Browse Through the projects     
       </p>
       <Search search={this.search.bind(this)}/>
+      <div className="row mv2">
+      <div className="col-md-9">
       {projectItems}
+      </div>
+      <div className="col-md-3">
+      <Domains projects={projects}/>
+      </div>
+      </div>
       </div>
       </div>
       </div>

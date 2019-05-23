@@ -63,6 +63,9 @@ for k in result_data.keys():
         url2="https://api.github.com/repos/"+_temp[0].strip()+"/"+_temp[1].strip()+"/stats/contributors?client_id="+clientId+"&+client_secret="+clientSecret
         data2=requests.get(url2)
         parsed2=json.loads(data2.text)
+        if len(parsed2)==0:
+            data2=requests.get(url2)
+            parsed2=json.loads(data2.text)
         total_commits=0
         total_add=0
         total_del=0
