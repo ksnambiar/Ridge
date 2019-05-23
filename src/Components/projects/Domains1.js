@@ -17,8 +17,8 @@ export class Domains1 extends Component {
         if(projects){
             projects.forEach(obj=>{
                 obj.domains.forEach(res=>{
-                    if(!domains.includes(res)){
-                        domains.push(res)
+                    if(!domains.includes(res.trim())){
+                        domains.push(res.trim())
                     }
                 })
             })
