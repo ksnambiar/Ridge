@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import {Button,Form,Row} from "react-bootstrap"
 import Octicon, { getIconByName } from '@githubprimer/octicons-react';
-class Search extends Component {
+class SearchDev extends Component {
  constructor(props) {
    super(props)
  
    this.state = {
-      search: ''
+    fullName:''
    }
    this.onSubmit=this.onSubmit.bind(this)
       this.onChange=this.onChange.bind(this)
@@ -27,7 +27,7 @@ class Search extends Component {
      <Form onSubmit={this.onSubmit}>
         <Form.Group as={Row}>
         <div>
-       <input type="search" name="search" className="form-control" placeholder="Search Projects" value={this.state.search} onChange={this.onChange}/>
+       <input type="search" name="search" className="form-control" placeholder="Search Developer" value={this.state.search} onChange={this.onChange}/>
        </div>
        <div>
         <Button type="submit" variant="info"><Octicon icon={getIconByName("search")} /></Button>
@@ -38,4 +38,4 @@ class Search extends Component {
  }
 }
 
-export default Search
+export default SearchDev
