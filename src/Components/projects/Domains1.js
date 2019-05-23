@@ -1,20 +1,22 @@
 import React, { Component } from 'react'
 import {Card,Nav,Badge} from "react-bootstrap"
-export class Domains extends Component {
+
+export class Domains1 extends Component {
     state={
         selected:"All"
     }
     onSelect(choice){
         this.setState({selected:choice})
+        this.props.domainSelect(choice)
     }
     render() {
         let options;
         let domains=[]
         const {selected}=this.state;
-        const {projects}=this.props
+        const {projects}=this.props;
         if(projects){
             projects.forEach(obj=>{
-                obj.forEach(res=>{
+                obj.domains.forEach(res=>{
                     if(!domains.includes(res)){
                         domains.push(res)
                     }
@@ -22,7 +24,7 @@ export class Domains extends Component {
             })
             options=domains.map((obj=>{
                 return <Nav.Item>
-                  <Nav.Link eventKey={obj} onSelect={this.onSelect.bind(this,obj)}><h6 style={{float:"left"}}>Accepted</h6></Nav.Link>
+                  <Nav.Link eventKey={obj} onSelect={this.onSelect.bind(this,obj)}><h6>{obj}</h6></Nav.Link>
                 </Nav.Item>
                               
             }))
@@ -30,20 +32,20 @@ export class Domains extends Component {
             options=null
         }
         return (
-            <div>
-                <Card>
-                <Card.body>
+            <Card>
+               <Card.Body>
+                {
                 <Nav variant="pills" defaultActiveKey={this.state.selected} className="flex-column">
   <Nav.Item>
-    <Nav.Link eventKey="All" onSelect={this.onSelect.bind(this,"All")}><h6 style={{float:"left"}}>All</h6></Nav.Link>
+    <Nav.Link eventKey="All" onSelect={this.onSelect.bind(this,"All")}><h6>All</h6></Nav.Link>
   </Nav.Item>
-  
+                    {options}
         </Nav>
-                </Card.body>
-                </Card>
-            </div>
+                }
+               </Card.Body>
+            </Card>
         )
     }
 }
 
-export default Domains
+export default Domains1;

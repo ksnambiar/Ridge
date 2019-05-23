@@ -5,22 +5,26 @@ import Spinner from '../../Components/Common/Spinner';
 import {getProjectsByCollege} from '../../actions/projectAction';
 import ProjectItem from './ProjectItem';
 import PropTypes from 'prop-types';
-import Domains from "./Domains"; 
+import Domains1 from './Domains1' 
 import Search from './Search';
 class Projects extends Component {
   state={
-    query:''
+    query:'',
+    domain:'All'
   }
   componentDidMount(){
     let college=this.props.match.params.institution;
     this.props.getProjectsByCollege(college);
+  }
+  domainSelect(domain){
+    this.setState({domain:domain})
   }
   search(data){
     this.setState({query:data})
   }
   render() {
     const {projects,loading}=this.props.project;
-    const {query}=this.state;
+    const {query,domain}=this.state;
     let projectItems
     if(projects===null || loading){
       projectItems=<Spinner />
@@ -28,13 +32,27 @@ class Projects extends Component {
     
     if(projects.length>0){
       if(query===''){
-      projectItems=projects.map((obj,i)=>(
-        <ProjectItem key={i} project={obj} />
-      ))
+        if(domain==='All'){
+          projectItems=projects.map((obj,i)=>(
+            <ProjectItem key={i} project={obj} />
+          ))
+        }else{
+          projectItems=projects.map((obj,i)=>(
+            obj.domains.includes(domain)?<ProjectItem key={i} project={obj} />:null
+          ))
+        }
+      
       }else{
-        projectItems=projects.map((obj,i)=>(
-          obj.name.toLowerCase().includes(query.toLowerCase())?<ProjectItem key={i} project={obj} />:null
-        ))
+        if(domain==='All'){
+          projectItems=projects.map((obj,i)=>(
+            (obj.name.toLowerCase().includes(query.toLowerCase()))?<ProjectItem key={i} project={obj} />:null
+          ))
+        }else{
+          projectItems=projects.map((obj,i)=>(
+            (obj.name.toLowerCase().includes(query.toLowerCase())&&obj.domains.includes(domain))?<ProjectItem key={i} project={obj} />:null
+          ))
+        }
+        
       }
     }else{
       projectItems = <div>No Projects Found in your Area</div>
@@ -59,7 +77,9 @@ class Projects extends Component {
       {projectItems}
       </div>
       <div className="col-md-3">
-      <Domains projects={projects}/>
+      {
+      <Domains1 projects={projects} domainSelect={this.domainSelect.bind(this)} />
+      }
       </div>
       </div>
       </div>
