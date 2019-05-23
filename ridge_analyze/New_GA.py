@@ -3,10 +3,11 @@
 import numpy
 import math
 import time
+from scipy import stats
 
 #Globals
 
-population_size = 2500                                                  #Size of population
+population_size = 10000                                                  #Size of population
 num_datasets = 20                                                       #Number of Datasets
 num_parameters = 6                                                      #Number of Parameters
 projects = []                                                           #Names of the projects
@@ -20,24 +21,17 @@ parameters = {                                                          #Paramet
 }
 a = 0.4                                                                 #Averaging factor
 pc = 0.5                                                                #Probability of Crossover
-pm = 0.01                                                               #Probability of Mutation
+pm = 0.2                                                                #Probability of Mutation
 fittest = 0                                                             #fittest individual for a generation
 fit_list = []                                                           #list of fittest values
 children_size = int(population_size*pc)                                 #Size of children population
 parent_size = int(population_size*(1-pc))                               #Size of parent population
 parent_indices = numpy.array([0]*population_size)                       #Marks selected parents
 optimal = numpy.array([None]*num_parameters)                            #Test case of optimal data
-dataset = numpy.array([[None]*(num_parameters+1)]*num_datasets)         #Dataset Values
+dataset = numpy.array([[None]*(num_parameters)]*num_datasets)           #Dataset Values
 population = numpy.array([[None]*(num_parameters+1)]*population_size)   #Population array
 children = numpy.array([[None]*(num_parameters+1)]*children_size)       #Children array
 parent = numpy.array([[None]*(num_parameters+1)]*parent_size)           #Parent array
-
-
-def optimal_init():
-    """Initializes first case of optimal result"""
-
-    for i in range(num_parameters):
-        optimal[i] = 100
 
 
 def optimal_read():
@@ -47,7 +41,7 @@ def optimal_read():
     f = open("optimal.txt","r")
     temp = eval(f.read())
     f.close()
-    optimal = temp[1]
+    optimal = temp
 
 
 def dataset_init():
@@ -55,6 +49,7 @@ def dataset_init():
 
     f = open("NewDataset.txt","r")
     Data = eval(f.read())
+    f.close()
 
     for i in range(num_datasets):
         projects.append(Data[i][0])
@@ -77,15 +72,6 @@ def preprocess_dataset():
                     if dataset[i][index] > parameters[params][1]:
                         dataset[i][index] = parameters[params][1]
 
-def calc_optimal_ELO():
-    """Calculates ELO using Optimal set"""
-
-    for i in range(num_datasets):
-        temp =0
-        for j in range(num_parameters):
-            temp += optimal[j]*dataset[i][j]
-        dataset[i][num_parameters] = temp
-
 
 def population_initialization():
     """Initializes a random set of weights in the search space"""
@@ -100,15 +86,26 @@ def fitness_calculation():
     """Calculates fitness of the existing population generation"""
 
     for i in range(population_size):
-        difference = 0
+        temp_rank = ["TEMP"]
+        temp_calc = [10*100]
         for j in range(num_datasets):
             calc = 0
             for k in range(num_parameters):
                 calc += dataset[j][k]*population[i][k]
-            difference += (dataset[j][num_parameters] - calc)
-        population[i][num_parameters] = math.fabs(difference/num_datasets)
-        if population[i][num_parameters] < 0.01:
-            population[i][num_parameters] = 0
+            for l in range(len(temp_calc)):
+                if temp_calc[l] < calc:
+                    temp_calc.insert(l, calc)
+                    temp_rank.insert(l, projects[j])
+                    break
+            else:
+                temp_calc.insert(-1, calc)
+                temp_rank.insert(-1, projects[j])
+
+        temp_rank.pop(0)
+        temp_calc.pop(0)
+
+        tau,ignore = stats.kendalltau(projects, temp_rank)
+        population[i][num_parameters] = tau
 
 
 def parent_selection():
@@ -117,16 +114,16 @@ def parent_selection():
     for i in range(len(parent_indices)):
         parent_indices[i] = 0
     for i in range(parent_size):
-        min = 10**100
-        min_index = parent_size
+        max = -2
+        max_index = parent_size
 
         for j in range(population_size):
-            if population[j][num_parameters] < min and parent_indices[j] == 0:
-                min = population[j][num_parameters]
-                min_index = j
+            if population[j][num_parameters] > max and parent_indices[j] == 0:
+                max = population[j][num_parameters]
+                max_index = j
 
-        parent_indices[min_index] = 1
-        parent[i] = population[min_index]
+        parent_indices[max_index] = 1
+        parent[i] = population[max_index]
 
 def new_crossover():
     """Performs crossover on selected parents"""
@@ -162,16 +159,17 @@ def survivor_selection():
 def display(generation):
     """Displays generation Details"""
 
-    min = 10**100
-    fittest = -1
+    max = -2
+    fittest = population_size
     for i in range(population_size):
-        if population[i][num_parameters] < min:
-            min = population[i][num_parameters]
+        if population[i][num_parameters] > max:
+            max = population[i][num_parameters]
             fittest = i
     print("-" * 300 + "\n\n")
     print("Generation No.",generation)
     print("Fitness achieved:",population[fittest][num_parameters])
     print()
+    print("-"*300+"\n\n")
     fit_list.append(population[fittest][num_parameters])
 
 
@@ -182,7 +180,7 @@ def write_results():
     f = open("optimal.txt", "w")
     for i in range(num_parameters):
         temp.append(population[fittest][i])
-    f.write(str([optimal, temp]))
+    f.write(str(temp))
     f.close()
 
     f = open("Result.txt", "w")
@@ -196,28 +194,28 @@ def termination_condition():
     global Generation
     Generation += 1
 
-    if Generation == 100:
+    if Generation == 1000:
         print("\nMaximum Number of Generations Reached\n\n")
         return False
 
     if Generation > 20:
-        for k in range(1,10):
-            check = 1
-            if fit_list[len(fit_list)-k] != fit_list[len(fit_list)-k-1]:
-                check = 0
-                break
-        if check == 1:
-            print("\nMinimum Fitness Achieved\n\n")
-            return False
+        if fit_list[-1] == 1:
+            for k in range(1,10):
+                check = 1
+                if fit_list[len(fit_list)-k] != fit_list[len(fit_list)-k-1]:
+                    check = 0
+                    break
+            if check == 1:
+                print("\nMinimum Fitness Achieved\n\n")
+                return False
 
     return True
 
 # Main
 
-optimal_read()
+
 dataset_init()
 preprocess_dataset()
-calc_optimal_ELO()
 
 #GA
 
@@ -233,6 +231,7 @@ while termination_condition():
     new_crossover()
     random_mutation()
     survivor_selection()
+
 
 write_results()
 

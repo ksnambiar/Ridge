@@ -1,7 +1,6 @@
 import numpy
 
-
-num_datasets = 20                                                       #Number of Datasets
+num_datasets = 0                                                       #Number of Datasets
 num_parameters = 6                                                      #Number of Parameters
 projects = []                                                           #Names of the projects
 parameters = {                                                          #Parameter Names and their ranges
@@ -13,20 +12,28 @@ parameters = {                                                          #Paramet
     "6. Marks Obtained": [0,100]
 }
 optimal = numpy.array([None]*num_parameters)                            #Test case of optimal data
-dataset = numpy.array([[None]*(num_parameters+1)]*num_datasets)         #Dataset Values
-rank = numpy.array([None]*num_datasets)                                 #Ranks of projects
+dataset = []                                                            #Dataset Values
+rank = numpy.array([])                                                  #Ranks of projects
 
 
 def dataset_init():
     """Initializes datasets"""
 
-    f = open("NewDataset.txt","r")
+    f = open("ridge-firebase-python\\NewDataset.txt","r")
     Data = eval(f.read())
+    f.close()
 
-    for i in range(num_datasets):
+    for i in range(len(Data)):
         projects.append(Data[i][0])
+        temp = []
         for j in range(num_parameters):
-            dataset[i][j] = Data[i][1][j][1]
+            temp.append(Data[i][1][j][1])
+        dataset.append(temp)
+
+    global num_datasets
+    global rank
+    num_datasets = len(dataset)
+    rank = numpy.array([None]*num_datasets)
 
 def optimal_read():
     """Reads Previously Obtained Weights to improve upon them"""
@@ -59,7 +66,7 @@ def calc_optimal_ELO():
         temp =0
         for j in range(num_parameters):
             temp += optimal[j]*dataset[i][j]
-        dataset[i][num_parameters] = temp
+        dataset[i].append(temp)
 
 
 def ranking():
@@ -71,7 +78,7 @@ def ranking():
         index = num_parameters
         for i in range(num_datasets):
 
-            if dataset[i][num_parameters] >= max and rank[i] == None:
+            if dataset[i][num_parameters] > max and rank[i] == None:
                 max = dataset[i][num_parameters]
                 index = i
 
@@ -86,7 +93,6 @@ dataset_init()
 preprocess_dataset()
 calc_optimal_ELO()
 ranking()
-
 
 dictionary = {}
 for i in range(num_datasets):
