@@ -5,22 +5,36 @@ import Spinner from '../../Components/Common/Spinner';
 import {getProjectsByCollege} from '../../actions/projectAction';
 import ProjectItem from './ProjectItem';
 import PropTypes from 'prop-types';
+import Search from './Search';
 class Projects extends Component {
+  state={
+    query:''
+  }
   componentDidMount(){
     let college=this.props.match.params.institution;
     this.props.getProjectsByCollege(college);
   }
+  search(data){
+    this.setState({query:data})
+  }
   render() {
     const {projects,loading}=this.props.project;
+    const {query}=this.state;
     let projectItems
     if(projects===null || loading){
       projectItems=<Spinner />
   }else{
     
     if(projects.length>0){
+      if(query===''){
       projectItems=projects.map((obj,i)=>(
         <ProjectItem key={i} project={obj} />
       ))
+      }else{
+        projectItems=projects.map((obj,i)=>(
+          obj.name.toLowerCase().includes(query.toLowerCase())?<ProjectItem key={i} project={obj} />:null
+        ))
+      }
     }else{
       projectItems = <div>No Projects Found in your Area</div>
     }
@@ -38,6 +52,7 @@ class Projects extends Component {
       <p className="lead text-center">
       Browse Through the projects     
       </p>
+      <Search search={this.search.bind(this)}/>
       {projectItems}
       </div>
       </div>
