@@ -4,10 +4,12 @@ import numpy
 import math
 import time
 from scipy import stats
+import matplotlib.pyplot as plt
+
 
 #Globals
 
-population_size = 10000                                                  #Size of population
+population_size = 100                                                   #Size of population
 num_datasets = 20                                                       #Number of Datasets
 num_parameters = 6                                                      #Number of Parameters
 projects = []                                                           #Names of the projects
@@ -104,7 +106,8 @@ def fitness_calculation():
         temp_rank.pop(0)
         temp_calc.pop(0)
 
-        tau,ignore = stats.kendalltau(projects, temp_rank)
+        #tau,ignore = stats.kendalltau(projects, temp_rank)
+        tau, ignore = stats.spearmanr(projects, temp_rank)
         population[i][num_parameters] = tau
 
 
@@ -156,7 +159,7 @@ def survivor_selection():
             count += 1
 
 
-def display(generation):
+def display():
     """Displays generation Details"""
 
     max = -2
@@ -166,11 +169,21 @@ def display(generation):
             max = population[i][num_parameters]
             fittest = i
     print("-" * 300 + "\n\n")
-    print("Generation No.",generation)
+    print("Generation No.",Generation)
     print("Fitness achieved:",population[fittest][num_parameters])
     print()
-    print("-"*300+"\n\n")
     fit_list.append(population[fittest][num_parameters])
+
+
+def plot_graph():
+    """Plots a graph for each generation"""
+
+    for i in range(population_size):
+        plt.scatter(Generation, population[i][num_parameters])
+        plt.pause(0.0001)
+    plt.title("GA")
+    plt.xlabel("Generation")
+    plt.ylabel("Fitness Values")
 
 
 def write_results():
@@ -183,9 +196,7 @@ def write_results():
     f.write(str(temp))
     f.close()
 
-    f = open("Result.txt", "w")
-    f.write(str(fit_list))
-    f.close()
+    plt.savefig("Second_Graph.png")
 
 
 def termination_condition():
@@ -226,7 +237,8 @@ Generation = -1
 while termination_condition():
 
     fitness_calculation()
-    display(Generation)
+    display()
+    plot_graph()
     parent_selection()
     new_crossover()
     random_mutation()
@@ -234,6 +246,7 @@ while termination_condition():
 
 
 write_results()
+plt.show()
 
 end = time.time()
 print("Time Taken : ", end-start, " seconds")
