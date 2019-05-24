@@ -168,7 +168,7 @@ def display(generation):
         if population[i][num_parameters] < min:
             min = population[i][num_parameters]
             fittest = i
-    print("-" * 300 + "\n\n")
+    print("-" * 300 + "\n")
     print("Generation No.",generation)
     print("Fitness achieved:",population[fittest][num_parameters])
     print()
@@ -214,7 +214,7 @@ def termination_condition():
 
 # Main
 
-optimal_read()
+optimal_init()
 dataset_init()
 preprocess_dataset()
 calc_optimal_ELO()
