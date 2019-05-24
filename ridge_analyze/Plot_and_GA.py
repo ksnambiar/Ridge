@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 #Globals
 
-population_size = 100                                                   #Size of population
+population_size = 100                                                    #Size of population
 num_datasets = 20                                                       #Number of Datasets
 num_parameters = 6                                                      #Number of Parameters
 projects = []                                                           #Names of the projects
@@ -94,7 +94,7 @@ def population_initialization():
     for i in range(population_size):
         sum = 0
         for j in range(num_parameters):
-            population[i][j] = numpy.random.uniform(1,100)
+            population[i][j] = numpy.random.uniform(1,500)
 
 
 def fitness_calculation():
@@ -181,7 +181,7 @@ def plot_graph():
 
     for i in range(population_size):
         plt.scatter(Generation, population[i][num_parameters])
-        plt.pause(0.0001)
+        plt.pause(1e-10)
     plt.title("GA")
     plt.xlabel("Generation")
     plt.ylabel("Fitness Values")
@@ -210,7 +210,7 @@ def termination_condition():
         print("\nMaximum Number of Generations Reached\n\n")
         return False
 
-    if Generation > 20:
+    if Generation > 11:
         for k in range(1,10):
             check = 1
             if fit_list[len(fit_list)-k] != fit_list[len(fit_list)-k-1]:
@@ -224,7 +224,7 @@ def termination_condition():
 
 # Main
 
-optimal_init()
+optimal_read()
 dataset_init()
 preprocess_dataset()
 calc_optimal_ELO()
@@ -246,7 +246,8 @@ while termination_condition():
     survivor_selection()
 
 write_results()
-plt.show()
 
 end = time.time()
+print("Time Taken : ", end-start, " seconds\n")
 
+plt.show()

@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 
 #Globals
 
-population_size = 100                                                   #Size of population
+population_size = 1000                                                  #Size of population
 num_datasets = 20                                                       #Number of Datasets
 num_parameters = 6                                                      #Number of Parameters
 projects = []                                                           #Names of the projects
@@ -180,7 +180,7 @@ def plot_graph():
 
     for i in range(population_size):
         plt.scatter(Generation, population[i][num_parameters])
-        plt.pause(0.0001)
+        plt.pause(1e-10)
     plt.title("GA")
     plt.xlabel("Generation")
     plt.ylabel("Fitness Values")
@@ -190,7 +190,7 @@ def write_results():
     """Writes the fitness list and optimal list to files"""
 
     temp = []
-    f = open("optimal.txt", "w")
+    f = open("optimal_New.txt", "w")
     for i in range(num_parameters):
         temp.append(population[fittest][i])
     f.write(str(temp))
@@ -209,7 +209,7 @@ def termination_condition():
         print("\nMaximum Number of Generations Reached\n\n")
         return False
 
-    if Generation > 20:
+    if Generation > 11:
         if fit_list[-1] == 1:
             for k in range(1,10):
                 check = 1
@@ -246,7 +246,8 @@ while termination_condition():
 
 
 write_results()
-plt.show()
 
 end = time.time()
-print("Time Taken : ", end-start, " seconds")
+print("Time Taken : ", end-start, " seconds\n")
+
+plt.show()
