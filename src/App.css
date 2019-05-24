@@ -10,6 +10,12 @@
   z-index:-1;
 
 }
+#bgimg{
+  background-image: url("./Components/Common/bgtemp1.jpg");
+  background-size: cover;
+  padding: 55px 200px 350px 200px;
+  background-repeat: no-repeat
+}
 .like{
   background-color: cornflowerblue
 }

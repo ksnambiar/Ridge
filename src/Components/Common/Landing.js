@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link,withRouter } from "react-router-dom";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
+import logo from "./logo1.jpg"
 class Landing extends Component {
   componentDidMount(){
     let {isAuthenticated,utype} = this.props.auth;
@@ -12,14 +13,14 @@ class Landing extends Component {
   render() {
     let {isAuthenticated,utype} = this.props.auth;
     return (
-      <div>
+      <div id="bgimg" className=" ph5">
         <div>
           <div className="dark-overlay landing-inner text-light">
             <div className="container">
               <div className="row">
                 <div className="col-md-12 text-center">
-                <div className=" bg-secondary jumbotron mt2">
-                  <h1 className="display-3 mb-4 ">TecRidge</h1>
+                <div className="">
+                <img src={logo} alt="tecridge" className="h5" />
                   <p className="lead ">
                     {" "}
                     A Complete Social Network for Showing off your Innovative Projects
