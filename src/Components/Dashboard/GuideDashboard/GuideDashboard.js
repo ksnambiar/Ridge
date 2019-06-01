@@ -52,7 +52,10 @@ class GuideDashboard extends Component {
             <GuideExperience profile={guideProfile} />
             </div>
             <div className="mv2">
-            <button className="btn btn-danger" onClick={this.onClickDelete.bind(this)}>Delete Account</button>
+            {
+                // <button className="btn btn-danger" onClick={this.onClickDelete.bind(this)}>Delete Account</button>
+
+            }
             </div>
             </div>
         }else{

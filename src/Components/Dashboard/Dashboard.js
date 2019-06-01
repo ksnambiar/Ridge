@@ -7,6 +7,7 @@ import {Link} from 'react-router-dom'
 import ProfileActions from './ProfileActions';
 import Experience from './Experience';
 import Projects from './Projects';
+import WorkingProjects from "./WorkingProjects";
 
 class Dashboard extends Component {
     componentDidMount(){
@@ -31,10 +32,11 @@ class Dashboard extends Component {
             </p>           
              <Experience experience={profile.experience}/>
            <Projects projects={profile.projects}/>
-        
+            <WorkingProjects projects = {profile.wprojects} />
             <div style={{marginBottom: '60px'}}>
-            <button className="btn btn-danger" onClick={this.onClickDelete.bind(this)}>Delete Account</button>
-
+            {
+            // <button className="btn btn-danger" onClick={this.onClickDelete.bind(this)}>Delete Account</button>
+            }
             </div>
             </div>
         }else{

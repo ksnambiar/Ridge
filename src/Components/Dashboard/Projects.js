@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {getprofilesbycollege,deleteProject} from '../../actions/profileAction';
 import {addDeveloperToTeam} from "../../actions/projectAction";
-import Modal from 'react-responsive-modal'
+// import Modal from 'react-responsive-modal'
 import {Link} from "react-router-dom"
 import Octicon,{getIconByName} from '@githubprimer/octicons-react';
 import AddDeveloper from './AddDeveloper';
