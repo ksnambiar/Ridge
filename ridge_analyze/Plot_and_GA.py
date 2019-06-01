@@ -3,10 +3,11 @@
 import numpy
 import math
 import time
+import matplotlib.pyplot as plt
 
 #Globals
 
-population_size = 2500                                                  #Size of population
+population_size = 100                                                    #Size of population
 num_datasets = 20                                                       #Number of Datasets
 num_parameters = 6                                                      #Number of Parameters
 projects = []                                                           #Names of the projects
@@ -51,7 +52,7 @@ def optimal_read():
 
 
 def dataset_init():
-    """Initializes test datasets"""
+    """Initializes datasets"""
 
     f = open("NewDataset.txt","r")
     Data = eval(f.read())
@@ -77,8 +78,8 @@ def preprocess_dataset():
                     if dataset[i][index] > parameters[params][1]:
                         dataset[i][index] = parameters[params][1]
 
-def calc_optimal_rank():
-    """Calculates optimal test case ELO"""
+def calc_optimal_ELO():
+    """Calculates ELO using Optimal set"""
 
     for i in range(num_datasets):
         temp =0
@@ -93,7 +94,7 @@ def population_initialization():
     for i in range(population_size):
         sum = 0
         for j in range(num_parameters):
-            population[i][j] = numpy.random.uniform(1,100)
+            population[i][j] = numpy.random.uniform(1,500)
 
 
 def fitness_calculation():
@@ -107,6 +108,8 @@ def fitness_calculation():
                 calc += dataset[j][k]*population[i][k]
             difference += (dataset[j][num_parameters] - calc)
         population[i][num_parameters] = math.fabs(difference/num_datasets)
+        if population[i][num_parameters] < 0.01:
+            population[i][num_parameters] = 0
 
 
 def parent_selection():
@@ -157,37 +160,57 @@ def survivor_selection():
             count += 1
 
 
-def display(generation):
+def display():
     """Displays generation Details"""
 
     min = 10**100
     fittest = -1
     for i in range(population_size):
         if population[i][num_parameters] < min:
+            min = population[i][num_parameters]
             fittest = i
-    print("Generation No.",generation)
+    print("-" * 300 + "\n")
+    print("Generation No.",Generation)
     print("Fitness achieved:",population[fittest][num_parameters])
     print()
-    print("-"*300+"\n\n")
-    global gen
-    gen += 1
+    fit_list.append(population[fittest][num_parameters])
 
 
-# Main
+def plot_graph():
+    """Plots a graph for each generation"""
 
-optimal_read()
-dataset_init()
-preprocess_dataset()
-calc_optimal_rank()
+    for i in range(population_size):
+        plt.scatter(Generation, population[i][num_parameters])
+        plt.pause(1e-10)
+    plt.title("GA")
+    plt.xlabel("Generation")
+    plt.ylabel("Fitness Values")
 
-#GA
 
-start = time.time()
-population_initialization()
-gen=0
+def write_results():
+    """Writes the fitness list and optimal list to files"""
 
-while gen != 1000:
-    if gen > 20:
+    temp = []
+    f = open("optimal.txt", "w")
+    for i in range(num_parameters):
+        temp.append(population[fittest][i])
+    f.write(str([optimal, temp]))
+    f.close()
+
+    plt.savefig("First_Graph.png")
+
+
+def termination_condition():
+    """Checks whether the termination conditions have been reached """
+
+    global Generation
+    Generation += 1
+
+    if Generation == 100:
+        print("\nMaximum Number of Generations Reached\n\n")
+        return False
+
+    if Generation > 11:
         for k in range(1,10):
             check = 1
             if fit_list[len(fit_list)-k] != fit_list[len(fit_list)-k-1]:
@@ -195,23 +218,36 @@ while gen != 1000:
                 break
         if check == 1:
             print("\nMinimum Fitness Achieved\n\n")
-            break
+            return False
+
+    return True
+
+# Main
+
+optimal_read()
+dataset_init()
+preprocess_dataset()
+calc_optimal_ELO()
+
+#GA
+
+start = time.time()
+population_initialization()
+Generation = -1
+
+while termination_condition():
 
     fitness_calculation()
-    display(gen)
+    display()
+    plot_graph()
     parent_selection()
     new_crossover()
     random_mutation()
     survivor_selection()
-    fit_list.append(population[fittest][num_parameters])
 
-temp = []
-f = open("optimal.txt","w")
-for i in range(num_parameters):
-    temp.append(population[fittest][i])
-f.write(str([optimal,temp]))
-f.close()
+write_results()
 
 end = time.time()
-print("Time Taken : ", end-start, " seconds")
+print("Time Taken : ", end-start, " seconds\n")
 
+plt.show()
