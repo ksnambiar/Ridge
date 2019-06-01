@@ -23,14 +23,26 @@ class Projects extends Component {
     this.setState({query:data})
   }
   render() {
-    const {projects,loading}=this.props.project;
+    const {loading}=this.props.project;
+    let projects=this.props.project.projects;
+    //sort function
+    
     const {query,domain}=this.state;
-    let projectItems
+    let projectItems;
     if(projects===null || loading){
       projectItems=<Spinner />
   }else{
     
     if(projects.length>0){
+      projects.sort((a,b)=>{
+        if ( a.rank < b.rank ){
+          return -1;
+        }
+        if ( a.rank > b.rank ){
+          return 1;
+        }
+        return 0;
+      })
       if(query===''){
         if(domain==='All'){
           projectItems=projects.map((obj,i)=>(

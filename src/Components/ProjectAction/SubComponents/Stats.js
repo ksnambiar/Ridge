@@ -5,13 +5,18 @@ import {Nav,Card} from "react-bootstrap";
 import Contribution from './Contribution';
 import TotalContribution from "./TotalContribution";
 export class Stats extends Component {
-    state={
-        clientId:'5d8243ed93467bbc02c7',
-        clientSecret: '1df9aad9b3bf785cb2ba29cbf9d34de3229ec651',
-        loading:false,
-        contribution:null,
-        selected:"overall",
-        index:-1
+    constructor(props) {
+        super(props)
+    
+        this.state = {
+            clientId:'5d8243ed93467bbc02c7',
+            clientSecret: '1df9aad9b3bf785cb2ba29cbf9d34de3229ec651',
+            loading:false,
+            contribution:null,
+            selected:"overall",
+            index:-1
+        }
+        this.loadState=this.loadState.bind(this)
     }
     componentDidMount(){
         this.setState({loading:true});
@@ -21,10 +26,20 @@ export class Stats extends Component {
         let len1=project.githublink.split("/").length;
         let username=project.githublink.split("/")[len1-2]
         let pname=project.githublink.split("/")[len1-1]
+        this.loadState(username,pname,clientId,clientSecret)
+    }
+    loadState(username,pname,clientId,clientSecret){
         axios.get(
             `https://api.github.com/repos/${username}/${pname}/stats/contributors?client_id=${clientId}&client_secret=${clientSecret}`
           ).then(data=>{
-               this.setState({contribution:data.data,loading:false})
+              console.log(data)
+              if(Object.keys(data.data).length===0){
+                  console.log("again")
+                this.setState({loading:true});
+                this.loadState(username,pname,clientId,clientSecret)
+              }else{
+                this.setState({contribution:data.data,loading:false})
+              }
           })
           .catch(err=>{
               console.log(err)

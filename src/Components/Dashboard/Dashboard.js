@@ -4,11 +4,10 @@ import PropTypes from 'prop-types';
 import {getCurrentProfile,deleteAccount} from '../../actions/profileAction';
 import Spinner from '../Common/Spinner';
 import {Link} from 'react-router-dom'
-import ProfileActions from './ProfileActions';
+// import ProfileActions from './ProfileActions';
 import Experience from './Experience';
 import Projects from './Projects';
 import WorkingProjects from "./WorkingProjects";
-
 class Dashboard extends Component {
     componentDidMount(){
         this.props.getCurrentProfile()
@@ -63,6 +62,7 @@ class Dashboard extends Component {
     )
   }
 }
+
 Dashboard.propTypes = {
     getCurrentProfile: PropTypes.func.isRequired,
     auth:PropTypes.object.isRequired,
