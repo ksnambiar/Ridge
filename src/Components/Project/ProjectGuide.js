@@ -8,7 +8,7 @@ class ProjectGuide extends Component {
     if(project.guide){
         let guide=project.guide
     tview=guide.map((obj,i)=>{
-      return <Link to={`/profile/${obj.uid}`} key={i} className="center"><li className="list-group-item dim">
+      return <Link to={`/guide-profile/${obj.uid}`} key={i} className="center"><li className="list-group-item dim">
       <h6  className="center">{obj.fullName}</h6>
        </li></Link>
       

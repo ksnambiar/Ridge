@@ -24,7 +24,7 @@ export class GuideList extends Component {
         }
       })
       acc=Object.keys(join_req).map((key,i)=>{
-        if(join_req[key].status==="accepted"){
+        if(join_req[key].status==="resolved"){
         return join_req[key].uid
         }
       })
@@ -54,7 +54,7 @@ export class GuideList extends Component {
                 </div>
               }
 
-                return <Card key={i} className="mv2">
+                return acc.includes(obj)?null:<Card key={i} className="mv2">
                 <Card.Body>
                 <div className="row">
                 <div className="col-md-3">

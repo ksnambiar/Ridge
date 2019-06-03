@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Card,Badge} from "react-bootstrap"; 
+import {Link} from "react-router-dom";
 export class GuideCreds extends Component {
   render() {
       const {profile} = this.props
@@ -48,7 +49,7 @@ export class GuideCreds extends Component {
         let data=profile.projects[k];
         return <Card key={i} className="center mv2" >
       <Card.Body>
-      <h4>{data.name}</h4>
+      <Link to={`/projects/${profile.institution}/${data.name}`} className="f5 h4">{data.name}</Link>
       <h5>Description:</h5><p>{data.description}</p>
       {
           data.guide?<div>
@@ -68,7 +69,7 @@ export class GuideCreds extends Component {
         let data=profile.mprojects[k];
         return <Card key={i} className="center mv2" >
       <Card.Body>
-      <h4>{data.name}</h4>
+      <Link to={`/projects/${profile.institution}/${data.name}`} className="center f5 h4">{data.name}</Link>
       </Card.Body>
         </Card>
     }):<Card>

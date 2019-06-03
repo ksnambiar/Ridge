@@ -11,9 +11,9 @@
 
 }
 #bgimg{
-  background-image: url("./Components/Common/bgtemp1.jpg");
+  background-image: url("./Components/Common/BGlatest.jpg");
   background-size: cover;
-  padding: 50px 100px 145px 100px;
+  padding: 50px 100px 250px 100px;
   background-repeat: no-repeat
 }
 .like{

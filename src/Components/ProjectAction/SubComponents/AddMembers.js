@@ -40,7 +40,7 @@ export class AddMembers extends Component {
         <h4>Members</h4>
         </Card.Header>
         <Card.Body>
-        <ProjectTeam project={this.props.project}/>
+        <ProjectTeam className="ml2" project={this.props.project}/>
         </Card.Body>
         </Card>
       </div>

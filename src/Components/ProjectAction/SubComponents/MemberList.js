@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {Card,Badge, Button} from "react-bootstrap"
 import Octicon,{getIconByName} from '@githubprimer/octicons-react';
 import {connect} from "react-redux";
+import {Link} from "react-router-dom"
 import PropTypes from "prop-types";
 import {addDeveloperToTeam} from "../../../actions/projectAction";
 
@@ -25,7 +26,7 @@ export class MemberList extends Component {
         }
       })
       acc=Object.keys(join_req).map((key,i)=>{
-        if(join_req[key].status==="accepted"){
+        if(join_req[key].status==="resolved"){
         return join_req[key].uid
         }
       })
@@ -37,7 +38,7 @@ export class MemberList extends Component {
           view=Object.keys(profiles).map((obj,i)=>{
               const data=profiles[obj]
               const domains=data.skills.split(",").map((obj,i)=>{
-                return <Badge key={i} variant="success" className="mh1">{obj}</Badge>
+                return <Badge key={i} variant="primary" className="mh1">{obj}</Badge>
               })
               let act_view
               if(pend.includes(obj)){
@@ -46,11 +47,17 @@ export class MemberList extends Component {
                 Yet to Respond
                 </Badge>
                 </div>
+              }else if(acc.includes(obj)){
+                act_view=<div className="row center">
+                <Badge variant="success">
+                Already Part of the team
+                </Badge>
+                </div>
               }
               else {
                 act_view=<div className="row center">
                 <Button variant="success" className="mh2" onClick={this.addDev.bind(this,this.props.pid,obj,data.fullName,data.institution)}><Octicon icon={getIconByName("plus")}/></Button>
-                <Button variant="info" className="mh2"><Octicon icon={getIconByName("file")}/></Button>
+                <Link to={`/profile/${obj}`} className="btn btn-primary" className="mh2"><Octicon icon={getIconByName("file")}/></Link>
                 </div>
               }
               return acc.includes(obj)?null:<Card key={i} className="mv2">
