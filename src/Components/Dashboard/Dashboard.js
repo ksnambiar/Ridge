@@ -8,6 +8,7 @@ import {Link} from 'react-router-dom'
 import Experience from './Experience';
 import Projects from './Projects';
 import WorkingProjects from "./WorkingProjects";
+import { Card } from 'react-bootstrap';
 class Dashboard extends Component {
     componentDidMount(){
         this.props.getCurrentProfile()
@@ -28,10 +29,12 @@ class Dashboard extends Component {
             dashboardContent=<div>
             <p className="lead text-muted">
             Welcome, <Link to={`/profile/${uid}`}>{user.fullName}</Link>
-            </p>           
-             <Experience experience={profile.experience}/>
+            </p>
+            <Card>
+            <Experience experience={profile.experience}/>
            <Projects projects={profile.projects}/>
             <WorkingProjects projects = {profile.wprojects} />
+            </Card>           
             <div style={{marginBottom: '60px'}}>
             {
             // <button className="btn btn-danger" onClick={this.onClickDelete.bind(this)}>Delete Account</button>
