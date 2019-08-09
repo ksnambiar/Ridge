@@ -8,7 +8,7 @@ import {Link} from 'react-router-dom'
 import Experience from './Experience';
 import Projects from './Projects';
 import WorkingProjects from "./WorkingProjects";
-import { Card } from 'react-bootstrap';
+import { Card, Badge } from 'react-bootstrap';
 class Dashboard extends Component {
     componentDidMount(){
         this.props.getCurrentProfile()
@@ -20,21 +20,23 @@ class Dashboard extends Component {
       const uid = localStorage.getItem('uid');
       const {user} = this.props.auth;
       const {profile,loading} = this.props.profile;
+      let noproj=0,noexp=0,nowproj=0;
       let dashboardContent;
       if(profile===null || loading){
         dashboardContent =<Spinner/>
       }else{
           //check to see if logged in user has profile data
         if(Object.keys(profile).length>1){
+            //getting count of projects and expreience
+            noproj=(profile.projects?Object.keys(profile.projects).length:0)+(profile.wprojects?Object.keys(profile.wprojects):0)
+            noexp=profile.experience?Object.keys(profile.experience).length:0
+            //render part
             dashboardContent=<div>
-            <p className="lead text-muted">
-            Welcome, <Link to={`/profile/${uid}`}>{user.fullName}</Link>
-            </p>
-            <Card>
-            <Experience experience={profile.experience}/>
+          
+            {/* <Experience experience={profile.experience}/>
            <Projects projects={profile.projects}/>
-            <WorkingProjects projects = {profile.wprojects} />
-            </Card>           
+            <WorkingProjects projects = {profile.wprojects} /> */}
+                       
             <div style={{marginBottom: '60px'}}>
             {
             // <button className="btn btn-danger" onClick={this.onClickDelete.bind(this)}>Delete Account</button>
@@ -51,16 +53,48 @@ class Dashboard extends Component {
       }
     return (
       <div className="dashboard">
-        <div className="container">
+        <div className="container-fluid mt3">
         <div className="row">
         <div className="col-md-12">
-        <h1 className="display-4">
+        <div className="row">
+          <div className="col-md-8">
+          <h1 className="display-4">
             Dashboard
-        </h1>
+        </h1>   
+          </div>
+          <div className="col-md-4">
+          <Card color="secondary">
+            <Card.Body>
+              <div className="row">
+                <div className="col-xs-7">
+                <img 
+             className="rounded-circle"
+             src={`https://robohash.org/${user.fullName}`}
+             alt="Profile Photo"
+             style={{height:85,borderWidth:3,borderColor:"gray"}}
+            />
+                </div>
+                <div className="col-xs-5">
+                <p className="lead text-muted">
+            <Link to={`/profile/${uid}`}>{user.fullName}</Link>
+          </p>
+          <Badge className="mh2" variant="primary">Projects : {noproj}</Badge>
+            <Badge className="mh2" variant="primary">Experiences : {noexp}</Badge>
+                </div>
+          </div>
+          </Card.Body>
+          </Card>
+          </div>
+        </div>
+       
+        <Card>
+          <Card.Body>
         {dashboardContent}
+        </Card.Body>
+        </Card>
         </div>
         </div>
-        </div>
+        </div>   
       </div>
     )
   }

@@ -60,7 +60,7 @@ class App extends Component {
           <div>
             <Navigation />
             <Route exact path='/' component={Landing}/>
-            <div className="container">
+            <div className="container-fluid">
             {
             <Particles params={pconfig} className="particlefind"/>
             }
